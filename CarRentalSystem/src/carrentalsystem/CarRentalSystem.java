@@ -5,6 +5,8 @@
  */
 package carrentalsystem;
 
+import javax.swing.JDialog;
+
 /**
  *
  * @author Lenovo
@@ -15,7 +17,11 @@ public class CarRentalSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Hello Yan kid");
+        //create JFrame object
+        MainFrame mainPage = new MainFrame();
+        //set visibility
+        mainPage.setVisible(true);
+        System.out.println("isit still running");
     }
     
 }
