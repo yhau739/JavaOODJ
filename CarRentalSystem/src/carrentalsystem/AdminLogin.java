@@ -6,6 +6,9 @@
 package carrentalsystem;
 
 import static carrentalsystem.Global.CheckLoginAdmin;
+import static carrentalsystem.Global.SaveLoginRecord;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  *
@@ -20,6 +23,10 @@ public class AdminLogin extends javax.swing.JFrame {
      */
     public AdminLogin() {
         initComponents();
+        
+        //To make sure JFrame is located in the center of the screen regardless of monitor resolution
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**
@@ -55,6 +62,7 @@ public class AdminLogin extends javax.swing.JFrame {
         });
 
         PassInput.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        PassInput.setToolTipText("");
         PassInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PassInputActionPerformed(evt);
@@ -175,8 +183,20 @@ public class AdminLogin extends javax.swing.JFrame {
 
         //if login success
         if (result == true) {
-            //go to next page
-            //code here . . .
+            //Set up profile
+            Global.Username = username;
+            Global.Password = password;
+            Global.Privilege = "admin";
+            
+            //save login record (backend)
+            SaveLoginRecord();
+            
+            //dispose & go to next page
+            this.setVisible(false);
+            this.dispose();
+            AdminMain page = new AdminMain();
+            page.setVisible(true);
+            
         } else if (result == false) {
             //clear inputs
             UsernameInput.setText("");
