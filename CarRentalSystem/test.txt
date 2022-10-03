@@ -1,0 +1,26 @@
+MUST OO
+USE TXT FILE
+GUI - AWT SWING
+user input validation
+report (pdf) 9th Dec before 12 noon
+system (zip) 9th Dec before 12 noon
+
+Admin:
+1. add new car
+2. Edit car info
+3. handle booking (send confirmation after cust book)
+
+Customers:
+1. register as user
+2. booking
+3. check booking history
+
+
+PS:
+1. System login record for auth and authorization process. (log)
+2. Manage and update car information
+3. Manage customer booking
+4. manage customer registration and booking
+5. check customer's booking history
+6. Generate analysed reports for the company
+7. Validation for input for all entry
