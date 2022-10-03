@@ -22,57 +22,42 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Global {
 
-    //add global variables here for profile
+    //shared variables
     public static String Username;
     public static String Privilege;
-    public static String Password;
+    private static String Password;
 
-    //check login status for admin
-    public static Boolean CheckLoginAdmin(String FileName, String UsernameInput, String PasswordInput) {
-        ArrayList<String> list = new ArrayList<String>();
-        //read file function
-        list = ReadFile(FileName);
-
-        //loop in the size of the list (number of admins)
-        for (int i = 0; i < list.size(); i++) {
-            //get full line
-            String fullLine = list.get(i);
-
-            //split each full line to get credentials
-            String[] splited = fullLine.split("\\s+");
-
-            //check username
-            if (splited[0].equals(UsernameInput)) {
-                //check password
-                if (splited[1].equals(PasswordInput)) {
-                    //prompt message
-                    JOptionPane.showMessageDialog(null, "Login is Successfull!", "Login", JOptionPane.INFORMATION_MESSAGE);
-                    return true;
-                }
-            }
-        }
-        //prompt message
-        JOptionPane.showMessageDialog(null, "Incorrect credentials\n Please Try Again!", "Error Message", JOptionPane.ERROR_MESSAGE);
-        return false;
+    //Encapsulation
+//    public static String GetUsername(){
+//        return Username;
+//    }
+//    
+//    public static void SetUsername(String username){
+//        Username = username;
+//    }
+    
+    public static String GetPassword(){
+        return Password;
     }
     
-
+    public static void SetPassword(String password){
+        Password = password;
+    }
+    
+    //save for both user
     public static void SaveLoginRecord() {
         try {
             //create writer
             FileWriter writer = new FileWriter("logins.txt", true);
-            
+
             //get current time
             LocalTime time = LocalTime.now();
-//            System.out.println("Formatted time: " + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-            
+
             //get current date
             LocalDate date = LocalDate.now();
-//            System.out.println(date.toString());
-            
+
             //get datetime
 //            String dateTime = time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + date.toString();
-            
             //write
             writer.write(date + " " + time + " " + Username + " " + Privilege);
             writer.write(System.getProperty("line.separator"));
@@ -80,6 +65,38 @@ public class Global {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in saveloginrecord");
         }
+    }
+
+    public static String[] RemoveElementFromArray(String[] arr, int index) {
+        // If the array is empty
+        // or the index is not in array range
+        // return the original array
+        if (arr == null || index < 0
+                || index >= arr.length) {
+
+            return arr;
+        }
+
+        // Create another array of size one less
+        String[] anotherArray = new String[arr.length - 1];
+
+        // Copy the elements except the index
+        // from original array to the other array
+        for (int i = 0, k = 0; i < arr.length; i++) {
+
+            // if the index is
+            // the removal element index
+            if (i == index) {
+                continue;
+            }
+
+            // if the index is not
+            // the removal element index
+            anotherArray[k++] = arr[i];
+        }
+
+        // return the resultant array
+        return anotherArray;
     }
 
     //readfile (return full line as a string), using as support method
@@ -97,8 +114,7 @@ public class Global {
             myReader.close();
         } catch (FileNotFoundException e) {
             //for debug purpose
-            System.out.println("ReadFile error occurred.");
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error in ReadFile");
         }
         return list;
     }

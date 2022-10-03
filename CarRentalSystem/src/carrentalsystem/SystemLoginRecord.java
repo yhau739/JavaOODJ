@@ -26,6 +26,21 @@ public class SystemLoginRecord extends javax.swing.JFrame {
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
+        //load table
+        DefaultTableModel table = (DefaultTableModel) searchTable.getModel();
+        ArrayList<String> list = new ArrayList<String>();
+        
+        //read file
+        list = Global.ReadFile("logins.txt");
+        
+        for (int i = 0; i < list.size(); i++) {
+            //get each full line first
+            String fullLine = list.get(i);
+            //each full line is split by " " to convert to []
+            String[] splited = fullLine.split("\\s+");
+            table.addRow(splited);
+        }
     }
 
     /**
@@ -39,7 +54,7 @@ public class SystemLoginRecord extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         searchTable = new javax.swing.JTable();
-        showBtn = new javax.swing.JButton();
+        refreshBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         BackBtn = new javax.swing.JButton();
 
@@ -66,11 +81,11 @@ public class SystemLoginRecord extends javax.swing.JFrame {
         searchTable.setRowHeight(32);
         jScrollPane1.setViewportView(searchTable);
 
-        showBtn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        showBtn.setText("Show");
-        showBtn.addActionListener(new java.awt.event.ActionListener() {
+        refreshBtn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        refreshBtn.setText("Refresh");
+        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showBtnActionPerformed(evt);
+                refreshBtnActionPerformed(evt);
             }
         });
 
@@ -94,7 +109,7 @@ public class SystemLoginRecord extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(62, 62, 62)
-                        .addComponent(showBtn))
+                        .addComponent(refreshBtn))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(BackBtn)
@@ -106,7 +121,7 @@ public class SystemLoginRecord extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(showBtn)
+                        .addComponent(refreshBtn)
                         .addComponent(jLabel1))
                     .addComponent(BackBtn))
                 .addGap(18, 18, 18)
@@ -117,28 +132,12 @@ public class SystemLoginRecord extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void showBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showBtnActionPerformed
-        //get the number of rows in the Jtable
-        int rowNum = searchTable.getModel().getRowCount();
-
-        DefaultTableModel table = (DefaultTableModel) searchTable.getModel();
-        //delete existing data first
-        if (rowNum > 0) {
-            table.setRowCount(0);
-        }
-
-        ArrayList<String> list = new ArrayList<String>();
-        //read file
-        list = Global.ReadFile("logins.txt");
-
-        for (int i = 0; i < list.size(); i++) {
-            //get each full line first
-            String fullLine = list.get(i);
-            //each full line is split by " " to convert to []
-            String[] splited = fullLine.split("\\s+");
-            table.addRow(splited);
-        }
-    }//GEN-LAST:event_showBtnActionPerformed
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        SystemLoginRecord page = new SystemLoginRecord();
+        page.setVisible(true);
+    }//GEN-LAST:event_refreshBtnActionPerformed
 
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
         this.setVisible(false);
@@ -186,7 +185,7 @@ public class SystemLoginRecord extends javax.swing.JFrame {
     private javax.swing.JButton BackBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton refreshBtn;
     private javax.swing.JTable searchTable;
-    private javax.swing.JButton showBtn;
     // End of variables declaration//GEN-END:variables
 }

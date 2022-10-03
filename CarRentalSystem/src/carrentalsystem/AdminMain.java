@@ -19,13 +19,13 @@ public class AdminMain extends javax.swing.JFrame {
      */
     public AdminMain() {
         initComponents();
-        
+
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-        
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
         //Set Welcome Message
-        WelcomeMsg.setText("Welcome " + Global.Username + "!");
+        WelcomeMsg.setText("Welcome " + Admin.Username + "!");
     }
 
     /**
@@ -38,20 +38,26 @@ public class AdminMain extends javax.swing.JFrame {
     private void initComponents() {
 
         WelcomeMsg = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        AddAdminBtn = new javax.swing.JButton();
         SystemLoginRecordBtn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        ViewEditCarBtn = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         LogoutBtn = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         WelcomeMsg.setFont(new java.awt.Font("Tahoma", 2, 36)); // NOI18N
         WelcomeMsg.setText("Welcome ");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Add New Cars");
+        AddAdminBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        AddAdminBtn.setText("Add New Admin");
+        AddAdminBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddAdminBtnActionPerformed(evt);
+            }
+        });
 
         SystemLoginRecordBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         SystemLoginRecordBtn.setText("System Login Record");
@@ -62,10 +68,15 @@ public class AdminMain extends javax.swing.JFrame {
         });
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton3.setText("Edit Cars");
+        jButton3.setText("Add New Cars");
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton4.setText("View Cars");
+        ViewEditCarBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        ViewEditCarBtn.setText("View & Edit Cars");
+        ViewEditCarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewEditCarBtnActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton5.setText("Manage Bookings");
@@ -78,6 +89,9 @@ public class AdminMain extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton4.setText("Manage Customers");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,16 +99,17 @@ public class AdminMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WelcomeMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SystemLoginRecordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(SystemLoginRecordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AddAdminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(116, 116, 116)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(WelcomeMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ViewEditCarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(103, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -110,14 +125,16 @@ public class AdminMain extends javax.swing.JFrame {
                 .addComponent(WelcomeMsg)
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
+                    .addComponent(ViewEditCarBtn)
                     .addComponent(SystemLoginRecordBtn))
                 .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(AddAdminBtn)
                     .addComponent(jButton3))
                 .addGap(75, 75, 75)
-                .addComponent(jButton5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton4))
                 .addContainerGap(90, Short.MAX_VALUE))
         );
 
@@ -137,6 +154,20 @@ public class AdminMain extends javax.swing.JFrame {
         SystemLoginRecord page = new SystemLoginRecord();
         page.setVisible(true);
     }//GEN-LAST:event_SystemLoginRecordBtnActionPerformed
+
+    private void AddAdminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAdminBtnActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        AdminNewAdmin page = new AdminNewAdmin();
+        page.setVisible(true);
+    }//GEN-LAST:event_AddAdminBtnActionPerformed
+
+    private void ViewEditCarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewEditCarBtnActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        AdminViewCar page = new AdminViewCar();
+        page.setVisible(true);
+    }//GEN-LAST:event_ViewEditCarBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,10 +205,11 @@ public class AdminMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddAdminBtn;
     private javax.swing.JButton LogoutBtn;
     private javax.swing.JButton SystemLoginRecordBtn;
+    private javax.swing.JButton ViewEditCarBtn;
     private javax.swing.JLabel WelcomeMsg;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

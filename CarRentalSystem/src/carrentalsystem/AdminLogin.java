@@ -5,7 +5,6 @@
  */
 package carrentalsystem;
 
-import static carrentalsystem.Global.CheckLoginAdmin;
 import static carrentalsystem.Global.SaveLoginRecord;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -41,10 +40,10 @@ public class AdminLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         UsernameInput = new javax.swing.JTextField();
-        PassInput = new javax.swing.JTextField();
         LoginBtn = new javax.swing.JButton();
         BackBtn = new javax.swing.JButton();
         ClearBtn = new javax.swing.JButton();
+        PassInput = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,14 +57,6 @@ public class AdminLogin extends javax.swing.JFrame {
         UsernameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsernameInputActionPerformed(evt);
-            }
-        });
-
-        PassInput.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        PassInput.setToolTipText("");
-        PassInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PassInputActionPerformed(evt);
             }
         });
 
@@ -101,29 +92,21 @@ public class AdminLogin extends javax.swing.JFrame {
                 .addContainerGap(45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(BackBtn)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(LoginBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 43, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(UsernameInput, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                            .addComponent(PassInput)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 9, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(LoginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PassInput, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(UsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14)))
+                                .addGap(19, 19, 19)
+                                .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(42, 42, 42))))
         );
         layout.setVerticalGroup(
@@ -133,17 +116,17 @@ public class AdminLogin extends javax.swing.JFrame {
                 .addComponent(BackBtn)
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(UsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PassInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PassInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ClearBtn)
                     .addComponent(LoginBtn))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,10 +135,6 @@ public class AdminLogin extends javax.swing.JFrame {
     private void UsernameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_UsernameInputActionPerformed
-
-    private void PassInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PassInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PassInputActionPerformed
 
     private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
         //clear inputs
@@ -179,17 +158,16 @@ public class AdminLogin extends javax.swing.JFrame {
         String password = PassInput.getText();
 
         //check & get login status
-        Boolean result = CheckLoginAdmin("Admin.txt", username, password);
+        Boolean result = Admin.CheckLoginAdmin("Admin.txt", username, password);
 
         //if login success
         if (result == true) {
             //Set up profile
-            Global.Username = username;
-            Global.Password = password;
-            Global.Privilege = "admin";
+            Admin.Username = username;
+            Admin.SetPassword(password);
             
             //save login record (backend)
-            SaveLoginRecord();
+            Admin.SaveLoginRecord();
             
             //dispose & go to next page
             this.setVisible(false);
@@ -206,9 +184,6 @@ public class AdminLogin extends javax.swing.JFrame {
             this.setVisible(false);
             this.setVisible(true);
         }
-//        ArrayList<String> data = new ArrayList<String>();
-//        data = global.ReadFile("Admin.txt");
-//        System.out.println(data);
     }//GEN-LAST:event_LoginBtnActionPerformed
 
     /**
@@ -250,7 +225,7 @@ public class AdminLogin extends javax.swing.JFrame {
     private javax.swing.JButton BackBtn;
     private javax.swing.JButton ClearBtn;
     private javax.swing.JButton LoginBtn;
-    private javax.swing.JTextField PassInput;
+    private javax.swing.JPasswordField PassInput;
     private javax.swing.JTextField UsernameInput;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
