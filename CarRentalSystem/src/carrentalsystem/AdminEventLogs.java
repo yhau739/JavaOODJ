@@ -9,7 +9,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -17,28 +16,28 @@ import javax.swing.table.JTableHeader;
  *
  * @author Lenovo
  */
-public class SystemLoginRecord extends javax.swing.JFrame {
+public class AdminEventLogs extends javax.swing.JFrame {
 
     /**
-     * Creates new form SystemLoginRecord
+     * Creates new form AdminEventLogs
      */
-    public SystemLoginRecord() {
+    public AdminEventLogs() {
         initComponents();
 
-        JTableHeader tableHeader = searchTable.getTableHeader();
+        JTableHeader tableHeader = EventTable.getTableHeader();
         Font headerFont = new Font("Verdana", Font.PLAIN, 24);
         tableHeader.setFont(headerFont);
-        
+
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
         //load table
-        DefaultTableModel table = (DefaultTableModel) searchTable.getModel();
+        DefaultTableModel table = (DefaultTableModel) EventTable.getModel();
         ArrayList<String> list = new ArrayList<String>();
 
         //read file
-        list = Global.ReadFile("logins.txt");
+        list = Global.ReadFile("event.txt");
 
         for (int i = 0; i < list.size(); i++) {
             //get each full line first
@@ -59,21 +58,21 @@ public class SystemLoginRecord extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        searchTable = new javax.swing.JTable();
-        refreshBtn = new javax.swing.JButton();
+        EventTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        refreshBtn = new javax.swing.JButton();
         BackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        searchTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        searchTable.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        searchTable.setModel(new javax.swing.table.DefaultTableModel(
+        EventTable.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        EventTable.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        EventTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Date", "Time", "Username", "Privilege"
+                "Username", "Action", "Date", "Time"
             }
         ) {
             Class[] types = new Class [] {
@@ -91,8 +90,11 @@ public class SystemLoginRecord extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        searchTable.setRowHeight(32);
-        jScrollPane1.setViewportView(searchTable);
+        EventTable.setRowHeight(32);
+        jScrollPane1.setViewportView(EventTable);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setText("Admin Event Logs");
 
         refreshBtn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         refreshBtn.setText("Refresh");
@@ -101,9 +103,6 @@ public class SystemLoginRecord extends javax.swing.JFrame {
                 refreshBtnActionPerformed(evt);
             }
         });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("System Login Record");
 
         BackBtn.setText("Back");
         BackBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +123,7 @@ public class SystemLoginRecord extends javax.swing.JFrame {
                         .addGap(62, 62, 62)
                         .addComponent(refreshBtn))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BackBtn)
                 .addContainerGap())
         );
@@ -139,7 +138,7 @@ public class SystemLoginRecord extends javax.swing.JFrame {
                     .addComponent(BackBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,7 +147,7 @@ public class SystemLoginRecord extends javax.swing.JFrame {
     private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
         this.setVisible(false);
         this.dispose();
-        SystemLoginRecord page = new SystemLoginRecord();
+        AdminEventLogs page = new AdminEventLogs();
         page.setVisible(true);
     }//GEN-LAST:event_refreshBtnActionPerformed
 
@@ -176,29 +175,29 @@ public class SystemLoginRecord extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SystemLoginRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminEventLogs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SystemLoginRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminEventLogs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SystemLoginRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminEventLogs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SystemLoginRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminEventLogs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SystemLoginRecord().setVisible(true);
+                new AdminEventLogs().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackBtn;
+    private javax.swing.JTable EventTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshBtn;
-    private javax.swing.JTable searchTable;
     // End of variables declaration//GEN-END:variables
 }

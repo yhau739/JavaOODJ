@@ -27,15 +27,7 @@ public class Global {
     public static String Privilege;
     private static String Password;
 
-    //Encapsulation
-//    public static String GetUsername(){
-//        return Username;
-//    }
-//    
-//    public static void SetUsername(String username){
-//        Username = username;
-//    }
-    
+    //Encapsulation    
     public static String GetPassword(){
         return Password;
     }
@@ -56,8 +48,6 @@ public class Global {
             //get current date
             LocalDate date = LocalDate.now();
 
-            //get datetime
-//            String dateTime = time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + date.toString();
             //write
             writer.write(date + " " + time + " " + Username + " " + Privilege);
             writer.write(System.getProperty("line.separator"));

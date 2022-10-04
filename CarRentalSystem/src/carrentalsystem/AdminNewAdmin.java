@@ -6,9 +6,11 @@
 package carrentalsystem;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -21,6 +23,10 @@ public class AdminNewAdmin extends javax.swing.JFrame {
      */
     public AdminNewAdmin() {
         initComponents();
+
+        JTableHeader tableHeader = AdminTable.getTableHeader();
+        Font headerFont = new Font("Verdana", Font.PLAIN, 24);
+        tableHeader.setFont(headerFont);
 
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -91,9 +97,16 @@ public class AdminNewAdmin extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         AdminTable.setRowHeight(30);
@@ -211,6 +224,7 @@ public class AdminNewAdmin extends javax.swing.JFrame {
 
         Boolean result = Admin.AddNewAdmin(newUsername, newPassword);
         if (result == true) {
+            Admin.SaveEventLogs(Admin.Username, Admin.Event);
             this.setVisible(false);
             this.dispose();
             AdminNewAdmin page = new AdminNewAdmin();

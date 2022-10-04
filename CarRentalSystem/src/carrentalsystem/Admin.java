@@ -19,13 +19,76 @@ import javax.swing.JOptionPane;
 //inheritance
 public class Admin extends Global {
 
+    public static String Event;
     public static int EditorSelectedRowIndex;
 
     //constructor
     static {
         Admin.Privilege = "admin";
     }
-    
+
+    public static void SaveEventLogs(String username, String action) {
+        try {
+            //create writer
+            FileWriter writer = new FileWriter("event.txt", true);
+
+            //get current time
+            LocalTime time = LocalTime.now();
+
+            //get current date
+            LocalDate date = LocalDate.now();
+
+            //write
+            writer.write(username + " " + action + " " + date + " " + time);
+            writer.write(System.getProperty("line.separator"));
+            writer.close();
+        } catch (Exception e) {
+            System.out.println("Failed to save event logs");
+        }
+    }
+
+    public static Boolean AddCar(String CarPlate, String CarType, String Price, String color) {
+        try {
+            //create writer
+            FileWriter writer = new FileWriter("cars.txt", true);
+
+            //write
+            writer.write(CarPlate + " " + CarType + " " + Price + " " + color);
+            writer.write(System.getProperty("line.separator"));
+            writer.close();
+            JOptionPane.showMessageDialog(null, "New Car is successfully added!", "New Car", JOptionPane.INFORMATION_MESSAGE);
+            Admin.Event = "AddCar";
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "failed to add car!", "Error", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+    }
+
+    public static Boolean SearchCar(String CarPlate) {
+        ArrayList<String> list = new ArrayList<String>();
+        //read file function
+        list = ReadFile("cars.txt");
+
+        for (int i = 0; i < list.size(); i++) {
+            //get each full line first
+            String fullLine = list.get(i);
+            //split
+            String[] splited;
+            splited = fullLine.split("\\s+");
+            //if matching records are found
+            if (splited[0].equals(CarPlate)) {
+                Car.CarPlate = splited[0];
+                Car.CarType = splited[1];
+                Car.PricePerDay = Integer.parseInt(splited[2]);
+                Car.CarColor = splited[3];
+                JOptionPane.showMessageDialog(null, "Matching Record is found");
+                return true;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "No Matching Records");
+        return false;
+    }
 
     public static Boolean DeleteCar(int SelectedRowIndex) {
         ArrayList<String> list = new ArrayList<String>();
@@ -56,10 +119,11 @@ public class Admin extends Global {
             }
             writer.flush();
             writer.close();
-            JOptionPane.showMessageDialog(null, "Modification is successful");
+            JOptionPane.showMessageDialog(null, "Deletion is successful");
+            Admin.Event = "DeleteCar";
             return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error in EditCar");
+            JOptionPane.showMessageDialog(null, "Error in DeleteCar");
             return false;
         }
     }
@@ -95,6 +159,7 @@ public class Admin extends Global {
             writer.flush();
             writer.close();
             JOptionPane.showMessageDialog(null, "Modification is successful");
+            Admin.Event = "EditCar";
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in EditCar");
@@ -118,6 +183,7 @@ public class Admin extends Global {
             writer.write(System.getProperty("line.separator"));
             writer.close();
             JOptionPane.showMessageDialog(null, "New Admin is successfully added!", "New Admin", JOptionPane.INFORMATION_MESSAGE);
+            Admin.Event = "AddNewAdmin";
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in AddNewAdmin");
