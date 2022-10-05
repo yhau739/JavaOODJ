@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -21,6 +22,7 @@ public class AdminViewCar extends javax.swing.JFrame {
     /**
      * Creates new form AdminViewCar
      */
+    //constructor
     public AdminViewCar() {
         initComponents();
 
@@ -30,30 +32,13 @@ public class AdminViewCar extends javax.swing.JFrame {
 
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);   
 
-        //load table
-        //get the number of rows in the Jtable
-        int rowNum = CarTable.getModel().getRowCount();
-
+        //create table model
         DefaultTableModel table = (DefaultTableModel) CarTable.getModel();
-        //delete existing data first
-        if (rowNum > 0) {
-            table.setRowCount(0);
-        }
-
-        ArrayList<String> list = new ArrayList<String>();
-        //read file
-        list = Global.ReadFile("cars.txt");
-
-        for (int i = 0; i < list.size(); i++) {
-            //get each full line first
-            String fullLine = list.get(i);
-            //each full line is split by " " to convert to []
-            String[] splited = fullLine.split("\\s+");
-
-            table.addRow(splited);
-        }
+        
+        //load table
+        Global.LoadTable(table, "cars.txt");
     }
 
     /**
@@ -85,6 +70,7 @@ public class AdminViewCar extends javax.swing.JFrame {
         CarTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         BackBtn = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,13 +102,10 @@ public class AdminViewCar extends javax.swing.JFrame {
 
         CarPlate.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        CarType.setEditable(false);
         CarType.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        Price.setEditable(false);
         Price.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        Color.setEditable(false);
         Color.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         EditBtn.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -142,7 +125,7 @@ public class AdminViewCar extends javax.swing.JFrame {
         });
 
         SearchBtn.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        SearchBtn.setText("Search");
+        SearchBtn.setText("Search with CarPlate");
         SearchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchBtnActionPerformed(evt);
@@ -153,45 +136,46 @@ public class AdminViewCar extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(97, 97, 97)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Color, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3)
-                                        .addComponent(EditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(22, 22, 22))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(CarType, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addGap(57, 57, 57)
-                                    .addComponent(CarPlate, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(Price, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGap(43, 43, 43)
-                                    .addComponent(DelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(97, 97, 97)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Color, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel3)
+                                            .addComponent(EditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(22, 22, 22))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(CarType, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(57, 57, 57)
+                                        .addComponent(CarPlate, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(Price, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(DelBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,6 +251,9 @@ public class AdminViewCar extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel10.setText("Click any row to select car");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -277,8 +264,11 @@ public class AdminViewCar extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BackBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BackBtn))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -287,14 +277,19 @@ public class AdminViewCar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(BackBtn))
-                .addGap(18, 18, 18)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(BackBtn))
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 15, Short.MAX_VALUE)))
                 .addGap(34, 34, 34))
         );
 
@@ -315,6 +310,9 @@ public class AdminViewCar extends javax.swing.JFrame {
         //set global 
         Admin.EditorSelectedRowIndex = selectedRowIndex;
 
+        //set current instance
+        Car.CarPlate = model.getValueAt(selectedRowIndex, 0).toString();
+        
         //display in textfields
         CarPlate.setText(model.getValueAt(selectedRowIndex, 0).toString());
         CarType.setText(model.getValueAt(selectedRowIndex, 1).toString());
@@ -323,21 +321,47 @@ public class AdminViewCar extends javax.swing.JFrame {
     }//GEN-LAST:event_CarTableMouseClicked
 
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
-        //get text from textfields and call method
-        Boolean result = Admin.EditCar(Admin.EditorSelectedRowIndex, CarPlate.getText(), CarType.getText(), Price.getText(), Color.getText());
-        if (result == true) {
-            Admin.SaveEventLogs(Admin.Username, Admin.Event);
-            this.setVisible(false);
-            this.dispose();
-            AdminViewCar page = new AdminViewCar();
-            page.setVisible(true);
+        //value before edit
+        String originalCarPlate = Car.CarPlate;
+        
+        //validation
+        Boolean validation = Global.IsInteger(Price.getText(), "Price");
+        Boolean validation2 = Global.StringOnly(CarType.getText(), "CarType");
+        Boolean validation3 = Global.StringOnly(Color.getText(), "Color");
+        Boolean validation4 = Global.AlreadyExists("cars.txt", CarPlate.getText(), "CarPlate", 0, true);
+        Boolean validation5 = (CarPlate.getText()).equals("") || (CarType.getText()).equals("") || (Price.getText()).equals("") || (Color.getText()).equals("");
+
+        if (validation == true && validation2 == true && validation3 == true && validation4 == false && validation5 == false) {
+            //get text from textfields and call method
+            Boolean result = Admin.EditCar(Admin.EditorSelectedRowIndex, CarPlate.getText(), CarType.getText(), Price.getText(), Color.getText());
+            if (result == true) {
+                Admin.SaveEventLogs(Admin.Username, Admin.Event);
+                this.setVisible(false);
+                this.dispose();
+                AdminViewCar page = new AdminViewCar();
+                page.setVisible(true);
+            }
+        }
+        else if(validation4 == true){
+            //set the field back to original value
+            CarPlate.setText(originalCarPlate);
+        }
+        else if (validation5 == true){
+            JOptionPane.showMessageDialog(null, "Please don't leave any text field empty");
         }
     }//GEN-LAST:event_EditBtnActionPerformed
 
     private void DelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnActionPerformed
-        Boolean result = Admin.DeleteCar(Admin.EditorSelectedRowIndex);
-        if (result == true){
-            Admin.SaveEventLogs(Admin.Username, Admin.Event);
+        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected car?", "Comfirmation", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            Boolean result = Admin.DeleteCar(Admin.EditorSelectedRowIndex);
+            if (result == true) {
+                Admin.SaveEventLogs(Admin.Username, Admin.Event);
+                this.setVisible(false);
+                this.dispose();
+                AdminViewCar page = new AdminViewCar();
+                page.setVisible(true);
+            }
         }
     }//GEN-LAST:event_DelBtnActionPerformed
 
@@ -402,6 +426,7 @@ public class AdminViewCar extends javax.swing.JFrame {
     private javax.swing.JTextField Price;
     private javax.swing.JButton SearchBtn;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

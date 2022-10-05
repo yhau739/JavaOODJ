@@ -34,18 +34,8 @@ public class AdminEventLogs extends javax.swing.JFrame {
 
         //load table
         DefaultTableModel table = (DefaultTableModel) EventTable.getModel();
-        ArrayList<String> list = new ArrayList<String>();
-
-        //read file
-        list = Global.ReadFile("event.txt");
-
-        for (int i = 0; i < list.size(); i++) {
-            //get each full line first
-            String fullLine = list.get(i);
-            //each full line is split by " " to convert to []
-            String[] splited = fullLine.split("\\s+");
-            table.addRow(splited);
-        }
+        
+        Global.LoadTable(table, "event.txt");
     }
 
     /**

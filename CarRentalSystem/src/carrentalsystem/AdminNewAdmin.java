@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
@@ -32,30 +33,11 @@ public class AdminNewAdmin extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
-        //get the number of rows in the Jtable
-        int rowNum = AdminTable.getModel().getRowCount();
-
+        //create table model
         DefaultTableModel table = (DefaultTableModel) AdminTable.getModel();
-        //delete existing data first
-        if (rowNum > 0) {
-            table.setRowCount(0);
-        }
+        //load table
+        Admin.LoadAdminTable(table, "admin.txt");
 
-        ArrayList<String> list = new ArrayList<String>();
-        //read file
-        list = Global.ReadFile("admin.txt");
-
-        for (int i = 0; i < list.size(); i++) {
-            //get each full line first
-            String fullLine = list.get(i);
-            //each full line is split by " " to convert to []
-            String[] splited = fullLine.split("\\s+");
-
-            //remove certain element from array
-            String[] newSplited = Global.RemoveElementFromArray(splited, 1);
-
-            table.addRow(newSplited);
-        }
     }
 
     /**
@@ -222,13 +204,25 @@ public class AdminNewAdmin extends javax.swing.JFrame {
         String newUsername = UsernameInput.getText();
         String newPassword = PassInput.getText();
 
-        Boolean result = Admin.AddNewAdmin(newUsername, newPassword);
-        if (result == true) {
-            Admin.SaveEventLogs(Admin.Username, Admin.Event);
-            this.setVisible(false);
-            this.dispose();
-            AdminNewAdmin page = new AdminNewAdmin();
-            page.setVisible(true);
+        //validation
+        Boolean validation1 = Global.AlreadyExists("admin.txt", newUsername, "Admin Username", 0, false);
+        Boolean validation2 = (UsernameInput.getText()).equals("");
+        Boolean validation3 = (PassInput.getText()).equals("");
+
+        if (validation1 == false && validation2 == false && validation3 == false) { //pass validation
+            Boolean result = Admin.AddNewAdmin(newUsername, newPassword);
+            if (result == true) {
+                Admin.SaveEventLogs(Admin.Username, Admin.Event);
+                this.setVisible(false);
+                this.dispose();
+                AdminNewAdmin page = new AdminNewAdmin();
+                page.setVisible(true);
+            }
+        } else if (validation1 == true) { //duplicate username
+            UsernameInput.setText("");
+        }
+        else if (validation2 == true || validation3 == true){ //empty text fields
+            JOptionPane.showMessageDialog(null, "Please don't leave any text field empty");
         }
     }//GEN-LAST:event_CreateBtnActionPerformed
 

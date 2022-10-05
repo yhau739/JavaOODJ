@@ -17,6 +17,7 @@ public class CarRentalSystem {
     public static void main(String[] args) {
         MainFrame main = new MainFrame();
         main.setVisible(true);
+        System.out.print(Global.StringOnly("asA@fq", "aa"));
     }
     
 }

@@ -28,14 +28,77 @@ public class Global {
     private static String Password;
 
     //Encapsulation    
-    public static String GetPassword(){
+    public static String GetPassword() {
         return Password;
     }
-    
-    public static void SetPassword(String password){
+
+    public static void SetPassword(String password) {
         Password = password;
     }
-    
+
+    public static void LoadTable(DefaultTableModel table, String fileName) {
+        ArrayList<String> list = new ArrayList<String>();
+        //read file
+        list = Global.ReadFile(fileName);
+
+        for (int i = 0; i < list.size(); i++) {
+            //get each full line first
+            String fullLine = list.get(i);
+            //each full line is split by " " to convert to []
+            String[] splited = fullLine.split("\\s+");
+
+            table.addRow(splited);
+        }
+    }
+
+    public static Boolean AlreadyExists(String fileName, String userInput, String bannerMsg, int indexToCheck, Boolean SkipRow) {
+        ArrayList<String> list = new ArrayList<String>();
+        //read file function
+        list = ReadFile(fileName);
+
+        //loop in the size of the list (number of records)
+        for (int i = 0; i < list.size(); i++) {
+            //get full line
+            String fullLine = list.get(i);
+
+            //split each full line to get credentials
+            String[] splited = fullLine.split("\\s+");
+
+            if (SkipRow == true) {
+                //skip the original line to avoid confusion of repetition
+                if (i == Admin.EditorSelectedRowIndex) {
+                    System.out.println("I skipped " + i);
+                    continue;
+                }
+            }
+
+            //only check the index given
+            if (userInput.equals(splited[indexToCheck])) {
+                JOptionPane.showMessageDialog(null, "This " + bannerMsg + " already exists! \n Please Enter a different " + bannerMsg, "Already Exists", JOptionPane.ERROR_MESSAGE);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Boolean IsInteger(String Userinput, String bannerMsg) {
+        try {
+            Integer.parseInt(Userinput);
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please enter numbers only for " + bannerMsg + " field");
+            return false;
+        }
+    }
+
+    public static Boolean StringOnly(String Userinput, String bannerMsg) {
+        Boolean result = Userinput.matches("[a-zA-Z]+");
+        if (result == false) {
+            JOptionPane.showMessageDialog(null, "Please enter letters only(no numbers) for " + bannerMsg + " field");
+        }
+        return result;
+    }
+
     //save for both user
     public static void SaveLoginRecord() {
         try {

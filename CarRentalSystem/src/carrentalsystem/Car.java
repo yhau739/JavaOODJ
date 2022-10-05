@@ -15,6 +15,8 @@ public class Car {
     public static String CarType;
     public static int PricePerDay;
     public static String CarColor;
+    //public static Boolean Availability; (true/false)
+    //public static String customerId;
 
 //    public Car(String plate, String type, int price, String color) {
 //        //in case nothing 

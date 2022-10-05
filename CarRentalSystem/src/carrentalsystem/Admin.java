@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -78,6 +79,8 @@ public class Admin extends Global {
             splited = fullLine.split("\\s+");
             //if matching records are found
             if (splited[0].equals(CarPlate)) {
+                //for delete car section
+                Admin.EditorSelectedRowIndex = i;
                 Car.CarPlate = splited[0];
                 Car.CarType = splited[1];
                 Car.PricePerDay = Integer.parseInt(splited[2]);
@@ -218,5 +221,23 @@ public class Admin extends Global {
         //prompt message
         JOptionPane.showMessageDialog(null, "Incorrect credentials\n Please Try Again!", "Error Message", JOptionPane.ERROR_MESSAGE);
         return false;
+    }
+
+    public static void LoadAdminTable(DefaultTableModel table, String fileName) {
+        ArrayList<String> list = new ArrayList<String>();
+        //read file
+        list = Global.ReadFile(fileName);
+
+        for (int i = 0; i < list.size(); i++) {
+            //get each full line first
+            String fullLine = list.get(i);
+            //each full line is split by " " to convert to []
+            String[] splited = fullLine.split("\\s+");
+
+            //remove certain element from array
+            String[] newSplited = Global.RemoveElementFromArray(splited, 1);
+
+            table.addRow(newSplited);
+        }
     }
 }
