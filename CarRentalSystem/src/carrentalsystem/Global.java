@@ -55,7 +55,6 @@ public class Global {
         JOptionPane.showMessageDialog(null, "Incorrect credentials\n Please Try Again!", "Error Message", JOptionPane.ERROR_MESSAGE);
         return false;
     }
-    
 
     public static void SaveLoginRecord() {
         try {

@@ -131,7 +131,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_AdminBtnActionPerformed
 
     private void CustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerBtnActionPerformed
-        // TODO add your handling code here:
+        CustomerLogin customerlogin = new CustomerLogin();
+        this.setVisible(false);
+        this.dispose();
+        customerlogin.setVisible(true);
     }//GEN-LAST:event_CustomerBtnActionPerformed
 
     private void ExitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitBtnActionPerformed
