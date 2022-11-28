@@ -25,7 +25,7 @@ public class AdminMain extends javax.swing.JFrame {
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
         //Set Welcome Message
-        WelcomeMsg.setText("Welcome " + Admin.Username + "!");
+        WelcomeMsg.setText("Welcome " + Global.CurrentAdmin.getUsername() + "!");
     }
 
     /**
@@ -310,8 +310,7 @@ public class AdminMain extends javax.swing.JFrame {
 
     private void LogoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutBtnActionPerformed
         //clear profile
-        Admin.Username = "";
-        Admin.SetPassword("");
+        Global.CurrentAdmin = null;
 
         this.setVisible(false);
         this.dispose();

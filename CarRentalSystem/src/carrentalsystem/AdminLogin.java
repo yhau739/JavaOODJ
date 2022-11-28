@@ -5,7 +5,6 @@
  */
 package carrentalsystem;
 
-import static carrentalsystem.Global.SaveLoginRecord;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -15,17 +14,15 @@ import java.awt.Toolkit;
  */
 public class AdminLogin extends javax.swing.JFrame {
 
-    Global global = new Global();
-
     /**
      * Creates new form AdminLogin
      */
     public AdminLogin() {
         initComponents();
-        
+
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
     }
 
     /**
@@ -146,7 +143,7 @@ public class AdminLogin extends javax.swing.JFrame {
         //close page and dispose
         this.setVisible(false);
         this.dispose();
-        
+
         //create object and open page
         MainFrame mainpage = new MainFrame();
         mainpage.setVisible(true);
@@ -158,31 +155,23 @@ public class AdminLogin extends javax.swing.JFrame {
         String password = PassInput.getText();
 
         //check & get login status
-        Boolean result = Admin.CheckLoginAdmin("Admin.txt", username, password);
+        Admin result = Admin.CheckLoginAdmin(username, password);
 
         //if login success
-        if (result == true) {
-            //Set up profile
-            Admin.Username = username;
-            Admin.SetPassword(password);
-            
-            //save login record (backend)
-            Admin.SaveLoginRecord();
+        if (result != null) {
+//            save login record (backend)already working
+//            Global.SaveAdminLoginRecord(result); 
             
             //dispose & go to next page
             this.setVisible(false);
             this.dispose();
             AdminMain page = new AdminMain();
             page.setVisible(true);
-            
-        } else if (result == false) {
+
+        } else if (result == null) {
             //clear inputs
             UsernameInput.setText("");
             PassInput.setText("");
-            
-            //fake refresh
-            this.setVisible(false);
-            this.setVisible(true);
         }
     }//GEN-LAST:event_LoginBtnActionPerformed
 

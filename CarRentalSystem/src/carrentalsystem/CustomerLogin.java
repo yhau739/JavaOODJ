@@ -169,10 +169,10 @@ public class CustomerLogin extends javax.swing.JFrame {
         //if login success
         if (result == true) {
             //Set up profile
-            Global.Username = username;
-            Customer.SetPassword(password);
+//            Global.Username = username;
+//            Customer.SetPassword(password);
 //            Global.Password = password;
-            Global.Privilege = "customer";
+//            Global.Privilege = "customer";
             
             //dispose & go to next page
             this.setVisible(false);

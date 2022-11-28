@@ -35,7 +35,8 @@ public class AdminEventLogs extends javax.swing.JFrame {
         //load table
         DefaultTableModel table = (DefaultTableModel) EventTable.getModel();
         
-        Global.LoadTable(table, "event.txt");
+//        Global.LoadTable(table, "event.txt");
+        Admin.LoadEventTable(table);
     }
 
     /**

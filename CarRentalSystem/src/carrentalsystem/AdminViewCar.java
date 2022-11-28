@@ -32,13 +32,13 @@ public class AdminViewCar extends javax.swing.JFrame {
 
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);   
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
         //create table model
         DefaultTableModel table = (DefaultTableModel) CarTable.getModel();
-        
+
         //load table
-        Global.LoadTable(table, "cars.txt");
+        Admin.LoadCarTable(table);
     }
 
     /**
@@ -308,11 +308,8 @@ public class AdminViewCar extends javax.swing.JFrame {
         int selectedRowIndex = CarTable.getSelectedRow();
 
         //set global 
-        Admin.EditorSelectedRowIndex = selectedRowIndex;
+//        Admin.EditorSelectedRowIndex = selectedRowIndex;
 
-        //set current instance
-        Car.CarPlate = model.getValueAt(selectedRowIndex, 0).toString();
-        
         //display in textfields
         CarPlate.setText(model.getValueAt(selectedRowIndex, 0).toString());
         CarType.setText(model.getValueAt(selectedRowIndex, 1).toString());
@@ -321,62 +318,45 @@ public class AdminViewCar extends javax.swing.JFrame {
     }//GEN-LAST:event_CarTableMouseClicked
 
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
-        //value before edit
-        String originalCarPlate = Car.CarPlate;
-        
-        //validation
-        Boolean validation = Global.IsInteger(Price.getText(), "Price");
-        Boolean validation2 = Global.StringOnly(CarType.getText(), "CarType");
-        Boolean validation3 = Global.StringOnly(Color.getText(), "Color");
-        Boolean validation4 = Global.AlreadyExists("cars.txt", CarPlate.getText(), "CarPlate", 0, true);
-        Boolean validation5 = (CarPlate.getText()).equals("") || (CarType.getText()).equals("") || (Price.getText()).equals("") || (Color.getText()).equals("");
+        Boolean result = Admin.EditCar(CarPlate.getText(), CarType.getText(), Price.getText(), Color.getText());
 
-        if (validation == true && validation2 == true && validation3 == true && validation4 == false && validation5 == false) {
-            //get text from textfields and call method
-            Boolean result = Admin.EditCar(Admin.EditorSelectedRowIndex, CarPlate.getText(), CarType.getText(), Price.getText(), Color.getText());
-            if (result == true) {
-                Admin.SaveEventLogs(Admin.Username, Admin.Event);
-                this.setVisible(false);
-                this.dispose();
-                AdminViewCar page = new AdminViewCar();
-                page.setVisible(true);
-            }
-        }
-        else if(validation4 == true){
-            //set the field back to original value
-            CarPlate.setText(originalCarPlate);
-        }
-        else if (validation5 == true){
-            JOptionPane.showMessageDialog(null, "Please don't leave any text field empty");
+        if (result == true) {
+            //logs
+            //Admin.SaveEventLogs(Global.currentadmin);
+            this.setVisible(false);
+            this.dispose();
+            AdminViewCar page = new AdminViewCar();
+            page.setVisible(true);
         }
     }//GEN-LAST:event_EditBtnActionPerformed
 
     private void DelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected car?", "Comfirmation", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            Boolean result = Admin.DeleteCar(Admin.EditorSelectedRowIndex);
-            if (result == true) {
-                Admin.SaveEventLogs(Admin.Username, Admin.Event);
-                this.setVisible(false);
-                this.dispose();
-                AdminViewCar page = new AdminViewCar();
-                page.setVisible(true);
-            }
-        }
+//        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected car?", "Comfirmation", JOptionPane.YES_NO_OPTION);
+//        if (reply == JOptionPane.YES_OPTION) {
+//            Boolean result = Admin.DeleteCar(Admin.EditorSelectedRowIndex);
+//            if (result == true) {
+//                //logs
+//                //Admin.SaveEventLogs(Admin.Username, Admin.Event);
+//                this.setVisible(false);
+//                this.dispose();
+//                AdminViewCar page = new AdminViewCar();
+//                page.setVisible(true);
+//            }
+//        }
     }//GEN-LAST:event_DelBtnActionPerformed
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
-        Boolean result = Admin.SearchCar(CarPlate.getText());
-        if (result == true) {
-            this.CarPlate.setText(Car.CarPlate);
-            this.CarType.setText(Car.CarType);
-            this.Price.setText(Integer.toString(Car.PricePerDay));
-            this.Color.setText(Car.CarColor);
-        } else {
+        Car result = Admin.SearchCar(CarPlate.getText());
+        if (result == null) {
             this.CarPlate.setText("");
             this.CarType.setText("");
             this.Price.setText("");
             this.Color.setText("");
+        } else {
+            this.CarPlate.setText(result.GetCarPlate());
+            this.CarType.setText(result.GetCarType());
+            this.Price.setText(Integer.toString(result.GetPrice()));
+            this.Color.setText(result.GetColor());
         }
     }//GEN-LAST:event_SearchBtnActionPerformed
 

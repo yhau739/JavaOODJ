@@ -15,9 +15,10 @@ public class CarRentalSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        //Read all files first
+        DataIO.ReadAllFiles();
         MainFrame main = new MainFrame();
         main.setVisible(true);
-        System.out.print(Global.StringOnly("asA@fq", "aa"));
     }
     
 }

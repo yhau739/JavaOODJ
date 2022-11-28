@@ -35,7 +35,8 @@ public class SystemLoginRecord extends javax.swing.JFrame {
 
         //load table
         DefaultTableModel table = (DefaultTableModel) searchTable.getModel();
-        Global.LoadTable(table, "logins.txt");
+//        Global.LoadTable(table, "logins.txt");
+        Admin.LoadLoginTable(table);
     }
 
     /**

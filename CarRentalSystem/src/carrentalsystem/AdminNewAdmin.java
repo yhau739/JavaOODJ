@@ -36,7 +36,7 @@ public class AdminNewAdmin extends javax.swing.JFrame {
         //create table model
         DefaultTableModel table = (DefaultTableModel) AdminTable.getModel();
         //load table
-        Admin.LoadAdminTable(table, "admin.txt");
+        Admin.LoadAdminTable(table);
 
     }
 
@@ -205,14 +205,14 @@ public class AdminNewAdmin extends javax.swing.JFrame {
         String newPassword = PassInput.getText();
 
         //validation
-        Boolean validation1 = Global.AlreadyExists("admin.txt", newUsername, "Admin Username", 0, false);
-        Boolean validation2 = (UsernameInput.getText()).equals("");
-        Boolean validation3 = (PassInput.getText()).equals("");
+        Boolean validation1 = Global.AdminAlreadyExists(newUsername, "Admin Username", 0, false);
+        Boolean validation2 = ((UsernameInput.getText()).equals("")|| (PassInput.getText()).equals(""));
 
-        if (validation1 == false && validation2 == false && validation3 == false) { //pass validation
+        if (validation1 == false && validation2 == false) { //pass validation
             Boolean result = Admin.AddNewAdmin(newUsername, newPassword);
             if (result == true) {
-                Admin.SaveEventLogs(Admin.Username, Admin.Event);
+                //logs
+//                Admin.SaveEventLogs(Global.currentadmin); already working
                 this.setVisible(false);
                 this.dispose();
                 AdminNewAdmin page = new AdminNewAdmin();
@@ -221,7 +221,7 @@ public class AdminNewAdmin extends javax.swing.JFrame {
         } else if (validation1 == true) { //duplicate username
             UsernameInput.setText("");
         }
-        else if (validation2 == true || validation3 == true){ //empty text fields
+        else if (validation2 == true){ //empty text fields
             JOptionPane.showMessageDialog(null, "Please don't leave any text field empty");
         }
     }//GEN-LAST:event_CreateBtnActionPerformed

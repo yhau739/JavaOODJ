@@ -22,20 +22,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Global {
 
-    //shared variables
-    public static String Username;
-    public static String Privilege;
-    private static String Password;
+    //current user
+    public static Admin CurrentAdmin;
 
-    //Encapsulation    
-    public static String GetPassword() {
-        return Password;
-    }
-
-    public static void SetPassword(String password) {
-        Password = password;
-    }
-
+    //Encapsulation + abstraction(not yet)
+//    public String GetPassword() {
+//        return Password;
+//    }
+//
+//    public void SetPassword(String password){
+//        Password = password;
+//    }
     public static void LoadTable(DefaultTableModel table, String fileName) {
         ArrayList<String> list = new ArrayList<String>();
         //read file
@@ -51,29 +48,54 @@ public class Global {
         }
     }
 
-    public static Boolean AlreadyExists(String fileName, String userInput, String bannerMsg, int indexToCheck, Boolean SkipRow) {
-        ArrayList<String> list = new ArrayList<String>();
-        //read file function
-        list = ReadFile(fileName);
-
-        //loop in the size of the list (number of records)
-        for (int i = 0; i < list.size(); i++) {
-            //get full line
-            String fullLine = list.get(i);
-
-            //split each full line to get credentials
-            String[] splited = fullLine.split("\\s+");
-
+    public static Boolean AdminAlreadyExists(String userInput, String bannerMsg, int indexToCheck, Boolean SkipRow) {
+        for (Admin obj : DataIO.allAdmins) {
             if (SkipRow == true) {
                 //skip the original line to avoid confusion of repetition
-                if (i == Admin.EditorSelectedRowIndex) {
-                    System.out.println("I skipped " + i);
+                //if statement need to modify
+                if (obj.getUsername().equals("compare with something that can record what is selected")) {
+                    System.out.println("I skipped " + obj.getUsername());
                     continue;
                 }
             }
+            if (obj.getUsername().equals(userInput)) {
+                JOptionPane.showMessageDialog(null, "This " + bannerMsg + " already exists! \n Please Enter a different " + bannerMsg, "Already Exists", JOptionPane.ERROR_MESSAGE);
+                return true;
+            }
+        }
+        return false;
+//        ArrayList<String> list = new ArrayList<String>();
+//        //read file function
+//        list = ReadFile(fileName);
+//
+//        //loop in the size of the list (number of records)
+//        for (int i = 0; i < list.size(); i++) {
+//            //get full line
+//            String fullLine = list.get(i);
+//
+//            //split each full line to get credentials
+//            String[] splited = fullLine.split("\\s+");
+//
+//            if (SkipRow == true) {
+//                //skip the original line to avoid confusion of repetition
+//                if (i == Admin.EditorSelectedRowIndex) {
+//                    System.out.println("I skipped " + i);
+//                    continue;
+//                }
+//            }
+//
+//            //only check the index given
+//            if (userInput.equals(splited[indexToCheck])) {
+//                JOptionPane.showMessageDialog(null, "This " + bannerMsg + " already exists! \n Please Enter a different " + bannerMsg, "Already Exists", JOptionPane.ERROR_MESSAGE);
+//                return true;
+//            }
+//        }
+//        return false;
+    }
 
-            //only check the index given
-            if (userInput.equals(splited[indexToCheck])) {
+    public static Boolean CarAlreadyExists(String userInput, String bannerMsg) {
+        for (Car obj : DataIO.allCars) {
+            if (obj.GetCarPlate().equals(userInput)) {
                 JOptionPane.showMessageDialog(null, "This " + bannerMsg + " already exists! \n Please Enter a different " + bannerMsg, "Already Exists", JOptionPane.ERROR_MESSAGE);
                 return true;
             }
@@ -100,21 +122,16 @@ public class Global {
     }
 
     //save for both user
-    public static void SaveLoginRecord() {
+    public static void SaveAdminLoginRecord(Admin adminObj) { //need to take in an object as parameter to getUsername
         try {
-            //create writer
-            FileWriter writer = new FileWriter("logins.txt", true);
-
             //get current time
             LocalTime time = LocalTime.now();
 
             //get current date
             LocalDate date = LocalDate.now();
-
-            //write
-            writer.write(date + " " + time + " " + Username + " " + Privilege);
-            writer.write(System.getProperty("line.separator"));
-            writer.close();
+            
+            DataIO.allLogins.add(new Login(date.toString(),time.toString(),adminObj.getUsername(),adminObj.getPrivilege()));
+            DataIO.WriteFileLogin();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in saveloginrecord");
         }

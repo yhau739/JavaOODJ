@@ -7,6 +7,7 @@ package carrentalsystem;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -223,30 +224,33 @@ public class AdminNewCar extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(18, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(BackBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(BackBtn)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
-        Boolean result = Admin.AddCar(CarPlate.getText(), CarType.getText(), Price.getText(), Color.getText());
-        if(result == true){
-            Admin.SaveEventLogs(Admin.Username, Admin.Event);
-            System.out.println("Event logs saved");
-        }
+        Boolean validation = (CarPlate.getText()).equals("") || (CarType.getText()).equals("") || (Price.getText()).equals("") || (Color.getText()).equals("");
+        Boolean validation2 = Global.CarAlreadyExists(CarPlate.getText(), "CarPlate");
 
+        if (validation == false && validation2 == false) {
+            Boolean result = Admin.AddCar(CarPlate.getText(), CarType.getText(), Price.getText(), Color.getText());
+            if (result == true) {
+                //logs
+//                Admin.SaveEventLogs(Global.currentadmin); already working
+            }
+        }
+        else if(validation == true){
+            JOptionPane.showMessageDialog(null, "Please don't leave any text field empty");
+        }
     }//GEN-LAST:event_AddBtnActionPerformed
 
     private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
@@ -254,7 +258,6 @@ public class AdminNewCar extends javax.swing.JFrame {
         CarType.setText("");
         Price.setText("");
         Color.setText("");
-
     }//GEN-LAST:event_ClearBtnActionPerformed
 
     private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
