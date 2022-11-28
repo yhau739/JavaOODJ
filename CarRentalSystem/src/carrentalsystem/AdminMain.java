@@ -53,6 +53,7 @@ public class AdminMain extends javax.swing.JFrame {
         AddCarBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        ManageAdmin = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         SystemLoginRecordBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -135,6 +136,7 @@ public class AdminMain extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         AddAdminBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -160,7 +162,7 @@ public class AdminMain extends javax.swing.JFrame {
         ManageCustomerBtn.setText("Manage Customers");
 
         AddCarBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        AddCarBtn.setText("Add New Cars");
+        AddCarBtn.setText("New Cars");
         AddCarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddCarBtnActionPerformed(evt);
@@ -172,6 +174,14 @@ public class AdminMain extends javax.swing.JFrame {
 
         jSeparator1.setForeground(new java.awt.Color(51, 255, 51));
 
+        ManageAdmin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        ManageAdmin.setText("Manage Admin");
+        ManageAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManageAdminActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -179,21 +189,26 @@ public class AdminMain extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(AddAdminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                        .addComponent(ViewEditCarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(AddCarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ManageCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(jSeparator1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AddAdminBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addGap(47, 47, 47)
+                                .addComponent(ManageAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 10, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AddCarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ManageBookings, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ViewEditCarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ManageCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,16 +220,22 @@ public class AdminMain extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddAdminBtn)
-                    .addComponent(ViewEditCarBtn))
+                    .addComponent(ManageAdmin))
                 .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddCarBtn)
-                    .addComponent(ManageCustomerBtn))
-                .addGap(39, 39, 39)
-                .addComponent(ManageBookings)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(AddCarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ViewEditCarBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(ManageCustomerBtn))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(ManageBookings)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         SystemLoginRecordBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -361,6 +382,13 @@ public class AdminMain extends javax.swing.JFrame {
         page.setVisible(true);
     }//GEN-LAST:event_EventLogsBtnActionPerformed
 
+    private void ManageAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageAdminActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        AdminViewAdmin page = new AdminViewAdmin();
+        page.setVisible(true);
+    }//GEN-LAST:event_ManageAdminActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -402,6 +430,7 @@ public class AdminMain extends javax.swing.JFrame {
     private javax.swing.JButton AddCarBtn;
     private javax.swing.JButton EventLogsBtn;
     private javax.swing.JButton LogoutBtn;
+    private javax.swing.JButton ManageAdmin;
     private javax.swing.JButton ManageBookings;
     private javax.swing.JButton ManageCustomerBtn;
     private javax.swing.JButton SystemLoginRecordBtn;

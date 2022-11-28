@@ -1,4 +1,3 @@
 LRJ1283 Lambo 2123 yellow
-LRJ1234 proton 2333 pink
-test1234 Lambo 23334 pink
-test222 ab 2323 aaa
+LRJ1234 banda 2333 pink
+test1234 Lambo 1234 pink

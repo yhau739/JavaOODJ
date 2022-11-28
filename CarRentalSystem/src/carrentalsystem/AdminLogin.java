@@ -152,10 +152,13 @@ public class AdminLogin extends javax.swing.JFrame {
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         //obtain inputs
         String username = UsernameInput.getText();
-        String password = PassInput.getText();
+        char[] password = PassInput.getPassword();
+
+        //Convert to String data type
+        String StrPassword = String.valueOf(password);
 
         //check & get login status
-        Admin result = Admin.CheckLoginAdmin(username, password);
+        Admin result = Admin.CheckLoginAdmin(username, StrPassword);
 
         //if login success
         if (result != null) {

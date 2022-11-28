@@ -7,7 +7,9 @@ package carrentalsystem;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +26,12 @@ public class AdminNewCar extends javax.swing.JFrame {
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
+        //create table model
+        DefaultTableModel table = (DefaultTableModel) CarTable.getModel();
+
+        //load table
+        Admin.LoadCarTable(table);
     }
 
     /**
@@ -35,6 +43,8 @@ public class AdminNewCar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        CarTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -55,9 +65,44 @@ public class AdminNewCar extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jLabel1 = new javax.swing.JLabel();
         BackBtn = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        CarTable1 = new javax.swing.JTable();
+
+        CarTable.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        CarTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CarPlate", "Type", "Price ", "Color"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        CarTable.setRowHeight(30);
+        CarTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CarTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(CarTable);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -208,6 +253,33 @@ public class AdminNewCar extends javax.swing.JFrame {
             }
         });
 
+        CarTable1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        CarTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CarPlate", "Type", "Price ", "Color"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        CarTable1.setRowHeight(30);
+        jScrollPane2.setViewportView(CarTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,9 +289,13 @@ public class AdminNewCar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 749, Short.MAX_VALUE)
                         .addComponent(BackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -230,7 +306,9 @@ public class AdminNewCar extends javax.swing.JFrame {
                     .addComponent(BackBtn)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -238,19 +316,7 @@ public class AdminNewCar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
-        Boolean validation = (CarPlate.getText()).equals("") || (CarType.getText()).equals("") || (Price.getText()).equals("") || (Color.getText()).equals("");
-        Boolean validation2 = Global.CarAlreadyExists(CarPlate.getText(), "CarPlate");
-
-        if (validation == false && validation2 == false) {
-            Boolean result = Admin.AddCar(CarPlate.getText(), CarType.getText(), Price.getText(), Color.getText());
-            if (result == true) {
-                //logs
-//                Admin.SaveEventLogs(Global.currentadmin); already working
-            }
-        }
-        else if(validation == true){
-            JOptionPane.showMessageDialog(null, "Please don't leave any text field empty");
-        }
+        Boolean result = Admin.AddCar(CarPlate.getText(), CarType.getText(), Price.getText(), Color.getText());
     }//GEN-LAST:event_AddBtnActionPerformed
 
     private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
@@ -266,6 +332,10 @@ public class AdminNewCar extends javax.swing.JFrame {
         AdminMain page = new AdminMain();
         page.setVisible(true);
     }//GEN-LAST:event_BackBtnActionPerformed
+
+    private void CarTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CarTableMouseClicked
+
+    }//GEN-LAST:event_CarTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -306,6 +376,8 @@ public class AdminNewCar extends javax.swing.JFrame {
     private javax.swing.JButton AddBtn;
     private javax.swing.JButton BackBtn;
     private javax.swing.JTextField CarPlate;
+    private javax.swing.JTable CarTable;
+    private javax.swing.JTable CarTable1;
     private javax.swing.JTextField CarType;
     private javax.swing.JButton ClearBtn;
     private javax.swing.JTextField Color;
@@ -321,6 +393,8 @@ public class AdminNewCar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
