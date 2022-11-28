@@ -27,6 +27,7 @@ public class Admin extends User {
     private String Event;
 //    public static int EditorSelectedRowIndex;
 
+    @Override
     public void setPrivilege(){
         this.Privilege = "admin";
     }
@@ -62,6 +63,7 @@ public class Admin extends User {
         this.setEvent("");
         this.CreatedOnDate = CreatedOnDate;
         this.CreatedOnTime = CreatedOnTime;
+        this.setPrivilege();
     }
 
     public static void SaveEventLogs(Admin adminObj) {

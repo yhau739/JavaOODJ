@@ -10,7 +10,7 @@ package carrentalsystem;
  * @author Lenovo
  */
 //abstract class
-abstract public class User {
+abstract class User {
 
     private String Username;
     public String Privilege;
@@ -29,7 +29,7 @@ abstract public class User {
     }
 
     //abstract method
-    abstract public void setPrivilege();
+    abstract void setPrivilege();
 
     public String getPassword() {
         return Password;
