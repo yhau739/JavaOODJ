@@ -28,7 +28,7 @@ public class AdminNewCar extends javax.swing.JFrame {
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
         //create table model
-        DefaultTableModel table = (DefaultTableModel) CarTable.getModel();
+        DefaultTableModel table = (DefaultTableModel) CarTable1.getModel();
 
         //load table
         Admin.LoadCarTable(table);
@@ -289,12 +289,12 @@ public class AdminNewCar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 749, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 842, Short.MAX_VALUE)
                         .addComponent(BackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -317,6 +317,17 @@ public class AdminNewCar extends javax.swing.JFrame {
 
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
         Boolean result = Admin.AddCar(CarPlate.getText(), CarType.getText(), Price.getText(), Color.getText());
+        if (result == true) {
+            this.setVisible(false);
+            this.dispose();
+            AdminNewCar page = new AdminNewCar();
+            page.setVisible(true);
+        } else {
+            CarPlate.setText("");
+            CarType.setText("");
+            Price.setText("");
+            Color.setText("");
+        }
     }//GEN-LAST:event_AddBtnActionPerformed
 
     private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed

@@ -15,22 +15,12 @@ public class Car {
     public String CarType;
     public int PricePerDay;
     public String CarColor;
-    //public static Boolean Availability; (true/false)
-    //public static String customerId;
 
     public Car(String plate, String type, int price, String color) {
-        //in case nothing 
-        if (plate == null) {
-            this.CarPlate = "none";
-            this.CarType = "none";
-            this.PricePerDay = 0;
-            this.CarColor = "none";
-        } else {
-            this.CarPlate = plate;
-            this.CarType = type;
-            this.PricePerDay = price;
-            this.CarColor = color;
-        }
+        this.CarPlate = plate;
+        this.CarType = type;
+        this.PricePerDay = price;
+        this.CarColor = color;
     }
 
     public String GetCarPlate() {
@@ -64,5 +54,5 @@ public class Car {
     public void setCarColor(String CarColor) {
         this.CarColor = CarColor;
     }
-    
+
 }

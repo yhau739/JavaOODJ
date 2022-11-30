@@ -7,14 +7,13 @@ package carrentalsystem;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,9 +24,9 @@ public class Global {
     //current user
     public static Admin CurrentAdmin;
 
-    public static Boolean NullValuesExist(ArrayList<String> list ){
-        for (String i: list){
-            if(i.equals("")){
+    public static Boolean NullValuesExist(ArrayList<String> list) {
+        for (String i : list) {
+            if (i.equals("")) {
                 JOptionPane.showMessageDialog(null, "Please don't leave any text field empty");
                 return true;
             }
@@ -61,8 +60,8 @@ public class Global {
 
             //get current date
             LocalDate date = LocalDate.now();
-            
-            DataIO.allLogins.add(new Login(date.toString(),time.toString(),adminObj.getUsername(),adminObj.getPrivilege()));
+
+            DataIO.allLogins.add(new Login(date.toString(), time.toString(), adminObj.getUsername(), adminObj.getPrivilege()));
             DataIO.WriteFileLogin();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in saveloginrecord");

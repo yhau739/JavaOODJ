@@ -109,7 +109,7 @@ public class Admin extends User {
             JOptionPane.showMessageDialog(null, "failed to add car!", "Error", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
-        return null;
+        return false;
     }
 
     public static Car SearchCar(String CarPlate) {
@@ -127,6 +127,7 @@ public class Admin extends User {
                 DataIO.allCars.remove(carObj);
                 Global.CurrentAdmin.setEvent("DeleteCar");
                 //Admin.SaveEventLogs(Global.currentadmin);
+                JOptionPane.showMessageDialog(null, "Car is deleted successfully!");
                 return true;
             }
         }
@@ -139,7 +140,7 @@ public class Admin extends User {
         list.add(CarType);
         list.add(Price);
         list.add(CarColor);
-
+        
         if (Global.NullValuesExist(list)) {
             return false;
         }
@@ -153,7 +154,7 @@ public class Admin extends User {
                 Boolean isStr2 = Global.StringOnly(CarColor, "Car Color");
 
                 //pass validation
-                if (isInt && isStr1 && isStr2) {
+                if (isInt && isStr1 && isStr2 ) {
                     //Edit values
                     i.setCarPlate(CarPlate);
                     i.setCarType(CarType);
@@ -166,7 +167,7 @@ public class Admin extends User {
                     //Admin.SaveEventLogs(Global.currentadmin);
                     JOptionPane.showMessageDialog(null, "Modification is successful!");
                     return true;
-                } 
+                }
             }
         }
         return false;
@@ -174,6 +175,23 @@ public class Admin extends User {
 
     public static Boolean AddNewAdmin(String NewUsername, String NewPassword) {
         try {
+            //create list
+            ArrayList<String> list = new ArrayList<String>();
+            list.add(NewUsername);
+            list.add(NewPassword);
+            //password validation
+            if (String.valueOf(NewPassword).length() >= 5) {
+                JOptionPane.showMessageDialog(null, "Password length must be at least 5 characters long!", "Invalid Password", JOptionPane.INFORMATION_MESSAGE);
+                return false;
+            }
+            //validation
+            Boolean validation1 = Admin.AdminAlreadyExists(NewUsername, "Admin Username");
+            Boolean validation2 = Global.NullValuesExist(list);
+
+            if (validation1 == true || validation2 == true) {
+                return false;
+            }
+
             LocalDate date = LocalDate.now();
             LocalTime time = LocalTime.now();
             //add data
@@ -205,6 +223,7 @@ public class Admin extends User {
                 DataIO.allAdmins.remove(adminObj);
                 Global.CurrentAdmin.setEvent("DeleteAdmin");
                 //Admin.SaveEventLogs(Global.currentadmin);
+                JOptionPane.showMessageDialog(null, "Admin is deleted successfully!");
                 return true;
             }
         }
@@ -212,6 +231,11 @@ public class Admin extends User {
     }
 
     public static Boolean EditAdmin(String username, String password) {
+        //password validation
+        if (String.valueOf(password).length() >= 5) {
+            JOptionPane.showMessageDialog(null, "Password length must be at least 5 characters long!", "Invalid Password", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
         ArrayList<String> list = new ArrayList<String>();
         list.add(username);
         list.add(password);
@@ -236,7 +260,7 @@ public class Admin extends User {
         return false;
     }
 
-    //Validation Section
+
     //check login status for admin
     public static Admin CheckLoginAdmin(String UsernameInput, String PasswordInput) {
         for (Admin adminObj : DataIO.allAdmins) {

@@ -223,25 +223,16 @@ public class AdminNewAdmin extends javax.swing.JFrame {
     private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
         String newUsername = UsernameInput.getText();
         String newPassword = PassInput.getText();
-        
-        ArrayList<String> list = new ArrayList<String>();
-        list.add(newUsername);
-        list.add(newPassword);
 
-        //validation
-        Boolean validation1 = Admin.AdminAlreadyExists(newUsername , "Admin Username");
-        Boolean validation2 = Global.NullValuesExist(list);
-
-        if (validation1 == false && validation2 == false) { //pass validation
-            Boolean result = Admin.AddNewAdmin(newUsername, newPassword);
-            if (result == true) {
-                this.setVisible(false);
-                this.dispose();
-                AdminNewAdmin page = new AdminNewAdmin();
-                page.setVisible(true);
-            }
-        } else if (validation1 == true) { //duplicate username
+        Boolean result = Admin.AddNewAdmin(newUsername, newPassword);
+        if (result == true) {
+            this.setVisible(false);
+            this.dispose();
+            AdminNewAdmin page = new AdminNewAdmin();
+            page.setVisible(true);
+        } else {
             UsernameInput.setText("");
+            PassInput.setText("");
         }
     }//GEN-LAST:event_CreateBtnActionPerformed
 
