@@ -8,10 +8,13 @@ package carrentalsystem;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +27,8 @@ public class Global {
 
     //current user
     public static Admin CurrentAdmin;
-
+    public static Customer CurrentCustomer;  
+    
     public static Boolean NullValuesExist(ArrayList<String> list ){
         for (String i: list){
             if(i.equals("")){
@@ -53,7 +57,7 @@ public class Global {
         return result;
     }
 
-    //save for both user
+    //save for admin
     public static void SaveAdminLoginRecord(Admin adminObj) { //need to take in an object as parameter to getUsername
         try {
             //get current time
@@ -87,5 +91,27 @@ public class Global {
             JOptionPane.showMessageDialog(null, "Error in ReadFile");
         }
         return list;
+    }
+    
+    public static String addDate(String bookingDate, String days){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+        int parsedDays=Integer.parseInt(days);  
+        Calendar c = Calendar.getInstance();
+        try
+        {
+            //Parse the date 
+            c.setTime(sdf.parse(bookingDate));
+        }
+        catch(ParseException e)
+        {
+            e.printStackTrace();
+        }
+        
+        //Add number of days
+        c.add(Calendar.DAY_OF_MONTH, parsedDays);
+        //Date after adding the days to booking date
+        String checkoutDate = sdf.format(c.getTime());
+        //return checkout date        
+        return checkoutDate;
     }
 }
