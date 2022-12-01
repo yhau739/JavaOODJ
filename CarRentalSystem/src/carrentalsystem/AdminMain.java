@@ -157,6 +157,11 @@ public class AdminMain extends javax.swing.JFrame {
 
         ManageBookings.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ManageBookings.setText("Manage Bookings");
+        ManageBookings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManageBookingsActionPerformed(evt);
+            }
+        });
 
         ManageCustomerBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ManageCustomerBtn.setText("Manage Customers");
@@ -388,6 +393,13 @@ public class AdminMain extends javax.swing.JFrame {
         AdminViewAdmin page = new AdminViewAdmin();
         page.setVisible(true);
     }//GEN-LAST:event_ManageAdminActionPerformed
+
+    private void ManageBookingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageBookingsActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        AdminViewBooking page = new AdminViewBooking();
+        page.setVisible(true);
+    }//GEN-LAST:event_ManageBookingsActionPerformed
 
     /**
      * @param args the command line arguments

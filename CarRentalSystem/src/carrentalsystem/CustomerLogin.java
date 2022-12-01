@@ -35,24 +35,16 @@ public class CustomerLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CPassInput = new javax.swing.JTextField();
         LoginBtn = new javax.swing.JButton();
         BackBtn = new javax.swing.JButton();
         ClearBtn = new javax.swing.JButton();
         CustomerUsernameLabel = new javax.swing.JLabel();
         CustomerPasswordLabel = new javax.swing.JLabel();
-        CUsernameInput = new javax.swing.JTextField();
+        UsernameInput = new javax.swing.JTextField();
         RegisterBtn = new javax.swing.JButton();
+        PassInput = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        CPassInput.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        CPassInput.setToolTipText("");
-        CPassInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CPassInputActionPerformed(evt);
-            }
-        });
 
         LoginBtn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         LoginBtn.setText("Login");
@@ -84,10 +76,10 @@ public class CustomerLogin extends javax.swing.JFrame {
         CustomerPasswordLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         CustomerPasswordLabel.setText("Password :");
 
-        CUsernameInput.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        CUsernameInput.addActionListener(new java.awt.event.ActionListener() {
+        UsernameInput.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        UsernameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CUsernameInputActionPerformed(evt);
+                UsernameInputActionPerformed(evt);
             }
         });
 
@@ -103,30 +95,31 @@ public class CustomerLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BackBtn)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(41, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BackBtn))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CustomerUsernameLabel)
-                            .addComponent(CustomerPasswordLabel))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(RegisterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(CUsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CPassInput, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CustomerPasswordLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(CustomerUsernameLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(RegisterBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(ClearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(UsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PassInput, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,54 +129,45 @@ public class CustomerLogin extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CustomerUsernameLabel)
-                    .addComponent(CUsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                    .addComponent(UsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CPassInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerPasswordLabel))
-                .addGap(41, 41, 41)
+                    .addComponent(CustomerPasswordLabel)
+                    .addComponent(PassInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ClearBtn)
                     .addComponent(LoginBtn)
                     .addComponent(RegisterBtn))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CPassInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CPassInputActionPerformed
-        
-        
-        
-    }//GEN-LAST:event_CPassInputActionPerformed
-
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         //obtain inputs
-        String username = CUsernameInput.getText();
-        String password = CPassInput.getText();
-
+        String username = UsernameInput.getText();
+        char[] password = PassInput.getPassword();
+        
+        //Convert to String data type
+        String StrPassword = String.valueOf(password);
+        
         //check & get login status
-        Boolean result = CheckLoginCustomer("customer.txt", username, password);
+        Customer result = Customer.CheckLoginCustomer(username, StrPassword);
 
         //if login success
-        if (result == true) {
-            //Set up profile
-//            Global.Username = username;
-//            Customer.SetPassword(password);
-//            Global.Password = password;
-//            Global.Privilege = "customer";
-            
+        if (result != null) {        
             //dispose & go to next page
             this.setVisible(false);
             this.dispose();
             CustomerMain cmain = new CustomerMain();
             cmain.setVisible(true);
 
-        } else if (result == false) {
+        } else if (result == null) {
             //clear inputs
-            CUsernameInput.setText("");
-            CPassInput.setText("");
+            UsernameInput.setText("");
+            PassInput.setText("");
 
             //fake refresh
             this.setVisible(false);
@@ -203,13 +187,13 @@ public class CustomerLogin extends javax.swing.JFrame {
 
     private void ClearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearBtnActionPerformed
         //clear inputs
-        CUsernameInput.setText("");
-        CPassInput.setText("");
+        UsernameInput.setText("");
+        PassInput.setText("");
     }//GEN-LAST:event_ClearBtnActionPerformed
 
-    private void CUsernameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CUsernameInputActionPerformed
+    private void UsernameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CUsernameInputActionPerformed
+    }//GEN-LAST:event_UsernameInputActionPerformed
 
     private void RegisterBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBtnActionPerformed
         //close page and dispose
@@ -258,12 +242,12 @@ public class CustomerLogin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackBtn;
-    private javax.swing.JTextField CPassInput;
-    private javax.swing.JTextField CUsernameInput;
     private javax.swing.JButton ClearBtn;
     private javax.swing.JLabel CustomerPasswordLabel;
     private javax.swing.JLabel CustomerUsernameLabel;
     private javax.swing.JButton LoginBtn;
+    private javax.swing.JPasswordField PassInput;
     private javax.swing.JButton RegisterBtn;
+    private javax.swing.JTextField UsernameInput;
     // End of variables declaration//GEN-END:variables
 }

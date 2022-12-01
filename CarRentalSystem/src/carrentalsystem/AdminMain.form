@@ -302,6 +302,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Manage Bookings"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ManageBookingsActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="ManageCustomerBtn">
           <Properties>

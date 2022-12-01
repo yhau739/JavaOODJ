@@ -8,10 +8,9 @@ package carrentalsystem;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,16 +23,19 @@ public class DataIO {
     public static ArrayList<Car> allCars = new ArrayList<Car>();
     public static ArrayList<Event> allEvents = new ArrayList<Event>();
     public static ArrayList<Login> allLogins = new ArrayList<Login>();
-    public static ArrayList<Customer> allCustomer = new ArrayList<Customer>();
+    public static ArrayList<Customer> allCustomers = new ArrayList<Customer>();
+    public static ArrayList<Booking> allBookings = new ArrayList<Booking>(); 
 
     public static void ReadAllFiles() {
         ReadFileAdmin();
         ReadFileCar();
         ReadFileEvent();
         ReadFileLogin();
+        ReadFileCustomer();
+        ReadFileBooking();
     }
 
-    //readfile (return full line as a string), using as support method
+    
     public static void ReadFileAdmin() {
         //read file and read each full line
         try {
@@ -171,6 +173,88 @@ public class DataIO {
             writer.close();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in WriteFileCar");
+        }
+    }
+    
+     public static void ReadFileCustomer() {
+        //read file and read each full line
+        try {
+            File myObj = new File("customer.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String fullLine = myReader.nextLine();
+
+                //split each full line to get credentials
+                String[] splited = fullLine.split(Pattern.quote("|%|"));
+                allCustomers.add(new Customer(splited[0], splited[1], splited[2], splited[3], splited[4], splited[5], splited[6], splited[7], splited[8]));
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            //for debug purpose
+            JOptionPane.showMessageDialog(null, "Error in ReadFileCustomer");
+        }
+    }
+     
+    // Used when customer register 
+    public static void WriteFileCustomer() {
+        try {
+            //create writer
+            FileWriter writer = new FileWriter("customer.txt", false);
+
+            for (Customer obj : allCustomers) {
+                writer.write(obj.getUsername() + "|%|" + obj.getPassword() + "|%|" + obj.getGender()  + "|%|" + obj.getAge()  + "|%|" + obj.getPhone()  + "|%|" + obj.getEmail() + "|%|" + obj.getAddress() + "|%|" + obj.getCard()  + "|%|" + obj.getStatus());
+                writer.write(System.getProperty("line.separator"));
+            }
+            writer.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error in WriteFileCustomer");
+        }
+    }
+    
+    public static void ReadFileBooking() {
+        //read file and read each full line
+        try {
+            File myObj = new File("booking.txt");
+            Scanner myReader = new Scanner(myObj);
+            Customer custObj = null;
+            Car carObj = null;
+            while (myReader.hasNextLine()) {
+                String fullLine = myReader.nextLine();
+
+                //split each full line to get credentials
+                String[] splited = fullLine.split("\\s+");
+                for (Customer cust : allCustomers) {
+                    if (splited[0].equals(cust.getUsername())) {
+                        custObj = cust; 
+                    }    
+                }
+                for (Car car : allCars) {
+                    if (splited[1].equals(car.GetCarPlate())) {
+                        carObj = car;
+                    }
+                }
+                allBookings.add(new Booking(custObj, carObj, splited[2], Integer.parseInt(splited[3]), splited[4]));
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            //for debug purpose
+            JOptionPane.showMessageDialog(null, "Error in ReadFileBooking");
+        }
+    }
+     
+    // Used when customer register 
+    public static void WriteFileBooking() {
+        try {
+            //create writer
+            FileWriter writer = new FileWriter("booking.txt", false);
+
+            for (Booking obj : allBookings) {
+                writer.write(obj.getCustomer().getUsername()+ " " + obj.getCar().GetCarPlate() + " " + obj.getStartDate() + " " + obj.getEndDate()+ " " + obj.getDuration() + " " +   obj.getBookStatus());
+                writer.write(System.getProperty("line.separator"));
+            }
+            writer.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error in WriteFileBooking");
         }
     }
 }

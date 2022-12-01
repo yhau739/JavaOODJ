@@ -1,30 +1,48 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package carrentalsystem;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author leere
  */
-public class CustomerRegister extends javax.swing.JFrame {
+public class CustomerEditProfile extends javax.swing.JFrame {
 
+    
     /**
-     * Creates new form CustomerRegister
+     * Creates new form CustomerEditProfile
      */
-    public CustomerRegister() {
+    public CustomerEditProfile() {
         initComponents();
         
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        setData();
+    }
+    
+    public void setData(){
+        Customer custObj = null;
+        for(Customer obj: DataIO.allCustomers){
+            if(obj == Global.CurrentCustomer){                
+                UsernameInput.setText(obj.getUsername());
+                PswInput.setText(obj.getPassword());
+                CfmPswInput.setText(obj.getPassword());
+                AgeInput.setText(obj.getAge());
+                GenderInput.setSelectedItem(obj.getGender());
+                PhoneInput.setText(obj.getPhone());
+                AddressInput.setText(obj.getAddress());
+                EmailInput.setText(obj.getEmail());
+                CardInput.setText(obj.getCard());
+            }
+        }
     }
 
     /**
@@ -36,14 +54,15 @@ public class CustomerRegister extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         PswInput = new javax.swing.JPasswordField();
         UsernameInput = new javax.swing.JTextField();
         GenderInput = new javax.swing.JComboBox<>();
@@ -51,33 +70,35 @@ public class CustomerRegister extends javax.swing.JFrame {
         PhoneInput = new javax.swing.JTextField();
         EmailInput = new javax.swing.JTextField();
         AddressInput = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         CfmPswInput = new javax.swing.JPasswordField();
         CfmBtn = new javax.swing.JButton();
         ClearBtn = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         CardInput = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        LoginBtn = new javax.swing.JButton();
+        BackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel2.setText("Profile");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel2.setText("Username:");
+        jLabel3.setText("Username:");
 
-        jLabel3.setText("Password:");
+        jLabel4.setText("Password:");
 
-        jLabel4.setText("Gender:");
+        jLabel5.setText("Gender:");
 
-        jLabel5.setText("Age:");
+        jLabel6.setText("Age:");
 
-        jLabel6.setText("Phone:");
+        jLabel7.setText("Phone:");
 
-        jLabel7.setText("Email:");
+        jLabel8.setText("Email:");
 
-        jLabel8.setText("Address:");
+        jLabel9.setText("Address:");
 
         PswInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +106,7 @@ public class CustomerRegister extends javax.swing.JFrame {
             }
         });
 
+        UsernameInput.setEnabled(false);
         UsernameInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UsernameInputActionPerformed(evt);
@@ -122,7 +144,7 @@ public class CustomerRegister extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("Confirm Password:");
+        jLabel10.setText("Confirm Password:");
 
         CfmPswInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +168,7 @@ public class CustomerRegister extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Credit Card:");
+        jLabel11.setText("Credit Card:");
 
         CardInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,15 +183,15 @@ public class CustomerRegister extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
                     .addComponent(jLabel4)
+                    .addComponent(jLabel3)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel8)
                     .addComponent(jLabel7)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CardInput)
@@ -195,40 +217,40 @@ public class CustomerRegister extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
                     .addComponent(UsernameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
                     .addComponent(PswInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
                     .addComponent(CfmPswInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
                     .addComponent(GenderInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
                     .addComponent(AgeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
                     .addComponent(PhoneInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
                     .addComponent(EmailInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
                     .addComponent(AddressInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CardInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CfmBtn)
@@ -236,14 +258,10 @@ public class CustomerRegister extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Customer Registration");
-
-        LoginBtn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        LoginBtn.setText("Login");
-        LoginBtn.addActionListener(new java.awt.event.ActionListener() {
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginBtnActionPerformed(evt);
+                BackBtnActionPerformed(evt);
             }
         });
 
@@ -251,35 +269,37 @@ public class CustomerRegister extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BackBtn)
+                .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(56, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(LoginBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BackBtn)
+                        .addGap(16, 16, 16)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void PswInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PswInputActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_PswInputActionPerformed
 
     private void UsernameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameInputActionPerformed
@@ -311,7 +331,7 @@ public class CustomerRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_CfmPswInputActionPerformed
 
     private void CfmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CfmBtnActionPerformed
-        String newUsername = UsernameInput.getText();
+        String username = UsernameInput.getText();
         char[] password = PswInput.getPassword();
         char[] cfmPassword = CfmPswInput.getPassword();
         String gender = GenderInput.getSelectedItem().toString();
@@ -320,27 +340,27 @@ public class CustomerRegister extends javax.swing.JFrame {
         String email = EmailInput.getText();
         String address = AddressInput.getText();
         String card = CardInput.getText();
-        String status = "unapproved";
+        String status = Global.CurrentCustomer.getStatus();
 
         //Convert to String data type
         String strPassword = String.valueOf(password);
         String strCfmPassword = String.valueOf(cfmPassword);
-        
+
         ArrayList<String> list = new ArrayList<String>();
-        list.add(newUsername);
+        list.add(username);
         list.add(strPassword);
         list.add(gender);
         list.add(age);
         list.add(phone);
         list.add(email);
         list.add(address);
-        
+        list.add(status);
+
         //validation
         Boolean validationNull = Global.NullValuesExist(list);
-                
+
         if (!validationNull){
             Boolean validationPsw = Customer.checkMatchPsw(strPassword, strCfmPassword);
-            Boolean validationUsernameExists = Customer.CustomerAlreadyExists(newUsername , "Customer Username");
             Boolean validateAge = Customer.validateAge(age);
             Boolean validatePhone = Customer.validatePhone(phone);
             Boolean validateEmail = Customer.validateEmail(email);
@@ -349,33 +369,28 @@ public class CustomerRegister extends javax.swing.JFrame {
                 PswInput.setText("");
                 CfmPswInput.setText("");
             }
-            
-            if (validationUsernameExists){ //Username exists
-                UsernameInput.setText("");
-            }
-            
             if (validateAge == false){ //Age wrong format, too small or too big
                 AgeInput.setText("");
             }
-            
+
             if (validatePhone == false){ //phone null or wrong format
                 PhoneInput.setText("");
             }
-            
+
             if (validateEmail == false){ //email null or wrong format
                 EmailInput.setText("");
             }
-            
+
             if (validateCard == false){ //email null or wrong format
                 CardInput.setText("");
             }
-            
-            if (validationPsw && validationUsernameExists == false && validationNull == false && validateAge && validatePhone && validateEmail) { //pass validation
-                Boolean result = Customer.Register(newUsername, strPassword, gender, age, phone, email, address, card, status);
+
+            if (validationPsw && validationNull == false && validateAge && validatePhone && validateEmail) { //pass validation
+                Boolean result = Customer.EditProfile(username, strPassword, gender, age, phone, email, address, card, status);
                 if (result == true) {
                     this.setVisible(false);
                     this.dispose();
-                    CustomerLogin page = new CustomerLogin();
+                    CustomerEditProfile page = new CustomerEditProfile();
                     page.setVisible(true);
                 }
             }
@@ -393,17 +408,16 @@ public class CustomerRegister extends javax.swing.JFrame {
         AddressInput.setText("");
     }//GEN-LAST:event_ClearBtnActionPerformed
 
-    private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
-        this.setVisible(false);
-        this.dispose();
-
-        CustomerLogin page = new CustomerLogin();
-        page.setVisible(true);
-    }//GEN-LAST:event_LoginBtnActionPerformed
-
     private void CardInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CardInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CardInputActionPerformed
+
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        CustomerMain page = new CustomerMain();
+        page.setVisible(true);
+    }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,20 +436,20 @@ public class CustomerRegister extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerEditProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerEditProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerEditProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerRegister.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomerEditProfile.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerRegister().setVisible(true);
+                new CustomerEditProfile().setVisible(true);
             }
         });
     }
@@ -443,18 +457,18 @@ public class CustomerRegister extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AddressInput;
     private javax.swing.JTextField AgeInput;
+    private javax.swing.JButton BackBtn;
     private javax.swing.JTextField CardInput;
     private javax.swing.JButton CfmBtn;
     private javax.swing.JPasswordField CfmPswInput;
     private javax.swing.JButton ClearBtn;
     private javax.swing.JTextField EmailInput;
     private javax.swing.JComboBox<String> GenderInput;
-    private javax.swing.JButton LoginBtn;
     private javax.swing.JTextField PhoneInput;
     private javax.swing.JPasswordField PswInput;
     private javax.swing.JTextField UsernameInput;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

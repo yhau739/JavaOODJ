@@ -83,6 +83,16 @@ public class Admin extends User {
     }
 
     //Functionality Section
+    public static ArrayList<Booking> SearchBooking(String customerUsername) {
+        ArrayList<Booking> MatchList = new ArrayList<Booking>();
+        for (Booking i : DataIO.allBookings) {
+            if (i.getCustomer().getUsername().equals(customerUsername)) {
+                MatchList.add(i);
+            }
+        }
+        return MatchList;
+    }
+
     public static Boolean AddCar(String CarPlate, String CarType, String Price, String color) {
         try {
             ArrayList<String> list = new ArrayList<String>();
@@ -140,7 +150,7 @@ public class Admin extends User {
         list.add(CarType);
         list.add(Price);
         list.add(CarColor);
-        
+
         if (Global.NullValuesExist(list)) {
             return false;
         }
@@ -154,7 +164,7 @@ public class Admin extends User {
                 Boolean isStr2 = Global.StringOnly(CarColor, "Car Color");
 
                 //pass validation
-                if (isInt && isStr1 && isStr2 ) {
+                if (isInt && isStr1 && isStr2) {
                     //Edit values
                     i.setCarPlate(CarPlate);
                     i.setCarType(CarType);
@@ -260,7 +270,6 @@ public class Admin extends User {
         return false;
     }
 
-
     //check login status for admin
     public static Admin CheckLoginAdmin(String UsernameInput, String PasswordInput) {
         for (Admin adminObj : DataIO.allAdmins) {
@@ -340,6 +349,26 @@ public class Admin extends User {
             Car carObj = DataIO.allCars.get(i);
             //get values and make it into an array
             String[] eachRow = new String[]{carObj.GetCarPlate(), carObj.GetCarType(), Integer.toString(carObj.GetPrice()), carObj.GetColor()};
+            table.addRow(eachRow);
+        }
+    }
+
+    public static void LoadBookingTable(DefaultTableModel table) {
+        for (int i = 0; i < DataIO.allBookings.size(); i++) {
+            //get object
+            Booking bookObj = DataIO.allBookings.get(i);
+            //get values and make it into an array
+            String[] eachRow = new String[]{bookObj.getCustomer().getUsername(), bookObj.getCar().GetCarPlate(), bookObj.getStartDate(), bookObj.getEndDate(), Integer.toString(bookObj.getDuration()), Integer.toString(bookObj.getPayment())};
+            table.addRow(eachRow);
+        }
+    }
+
+    public static void LoadSearchedBookingTable(DefaultTableModel table, ArrayList<Booking> bookingList) {
+        for (int i = 0; i < bookingList.size(); i++) {
+            //get object
+            Booking bookObj = bookingList.get(i);
+            //get values and make it into an array
+            String[] eachRow = new String[]{bookObj.getCustomer().getUsername(), bookObj.getCar().GetCarPlate(), bookObj.getStartDate(), bookObj.getEndDate(), Integer.toString(bookObj.getDuration()), Integer.toString(bookObj.getPayment())};
             table.addRow(eachRow);
         }
     }
