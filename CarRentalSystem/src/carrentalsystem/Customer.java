@@ -207,11 +207,12 @@ public class Customer extends User {
                 Boolean checkBookingExist = Customer.BookingAlreadyExists(carObj);
 
                 if (checkNull == false && checkBookingExist == false) {
-                    String status = "pending";
+                    String BookingStatus = "pending";
+                     String PaymentStatus = "no";
                     String rating = null;
                     String feedback = null;
                     //create obj
-                    Booking newBooking = new Booking(Global.CurrentCustomer, carObj, startDate, Integer.parseInt(duration), status, rating, feedback);
+                    Booking newBooking = new Booking(Global.CurrentCustomer, carObj, startDate, Integer.parseInt(duration), BookingStatus, PaymentStatus, rating, feedback);
                     //add obj
                     DataIO.allBookings.add(newBooking);
                     //write file

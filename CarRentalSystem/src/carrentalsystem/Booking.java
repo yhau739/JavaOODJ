@@ -15,15 +15,16 @@ public class Booking {
     private Customer customer;
     private Car car;
     private String StartDate;
-    private String EndDate;
     private int Duration;
-    private int Payment;
     private String BookStatus;
+    private String EndDate;
+    private int Payment;
+    private String PaymentStatus;
     private String Rating;
     private String Feedback;
     
     //constructor
-    public Booking(Customer customer, Car car, String StartDate, int Duration, String BookStatus, String Rating, String Feedback){
+    public Booking(Customer customer, Car car, String StartDate, int Duration, String BookStatus, String PaymentStatus, String Rating, String Feedback){
         this.customer = customer;
         this.car = car;
         this.StartDate = StartDate;
@@ -33,6 +34,7 @@ public class Booking {
         this.EndDate = Global.addDate(StartDate, Integer.toString(Duration));
         //calculate payment
         this.Payment = car.GetPrice() * Duration;
+        this.PaymentStatus = PaymentStatus;
         this.Rating = Rating;
         this.Feedback = Feedback;
     }
@@ -73,6 +75,10 @@ public class Booking {
         return Feedback;
     }
 
+    public String getPaymentStatus() {
+        return PaymentStatus;
+    }
+
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
@@ -109,6 +115,11 @@ public class Booking {
         this.Feedback = Feedback;
     }
 
+    public void setPaymentStatus(String PaymentStatus) {
+        this.PaymentStatus = PaymentStatus;
+    }
+
+    
     //Load Table Section in Feedback Section for customer
     public static void LoadBookingTable(DefaultTableModel table) {
         for (int i = 0; i < DataIO.allBookings.size(); i++) {
