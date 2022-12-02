@@ -222,7 +222,7 @@ public class DataIO {
                 String fullLine = myReader.nextLine();
 
                 //split each full line to get credentials
-                String[] splited = fullLine.split("\\s+");
+                String[] splited = fullLine.split(Pattern.quote("|%|"));
                 for (Customer cust : allCustomers) {
                     if (splited[0].equals(cust.getUsername())) {
                         custObj = cust; 
@@ -233,7 +233,7 @@ public class DataIO {
                         carObj = car;
                     }
                 }
-                allBookings.add(new Booking(custObj, carObj, splited[2], Integer.parseInt(splited[3]), splited[4]));
+                allBookings.add(new Booking(custObj, carObj, splited[2], Integer.parseInt(splited[3]), splited[4], splited[7], splited[8]));
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -241,7 +241,17 @@ public class DataIO {
             JOptionPane.showMessageDialog(null, "Error in ReadFileBooking");
         }
     }
-     
+//     this.customer = customer;
+//        this.car = car;
+//        this.StartDate = StartDate;
+//        this.Duration = Duration;
+//        this.BookStatus = BookStatus;
+//        //calculate end date
+//        this.EndDate = Global.addDate(StartDate, Integer.toString(Duration));
+//        //calculate payment
+//        this.Payment = car.GetPrice() * Duration;
+//        this.Rating = "none";
+//        this.Feedback = "none";
     // Used when customer register 
     public static void WriteFileBooking() {
         try {
@@ -249,7 +259,7 @@ public class DataIO {
             FileWriter writer = new FileWriter("booking.txt", false);
 
             for (Booking obj : allBookings) {
-                writer.write(obj.getCustomer().getUsername()+ " " + obj.getCar().GetCarPlate() + " " + obj.getStartDate() + " " + obj.getEndDate()+ " " + obj.getDuration() + " " +   obj.getBookStatus());
+                writer.write(obj.getCustomer().getUsername()+ "|%|" + obj.getCar().GetCarPlate() + "|%|" + obj.getStartDate() + "|%|" + obj.getDuration() + "|%|" obj.getBookStatus() + |%| + obj.getEndDate()+ "|%|" + obj.getDuration() + "|%|" +   obj.getBookStatus());
                 writer.write(System.getProperty("line.separator"));
             }
             writer.close();

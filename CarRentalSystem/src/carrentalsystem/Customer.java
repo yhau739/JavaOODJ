@@ -208,8 +208,10 @@ public class Customer extends User {
 
                 if (checkNull == false && checkBookingExist == false) {
                     String status = "pending";
+                    String rating = null;
+                    String feedback = null;
                     //create obj
-                    Booking newBooking = new Booking(Global.CurrentCustomer, carObj, startDate, Integer.parseInt(duration), status);
+                    Booking newBooking = new Booking(Global.CurrentCustomer, carObj, startDate, Integer.parseInt(duration), status, rating, feedback);
                     //add obj
                     DataIO.allBookings.add(newBooking);
                     //write file
