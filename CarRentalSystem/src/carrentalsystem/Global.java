@@ -110,7 +110,7 @@ public class Global {
     }
 
     public static String addDate(String bookingDate, String days) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         int parsedDays = Integer.parseInt(days);
         Calendar c = Calendar.getInstance();
         try {

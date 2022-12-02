@@ -33,8 +33,8 @@ public class Booking {
         this.EndDate = Global.addDate(StartDate, Integer.toString(Duration));
         //calculate payment
         this.Payment = car.GetPrice() * Duration;
-        this.Rating = "none";
-        this.Feedback = "none";
+        this.Rating = Rating;
+        this.Feedback = Feedback;
     }
 
     public Customer getCustomer() {

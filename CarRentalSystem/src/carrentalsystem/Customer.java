@@ -215,7 +215,7 @@ public class Customer extends User {
                     //add obj
                     DataIO.allBookings.add(newBooking);
                     //write file
-                    DataIO.WriteFileBooking();
+//                    DataIO.WriteFileBooking();
                     JOptionPane.showMessageDialog(null, "New Booking is successfully added!", "New Booking", JOptionPane.INFORMATION_MESSAGE);
                     return true;
                 }

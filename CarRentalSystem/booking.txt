@@ -1,1 +1,1 @@
-customer123 LRJ1283 12-04-2022 3 available
+customer123|%|LRJ1283|%|12-04-2022|%|3|%|available|%|none|%|none
