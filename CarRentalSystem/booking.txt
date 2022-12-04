@@ -1,3 +1,2 @@
-customer123|%|LRJ1283|%|12-04-2022|%|3|%|available|%|no|%|none|%|none
-customer123|%|test1234|%|23-04-2022|%|5|%|available|%|no|%|none|%|none
-customer123|%|LRJ1234|%|05-04-2022|%|6|%|available|%|no|%|none|%|none
+customer123|%|LRJ1283|%|15-12-2022|%|3|%|booked|%|18-12-2022|%|6369|%|yes|%|none|%|none
+customer123|%|test1234|%|20-12-2022|%|5|%|notavailable|%|25-12-2022|%|6170|%|no|%|none|%|none

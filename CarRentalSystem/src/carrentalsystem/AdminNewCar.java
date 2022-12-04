@@ -6,10 +6,12 @@
 package carrentalsystem;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -22,6 +24,10 @@ public class AdminNewCar extends javax.swing.JFrame {
      */
     public AdminNewCar() {
         initComponents();
+
+        JTableHeader tableHeader = CarTable1.getTableHeader();
+        Font headerFont = new Font("Verdana", Font.PLAIN, 14);
+        tableHeader.setFont(headerFont);
 
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();

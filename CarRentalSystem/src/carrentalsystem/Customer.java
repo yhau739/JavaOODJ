@@ -189,42 +189,56 @@ public class Customer extends User {
     public static Boolean AddBooking(String carPlate, String startDate, String duration) {
         try {
             //validate data
-            if (Customer.validateDate(startDate)) {
-                ArrayList<String> list = new ArrayList<String>();
-                list.add(carPlate);
-                list.add(startDate);
-                list.add(duration);
-                list.add("pending");
-                
-                Car carObj = null;
-                 for (Car car : DataIO.allCars) {
-                     if(car.GetCarPlate().equals(carPlate)){
-                         carObj = car;
-                     }
-                 }
-                 
-                Boolean checkNull = Global.NullValuesExist(list);
-                Boolean checkBookingExist = Customer.BookingAlreadyExists(carObj);
+            if (Global.validateDate(startDate)) {
+                if (Global.beforeTodayDate(startDate) == false && Global.IsInteger(duration, "duration")){
+                    ArrayList<String> list = new ArrayList<String>();
+                    list.add(carPlate);
+                    list.add(startDate);
+                    list.add(duration);
+                    list.add("pending");
 
-                if (checkNull == false && checkBookingExist == false) {
-                    String status = "pending";
-                    String rating = null;
-                    String feedback = null;
-                    //create obj
-                    Booking newBooking = new Booking(Global.CurrentCustomer, carObj, startDate, Integer.parseInt(duration),"no", status, rating, feedback);
-                    //add obj
-                    DataIO.allBookings.add(newBooking);
-                    //write file
-//                    DataIO.WriteFileBooking();
-                    JOptionPane.showMessageDialog(null, "New Booking is successfully added!", "New Booking", JOptionPane.INFORMATION_MESSAGE);
-                    return true;
+                    Car carObj = null;
+                    int price = 0;
+                     for (Car car : DataIO.allCars) {
+                         if(car.GetCarPlate().equals(carPlate)){
+                             carObj = car;
+                             price = car.GetPrice();
+                         }
+                     }
+
+                    Boolean checkNull = Global.NullValuesExist(list);
+                    Boolean checkBookingExist = Customer.BookingAlreadyExists(carObj);
+                    int total = price*Integer.parseInt(duration);
+
+                    if (checkNull == false && checkBookingExist == false) {
+                        int result = JOptionPane.showConfirmDialog(null,"Your total will be RM" + total + "\nPayment will be done after staff approves the booking.\nConfirm Booking?", "Total Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if(result == JOptionPane.YES_OPTION){
+                            String BookingStatus = "pending";
+                            String PaymentStatus = "no";
+                            String rating = null;
+                            String feedback = null;
+                            //create obj
+                            Booking newBooking = new Booking(Global.CurrentCustomer, carObj, startDate, Integer.parseInt(duration), BookingStatus, PaymentStatus, rating, feedback);
+                            //add obj
+                            DataIO.allBookings.add(newBooking);
+                            //write file
+                            DataIO.WriteFileBooking();
+                            JOptionPane.showMessageDialog(null, "New Booking is successfully added for car " + carPlate, "New Booking", JOptionPane.INFORMATION_MESSAGE);
+                            return true;
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Booking canceled", "Booking cancelation", JOptionPane.INFORMATION_MESSAGE);
+                            return false;
+                        }
+                    }
                 }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "failed to add car!", "Error", JOptionPane.INFORMATION_MESSAGE);
+            System.out.print(e);
             return false;
         }
-        return null;
+        return false;
     }
 
     public static Boolean BookingAlreadyExists(Car car) {
@@ -238,29 +252,6 @@ public class Customer extends User {
     }
 
     //Validation methods
-    public static Boolean validateDate(String stringDate) {
-        // Check if date is 'null'
-        if (stringDate.trim().equals("")) {
-            return false;
-        } // Date is not 'null' 
-        else {
-            //Check date format
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            sdf.setLenient(false);
-            // Create Date object, parse the string into date 
-            try {
-                //Parse string date into date type
-                Date parsedDate = sdf.parse(stringDate);
-                //System.out.println(parsedDate+" is valid date format");
-            } /* Date format is invalid */ catch (ParseException e) {
-                JOptionPane.showMessageDialog(null, "Wrong date format entered!\nPlease follow the format DD-MM-YYYY");
-                return false;
-            }
-            /* Return true if date format is valid */
-            return true;
-        }
-    }
-
     public static Boolean CustomerAlreadyExists(String username, String bannerMsg) {
         for (Customer obj : DataIO.allCustomers) {
             if (obj.getUsername().equals(username)) {

@@ -15,11 +15,11 @@ public class Booking {
     private Customer customer;
     private Car car;
     private String StartDate;
-    private String EndDate;
     private int Duration;
+    private String BookStatus;
+    private String EndDate;
     private int Payment;
     private String PaymentStatus;
-    private String BookStatus;
     private String Rating;
     private String Feedback;
     
@@ -119,6 +119,7 @@ public class Booking {
         this.Feedback = Feedback;
     }
 
+    
     //Load Table Section in Feedback Section for customer
     public static void LoadBookingTable(DefaultTableModel table) {
         for (int i = 0; i < DataIO.allBookings.size(); i++) {

@@ -90,43 +90,61 @@ public class Admin extends User {
         list.add(startDate);
         list.add(Duration);
 
+        Car newcar = null;
+
         //validate null values
         if (Global.NullValuesExist(list)) {
             return false;
         }
 
-        for (Booking i : DataIO.allBookings) {
-            //find booking
-            if (i.getCustomer().getUsername().equals(username)) {
-                if (i.getCar().GetCarPlate().equals(carPlate)) {
-                    //Edit values
-                    //if car is changed
-                    if (!Admin.CurrentCarPlate.equals(carPlate)) {
-                        //check if the new car is taken
-                        for (Booking b : DataIO.allBookings) {
-                            if (b.getCar().GetCarPlate().equals(carPlate)) {
-                                //car is taken, can not change to this car
-                                JOptionPane.showMessageDialog(null, "This car is unavailable, please choose another one!");
-                                return false;
-                            }
-                        }
-                        //passed validation, switch car for booking
-                        for (Car c : DataIO.allCars) {
-                            if (c.GetCarPlate().equals(carPlate)) {
-                                i.setCar(c);
-                            }
-                        }
+        //validate if date is already passed
+        Boolean validation = Global.beforeTodayDate(startDate);
+        if (validation) {
+            return false;
+        }
+
+        //check integer
+        Boolean isInt = Global.IsInteger(Duration, "Duration");
+        if (!isInt) {
+            return false;
+        }
+
+        //if car has been changed
+        if (!Admin.CurrentCarPlate.equals(carPlate)) {
+            //check if car is taken
+            for (Booking b : DataIO.allBookings) {
+                if (b.getCar().GetCarPlate().equals(carPlate)) {
+                    //car is taken, can not change to this car
+                    JOptionPane.showMessageDialog(null, "This car is unavailable, please choose another one!");
+                    return false;
+                }
+            }
+            //if car not taken, check if car exist
+            for (Car c : DataIO.allCars) {
+                //if car exist
+                if (c.GetCarPlate().equals(carPlate)) {
+                    newcar = c;
+                }
+            }
+            if (newcar == null) {
+                //if car does not exist
+                JOptionPane.showMessageDialog(null, "This car does not exist, please choose another one!");
+                return false;
+            }
+        }
+        for (Booking b : DataIO.allBookings) {
+            if (b.getCustomer().getUsername().equals(username)) {
+                if (b.getCar().GetCarPlate().equals(Admin.CurrentCarPlate)) {
+                    //matching booking
+                    if (newcar != null) {
+                        b.setCar(newcar);
                     }
-                    //validate if date is already passed
-                    //insert code here ...
-                    i.setStartDate(startDate);
-                    Boolean isInt = Global.IsInteger(Duration, "Duration");
-                    if (!isInt) {
-                        return false;
-                    }
-                    i.setDuration(Integer.parseInt(Duration));
+                    b.setStartDate(startDate);
+                    b.setDuration(Integer.parseInt(Duration));
+                    b.setEndDate(Global.addDate(startDate, Duration));
+                    b.setPayment(b.getCar().GetPrice() * Integer.parseInt(Duration));
                     //Write to File
-                    DataIO.writeFileBooking();
+                    DataIO.WriteFileBooking();
                     //save events
                     Global.CurrentAdmin.setEvent("EditBooking");
                     //Admin.SaveEventLogs(Global.currentadmin);
@@ -141,42 +159,90 @@ public class Admin extends User {
     public static ArrayList<Booking> SearchBooking(String customerUsername, String attribute) {
         ArrayList<Booking> MatchList = new ArrayList<Booking>();
         for (Booking i : DataIO.allBookings) {
-            switch (attribute) {
-                case "Customer":
-                    if (i.getCustomer().getUsername().matches("(.*)" + customerUsername + "(.*)")) {
-                        MatchList.add(i);
-                    }
-                    break;
-                case "Car Plate":
-                    if (i.getCar().GetCarPlate().matches("(.*)" + customerUsername + "(.*)")) {
-                        MatchList.add(i);
-                    }
-                    break;
-                case "Start Date":
-                    if (i.getStartDate().matches("(.*)" + customerUsername + "(.*)")) {
-                        MatchList.add(i);
-                    }
-                    break;
-                case "End Date":
-                    if (i.getEndDate().matches("(.*)" + customerUsername + "(.*)")) {
-                        MatchList.add(i);
-                    }
-                    break;
-                case "Duration":
-                    if (Integer.toString(i.getDuration()).matches("(.*)" + customerUsername + "(.*)")) {
-                        MatchList.add(i);
-                    }
-                    break;
-                case "Status":
-                    if (i.getBookStatus().matches("(.*)" + customerUsername + "(.*)")) {
-                        MatchList.add(i);
-                    }
-                    break;
-                case "Payment Status":
-                    if (i.getPaymentStatus().matches("(.*)" + customerUsername + "(.*)")) {
-                        MatchList.add(i);
-                    }
-                    break;
+            if (i.getBookStatus().equals("available") || i.getBookStatus().equals("pending") || i.getBookStatus().equals("notavailable")) {
+                switch (attribute) {
+                    case "Customer":
+                        if (i.getCustomer().getUsername().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "Car Plate":
+                        if (i.getCar().GetCarPlate().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "Start Date":
+                        if (i.getStartDate().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "End Date":
+                        if (i.getEndDate().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "Duration":
+                        if (Integer.toString(i.getDuration()).matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "Status":
+                        if (i.getBookStatus().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "Payment Status":
+                        if (i.getPaymentStatus().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                }
+            }
+        }
+        return MatchList;
+    }
+
+    public static ArrayList<Booking> SearchBookingHistory(String customerUsername, String attribute) {
+        ArrayList<Booking> MatchList = new ArrayList<Booking>();
+        for (Booking i : DataIO.allBookings) {
+            if (i.getBookStatus().equals("booked") || i.getBookStatus().equals("returned")) {
+                switch (attribute) {
+                    case "Customer":
+                        if (i.getCustomer().getUsername().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "Car Plate":
+                        if (i.getCar().GetCarPlate().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "Start Date":
+                        if (i.getStartDate().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "End Date":
+                        if (i.getEndDate().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "Duration":
+                        if (Integer.toString(i.getDuration()).matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "Status":
+                        if (i.getBookStatus().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                    case "Payment Status":
+                        if (i.getPaymentStatus().matches("(.*)" + customerUsername + "(.*)")) {
+                            MatchList.add(i);
+                        }
+                        break;
+                }
             }
         }
         return MatchList;
@@ -187,6 +253,8 @@ public class Admin extends User {
             if (bookObj.getCustomer().getUsername().equals(username)) {
                 if (bookObj.getCar().GetCarPlate().equals(carplate)) {
                     DataIO.allBookings.remove(bookObj);
+                    //write file
+                    DataIO.WriteFileBooking();
                     Global.CurrentAdmin.setEvent("DeleteBooking");
                     //Admin.SaveEventLogs(Global.currentadmin);
                     JOptionPane.showMessageDialog(null, "Booking is deleted successfully!");
@@ -202,12 +270,42 @@ public class Admin extends User {
         for (Booking bookObj : DataIO.allBookings) {
             if (bookObj.getCustomer().getUsername().equals(username)) {
                 if (bookObj.getCar().GetCarPlate().equals(carplate)) {
+                    //if booking approved + paid
                     if (bookObj.getBookStatus().equals("booked")) {
+                        JOptionPane.showMessageDialog(null, "This booking is already approved and paid!");
+                        return false;
+                    } //booking approved + not paid
+                    else if (bookObj.getBookStatus().equals("available")) {
                         JOptionPane.showMessageDialog(null, "This booking is already approved!");
                         return false;
+                    } //completed bookings
+                    else if (bookObj.getBookStatus().equals("returned")) {
+                        JOptionPane.showMessageDialog(null, "This booking is already completed!");
+                        return false;
+                    } //booking previously disapproved
+                    else if (bookObj.getBookStatus().equals("notavailable")) {
+                        int reply = JOptionPane.showConfirmDialog(null,
+                                "Are you sure you want to approve the previously disapproved booking?",
+                                "Comfirmation",
+                                JOptionPane.YES_NO_OPTION);
+                        //yes
+                        if (reply == JOptionPane.YES_OPTION) {
+                            bookObj.setBookStatus("available");
+                            //write file
+                            DataIO.WriteFileBooking();
+                            Global.CurrentAdmin.setEvent("ApproveBooking");
+                            //Admin.SaveEventLogs(Global.currentadmin);
+                            JOptionPane.showMessageDialog(null, "Booking is approved!");
+                            return true;
+                        } //no
+                        else {
+                            return false;
+                        }
                     }
-                    //approve
-                    bookObj.setBookStatus("booked");
+                    //pending booking
+                    bookObj.setBookStatus("available");
+                    //write file
+                    DataIO.WriteFileBooking();
                     Global.CurrentAdmin.setEvent("ApproveBooking");
                     //Admin.SaveEventLogs(Global.currentadmin);
                     JOptionPane.showMessageDialog(null, "Booking is approved!");
@@ -215,6 +313,49 @@ public class Admin extends User {
                 }
             }
         }
+        return false;
+    }
+
+    public static Boolean DisapproveBooking(String username, String carplate) {
+        //get Booking obj
+        for (Booking bookObj : DataIO.allBookings) {
+            if (bookObj.getCustomer().getUsername().equals(username)) {
+                if (bookObj.getCar().GetCarPlate().equals(carplate)) {
+                    String status = bookObj.getBookStatus();
+                    switch (status) {
+                        case "booked":
+                            JOptionPane.showMessageDialog(null, "This booking is already approved and paid!");
+                            return false;
+                        case "available":
+                            int reply = JOptionPane.showConfirmDialog(null,
+                                    "Are you sure you want to disapprove the previously approved booking?",
+                                    "Comfirmation",
+                                    JOptionPane.YES_NO_OPTION);
+                            //yes
+                            if (reply == JOptionPane.YES_OPTION) {
+                                break;
+                            } //no
+                            else {
+                                return false;
+                            }
+                        case "notavailable":
+                            JOptionPane.showMessageDialog(null, "This booking is already disapproved!");
+                            return false;
+                        case "pending":
+                            break;
+                    }
+                    //set status
+                    bookObj.setBookStatus("notavailable");
+                    //write file
+                    DataIO.WriteFileBooking();
+                    Global.CurrentAdmin.setEvent("DisapproveBooking");
+                    //Admin.SaveEventLogs(Global.currentadmin);
+                    JOptionPane.showMessageDialog(null, "Booking is disapproved!");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static Boolean AddCar(String CarPlate, String CarType, String Price, String color) {
@@ -279,6 +420,7 @@ public class Admin extends User {
         for (Car carObj : DataIO.allCars) {
             if (carObj.GetCarPlate().equals(carplate)) {
                 DataIO.allCars.remove(carObj);
+                DataIO.WriteFileCar();
                 Global.CurrentAdmin.setEvent("DeleteCar");
                 //Admin.SaveEventLogs(Global.currentadmin);
                 JOptionPane.showMessageDialog(null, "Car is deleted successfully!");
@@ -392,6 +534,7 @@ public class Admin extends User {
         for (Admin adminObj : DataIO.allAdmins) {
             if (adminObj.getUsername().equals(username)) {
                 DataIO.allAdmins.remove(adminObj);
+                DataIO.WriteFileAdmin();
                 Global.CurrentAdmin.setEvent("DeleteAdmin");
                 //Admin.SaveEventLogs(Global.currentadmin);
                 JOptionPane.showMessageDialog(null, "Admin is deleted successfully!");
@@ -535,12 +678,11 @@ public class Admin extends User {
     }
 
     public static void LoadBookingTable(DefaultTableModel table) {
-        for (int i = 0; i < DataIO.allBookings.size(); i++) {
-            //get object
-            Booking bookObj = DataIO.allBookings.get(i);
-            //get values and make it into an array
-            String[] eachRow = new String[]{bookObj.getCustomer().getUsername(), bookObj.getCar().GetCarPlate(), bookObj.getStartDate(), bookObj.getEndDate(), Integer.toString(bookObj.getDuration()), Integer.toString(bookObj.getPayment()), bookObj.getBookStatus(), bookObj.getPaymentStatus()};
-            table.addRow(eachRow);
+        for (Booking bookObj : DataIO.allBookings) {
+            if (bookObj.getBookStatus().equals("available") || bookObj.getBookStatus().equals("pending") || bookObj.getBookStatus().equals("notavailable")) {
+                String[] eachRow = new String[]{bookObj.getCustomer().getUsername(), bookObj.getCar().GetCarPlate(), bookObj.getStartDate(), bookObj.getEndDate(), Integer.toString(bookObj.getDuration()), Integer.toString(bookObj.getPayment()), bookObj.getBookStatus(), bookObj.getPaymentStatus()};
+                table.addRow(eachRow);
+            }
         }
     }
 
@@ -554,4 +696,12 @@ public class Admin extends User {
         }
     }
 
+    public static void LoadBookingHistoryTable(DefaultTableModel table) {
+        for (Booking bookObj : DataIO.allBookings) {
+            if (bookObj.getBookStatus().equals("booked") || bookObj.getBookStatus().equals("returned")) {
+                String[] eachRow = new String[]{bookObj.getCustomer().getUsername(), bookObj.getCar().GetCarPlate(), bookObj.getStartDate(), bookObj.getEndDate(), Integer.toString(bookObj.getDuration()), Integer.toString(bookObj.getPayment()), bookObj.getBookStatus(), bookObj.getPaymentStatus()};
+                table.addRow(eachRow);
+            }
+        }
+    }
 }

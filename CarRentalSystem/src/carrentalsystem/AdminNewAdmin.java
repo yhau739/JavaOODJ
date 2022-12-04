@@ -26,7 +26,7 @@ public class AdminNewAdmin extends javax.swing.JFrame {
         initComponents();
 
         JTableHeader tableHeader = AdminTable.getTableHeader();
-        Font headerFont = new Font("Verdana", Font.PLAIN, 24);
+        Font headerFont = new Font("Verdana", Font.PLAIN, 14);
         tableHeader.setFont(headerFont);
 
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution

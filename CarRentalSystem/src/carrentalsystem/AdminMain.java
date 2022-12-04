@@ -54,6 +54,7 @@ public class AdminMain extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         ManageAdmin = new javax.swing.JButton();
+        BookingsHistory = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         SystemLoginRecordBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -187,6 +188,14 @@ public class AdminMain extends javax.swing.JFrame {
             }
         });
 
+        BookingsHistory.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        BookingsHistory.setText("Bookings History");
+        BookingsHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingsHistoryActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -213,7 +222,10 @@ public class AdminMain extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ViewEditCarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ManageCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))))
+                        .addGap(22, 22, 22))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(BookingsHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +249,9 @@ public class AdminMain extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(ManageBookings)))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(BookingsHistory)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -401,6 +415,13 @@ public class AdminMain extends javax.swing.JFrame {
         page.setVisible(true);
     }//GEN-LAST:event_ManageBookingsActionPerformed
 
+    private void BookingsHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingsHistoryActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        AdminViewBookingHistory page = new AdminViewBookingHistory();
+        page.setVisible(true);
+    }//GEN-LAST:event_BookingsHistoryActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -440,6 +461,7 @@ public class AdminMain extends javax.swing.JFrame {
     private javax.swing.JButton AddAdminBtn;
     private javax.swing.JButton AddAdminBtn1;
     private javax.swing.JButton AddCarBtn;
+    private javax.swing.JButton BookingsHistory;
     private javax.swing.JButton EventLogsBtn;
     private javax.swing.JButton LogoutBtn;
     private javax.swing.JButton ManageAdmin;

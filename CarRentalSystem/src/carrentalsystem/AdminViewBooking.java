@@ -26,7 +26,7 @@ public class AdminViewBooking extends javax.swing.JFrame {
         initComponents();
 
         JTableHeader tableHeader = BookingTable.getTableHeader();
-        Font headerFont = new Font("Verdana", Font.PLAIN, 24);
+        Font headerFont = new Font("Verdana", Font.PLAIN, 14);
         tableHeader.setFont(headerFont);
 
         //To make sure JFrame is located in the center of the screen regardless of monitor resolution
@@ -72,6 +72,7 @@ public class AdminViewBooking extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         ApproveBtn = new javax.swing.JButton();
         SelectedVariable = new javax.swing.JComboBox<>();
+        DisapproveBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         RefreshBtn = new javax.swing.JButton();
 
@@ -93,7 +94,7 @@ public class AdminViewBooking extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Customer", "Car Plate", "Start Date", "End Date", "Duration", "Payment", "Booking Status", "Payment Status"
+                "Customer", "Car Plate", "Start Date", "End Date", "Duration", "Payment", "BookStatus", "Paid?"
             }
         ) {
             Class[] types = new Class [] {
@@ -195,6 +196,14 @@ public class AdminViewBooking extends javax.swing.JFrame {
         SelectedVariable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         SelectedVariable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Car Plate", "Start Date", "End Date", "Duration", "Status", "Payment Status" }));
 
+        DisapproveBtn.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        DisapproveBtn.setText("Disapprove");
+        DisapproveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DisapproveBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -206,7 +215,7 @@ public class AdminViewBooking extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSeparator1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGap(0, 254, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -223,13 +232,6 @@ public class AdminViewBooking extends javax.swing.JFrame {
                                             .addComponent(Customer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(CarPlate, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(Duration, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(ApproveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(209, 209, 209)
-                                        .addComponent(DelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(EditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(175, 175, 175))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -250,6 +252,16 @@ public class AdminViewBooking extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(SearchTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ApproveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(DisapproveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(53, 53, 53))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -288,12 +300,15 @@ public class AdminViewBooking extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Duration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DelBtn)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(EditBtn)
-                    .addComponent(ApproveBtn))
-                .addGap(44, 44, 44))
+                    .addComponent(DelBtn))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ApproveBtn)
+                    .addComponent(DisapproveBtn))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -347,10 +362,10 @@ public class AdminViewBooking extends javax.swing.JFrame {
                         .addGap(11, 11, 11)
                         .addComponent(RefreshBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -377,12 +392,10 @@ public class AdminViewBooking extends javax.swing.JFrame {
 
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
         Boolean result = Admin.EditBooking(Customer.getText(), CarPlate.getText(), StartDate.getText(), Duration.getText());
-        if (result == true) {
-            this.setVisible(false);
-            this.dispose();
-            AdminViewBooking page = new AdminViewBooking();
-            page.setVisible(true);
-        }
+        this.setVisible(false);
+        this.dispose();
+        AdminViewBooking page = new AdminViewBooking();
+        page.setVisible(true);
     }//GEN-LAST:event_EditBtnActionPerformed
 
     private void DelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnActionPerformed
@@ -429,6 +442,16 @@ public class AdminViewBooking extends javax.swing.JFrame {
         Admin.LoadBookingTable(table);
     }//GEN-LAST:event_RefreshBtnActionPerformed
 
+    private void DisapproveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisapproveBtnActionPerformed
+        Boolean result = Admin.DisapproveBooking(Customer.getText(), CarPlate.getText());
+        if (result) {
+            this.setVisible(false);
+            this.dispose();
+            AdminViewBooking page = new AdminViewBooking();
+            page.setVisible(true);
+        }
+    }//GEN-LAST:event_DisapproveBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -471,6 +494,7 @@ public class AdminViewBooking extends javax.swing.JFrame {
     private javax.swing.JTextField CarPlate;
     private javax.swing.JTextField Customer;
     private javax.swing.JButton DelBtn;
+    private javax.swing.JButton DisapproveBtn;
     private javax.swing.JTextField Duration;
     private javax.swing.JButton EditBtn;
     private javax.swing.JButton RefreshBtn;
