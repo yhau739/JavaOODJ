@@ -158,13 +158,23 @@ public class Global {
     //validate if date entered is before today's date.
     public static Boolean beforeTodayDate(String stringDate){
         LocalDate today = LocalDate.now();
-        LocalDate bookingDate = LocalDate.parse(stringDate);
-        if(bookingDate.isBefore(today) || bookingDate.isEqual(today)){
-            JOptionPane.showMessageDialog(null, "Please enter a date that is after today's date");   
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedTodayDate = today.format(dateTimeFormatter);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        sdf.setLenient(false);
+        try {
+            //Parse string date into date type
+            Date parsedBookingDate = sdf.parse(stringDate);
+            Date parsedTodayDate = sdf.parse(formattedTodayDate);
+            if(parsedBookingDate.compareTo(parsedTodayDate) < 0 || parsedBookingDate.compareTo(parsedTodayDate) == 0){
+                JOptionPane.showMessageDialog(null, "Please enter a date that is after today's date");   
             return true;
         }
-        else{
-            return false;
         }
+        catch (ParseException e) {
+                JOptionPane.showMessageDialog(null, "Wrong date format entered!\nPlease follow the format DD-MM-YYYY");
+                return true;
+        }
+        return false;
     }
 }
