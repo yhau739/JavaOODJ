@@ -18,12 +18,13 @@ public class Booking {
     private String EndDate;
     private int Duration;
     private int Payment;
+    private String PaymentStatus;
     private String BookStatus;
     private String Rating;
     private String Feedback;
     
     //constructor
-    public Booking(Customer customer, Car car, String StartDate, int Duration, String BookStatus, String Rating, String Feedback){
+    public Booking(Customer customer, Car car, String StartDate, int Duration, String BookStatus, String PaymentStatus, String Rating, String Feedback){
         this.customer = customer;
         this.car = car;
         this.StartDate = StartDate;
@@ -33,6 +34,7 @@ public class Booking {
         this.EndDate = Global.addDate(StartDate, Integer.toString(Duration));
         //calculate payment
         this.Payment = car.GetPrice() * Duration;
+        this.PaymentStatus = PaymentStatus;
         this.Rating = Rating;
         this.Feedback = Feedback;
     }
@@ -63,6 +65,10 @@ public class Booking {
     
     public int getPayment() {
         return Payment;
+    }
+
+    public String getPaymentStatus() {
+        return PaymentStatus;
     }
 
     public String getRating() {
@@ -99,6 +105,10 @@ public class Booking {
 
     public void setPayment(int Payment) {
         this.Payment = Payment;
+    }
+
+    public void setPaymentStatus(String PaymentStatus) {
+        this.PaymentStatus = PaymentStatus;
     }
 
     public void setRating(String Rating) {

@@ -177,7 +177,7 @@ public class AdminMain extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Management");
 
-        jSeparator1.setForeground(new java.awt.Color(51, 255, 51));
+        jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
 
         ManageAdmin.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ManageAdmin.setText("Manage Admin");
@@ -262,7 +262,7 @@ public class AdminMain extends javax.swing.JFrame {
             }
         });
 
-        jSeparator2.setForeground(new java.awt.Color(51, 255, 51));
+        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

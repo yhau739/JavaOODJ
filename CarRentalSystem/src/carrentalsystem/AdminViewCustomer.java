@@ -5,38 +5,17 @@
  */
 package carrentalsystem;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-
 /**
  *
  * @author Lenovo
  */
-public class AdminViewBooking extends javax.swing.JFrame {
+public class AdminViewCustomer extends javax.swing.JFrame {
 
     /**
-     * Creates new form AdminViewBooking
+     * Creates new form AdminViewCustomer
      */
-    public AdminViewBooking() {
+    public AdminViewCustomer() {
         initComponents();
-
-        JTableHeader tableHeader = BookingTable.getTableHeader();
-        Font headerFont = new Font("Verdana", Font.PLAIN, 24);
-        tableHeader.setFont(headerFont);
-
-        //To make sure JFrame is located in the center of the screen regardless of monitor resolution
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-
-        //create table model
-        DefaultTableModel table = (DefaultTableModel) BookingTable.getModel();
-        //load table
-        Admin.LoadBookingTable(table);
     }
 
     /**
@@ -51,14 +30,16 @@ public class AdminViewBooking extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         BackBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        BookingTable = new javax.swing.JTable();
+        CustomerTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        RefreshBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        Customer = new javax.swing.JTextField();
-        CarPlate = new javax.swing.JTextField();
+        Username = new javax.swing.JTextField();
+        Gender = new javax.swing.JTextField();
         EditBtn = new javax.swing.JButton();
         DelBtn = new javax.swing.JButton();
         SearchTxt = new javax.swing.JTextField();
@@ -66,19 +47,26 @@ public class AdminViewBooking extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        StartDate = new javax.swing.JTextField();
-        Duration = new javax.swing.JTextField();
+        Age = new javax.swing.JTextField();
+        Phone = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         ApproveBtn = new javax.swing.JButton();
         SelectedVariable = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        RefreshBtn = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        Email = new javax.swing.JTextField();
+        Address = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        Card = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel10.setText("Select Booking From Table");
+        jLabel10.setText("Select Customer From Table");
 
         BackBtn.setText("Back");
         BackBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -87,13 +75,13 @@ public class AdminViewBooking extends javax.swing.JFrame {
             }
         });
 
-        BookingTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        BookingTable.setModel(new javax.swing.table.DefaultTableModel(
+        CustomerTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        CustomerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Customer", "Car Plate", "Start Date", "End Date", "Duration", "Payment", "Booking Status", "Payment Status"
+                "Username", "Gender", "Age", "Phone", "Email", "Address", "Card", "Status"
             }
         ) {
             Class[] types = new Class [] {
@@ -111,22 +99,32 @@ public class AdminViewBooking extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        BookingTable.setRowHeight(30);
-        BookingTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        CustomerTable.setRowHeight(30);
+        CustomerTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BookingTableMouseClicked(evt);
+                CustomerTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(BookingTable);
+        jScrollPane1.setViewportView(CustomerTable);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setText("Manage Customers");
+
+        RefreshBtn.setText("Refresh Table");
+        RefreshBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshBtnActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("Customer");
+        jLabel2.setText("Username");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel4.setText("Car Plate");
+        jLabel4.setText("Gender");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel6.setText(":");
@@ -134,10 +132,10 @@ public class AdminViewBooking extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel8.setText(":");
 
-        Customer.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        Customer.setEnabled(false);
+        Username.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        Username.setEnabled(false);
 
-        CarPlate.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        Gender.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         EditBtn.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         EditBtn.setText("Edit");
@@ -169,14 +167,14 @@ public class AdminViewBooking extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel5.setText("Start Date");
+        jLabel5.setText("Age");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel7.setText("Duration");
+        jLabel7.setText("Phone");
 
-        StartDate.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        Age.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        Duration.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        Phone.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel9.setText(":");
@@ -193,7 +191,31 @@ public class AdminViewBooking extends javax.swing.JFrame {
         });
 
         SelectedVariable.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        SelectedVariable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer", "Car Plate", "Start Date", "End Date", "Duration", "Status", "Payment Status" }));
+        SelectedVariable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Username", "Gender", "Age", "Status" }));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel12.setText("Email");
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel13.setText("Address");
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel14.setText(":");
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel15.setText(":");
+
+        Email.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        Address.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel16.setText("Card");
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel17.setText(":");
+
+        Card.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -209,38 +231,49 @@ public class AdminViewBooking extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(8, 8, 8))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Customer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(CarPlate, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Duration, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(ApproveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(209, 209, 209)
-                                        .addComponent(DelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(EditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(175, 175, 175))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(Age, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(ApproveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(37, 37, 37)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(EditBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(44, 44, 44)
+                                                .addComponent(DelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGap(8, 8, 8))
+                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                        .addGap(2, 2, 2)
+                                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(Username, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(Gender, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(Phone, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(Email, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(Address, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(Card, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel16))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
@@ -266,15 +299,15 @@ public class AdminViewBooking extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Customer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CarPlate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Gender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Age, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,25 +319,36 @@ public class AdminViewBooking extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Duration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DelBtn)
-                    .addComponent(EditBtn)
-                    .addComponent(ApproveBtn))
-                .addGap(44, 44, 44))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ApproveBtn)
+                            .addComponent(EditBtn)
+                            .addComponent(DelBtn))
+                        .addGap(25, 25, 25))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Card, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("Manage Bookings");
-
-        RefreshBtn.setText("Refresh Table");
-        RefreshBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RefreshBtnActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -321,14 +365,14 @@ public class AdminViewBooking extends javax.swing.JFrame {
                         .addComponent(jLabel10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 489, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(BackBtn))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(RefreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 372, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 946, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -348,9 +392,9 @@ public class AdminViewBooking extends javax.swing.JFrame {
                         .addComponent(RefreshBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -363,71 +407,64 @@ public class AdminViewBooking extends javax.swing.JFrame {
         page.setVisible(true);
     }//GEN-LAST:event_BackBtnActionPerformed
 
-    private void BookingTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BookingTableMouseClicked
-        DefaultTableModel model = (DefaultTableModel) BookingTable.getModel();
-        int selectedRowIndex = BookingTable.getSelectedRow();
-
-        //display in textfields
-        Customer.setText(model.getValueAt(selectedRowIndex, 0).toString());
-        CarPlate.setText(model.getValueAt(selectedRowIndex, 1).toString());
-        Admin.CurrentCarPlate = CarPlate.getText();
-        StartDate.setText(model.getValueAt(selectedRowIndex, 2).toString());
-        Duration.setText(model.getValueAt(selectedRowIndex, 4).toString());
-    }//GEN-LAST:event_BookingTableMouseClicked
-
-    private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
-        Boolean result = Admin.EditBooking(Customer.getText(), CarPlate.getText(), StartDate.getText(), Duration.getText());
-        if (result == true) {
-            this.setVisible(false);
-            this.dispose();
-            AdminViewBooking page = new AdminViewBooking();
-            page.setVisible(true);
-        }
-    }//GEN-LAST:event_EditBtnActionPerformed
-
-    private void DelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected booking?", "Comfirmation", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            Boolean result = Admin.DeleteBooking(Customer.getText(), CarPlate.getText());
-            if (result == true) {
-                this.setVisible(false);
-                this.dispose();
-                AdminViewBooking page = new AdminViewBooking();
-                page.setVisible(true);
-            }
-        }
-    }//GEN-LAST:event_DelBtnActionPerformed
-
-    private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
-        ArrayList<Booking> result = Admin.SearchBooking(SearchTxt.getText(), SelectedVariable.getSelectedItem().toString());
-        this.SearchTxt.setText("");
-        if (result != null) {
-            DefaultTableModel table = (DefaultTableModel) BookingTable.getModel();
-            //clear table first
-            table.setRowCount(0);
-            //Load the searched results
-            Admin.LoadSearchedBookingTable(table, result);
-        }
-    }//GEN-LAST:event_SearchBtnActionPerformed
-
-    private void ApproveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveBtnActionPerformed
-        Boolean result = Admin.ApproveBooking(Customer.getText(), CarPlate.getText());
-        if (result) {
-            this.setVisible(false);
-            this.dispose();
-            AdminViewBooking page = new AdminViewBooking();
-            page.setVisible(true);
-        }
-    }//GEN-LAST:event_ApproveBtnActionPerformed
+    private void CustomerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerTableMouseClicked
+//        DefaultTableModel model = (DefaultTableModel) CustomerTable.getModel();
+//        int selectedRowIndex = CustomerTable.getSelectedRow();
+//
+//        //display in textfields
+//        Username.setText(model.getValueAt(selectedRowIndex, 0).toString());
+//        Gender.setText(model.getValueAt(selectedRowIndex, 1).toString());
+//        Age.setText(model.getValueAt(selectedRowIndex, 2).toString());
+//        Phone.setText(model.getValueAt(selectedRowIndex, 3).toString());
+    }//GEN-LAST:event_CustomerTableMouseClicked
 
     private void RefreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtnActionPerformed
         //create table model
-        DefaultTableModel table = (DefaultTableModel) BookingTable.getModel();
-        //clear table first
-        table.setRowCount(0);
-        //load table
-        Admin.LoadBookingTable(table);
+//        DefaultTableModel table = (DefaultTableModel) CustomerTable.getModel();
+//        //clear table first
+//        table.setRowCount(0);
+//        //load table
+//        Admin.LoadBookingTable(table);
     }//GEN-LAST:event_RefreshBtnActionPerformed
+
+    private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
+        //        Boolean result = Admin.EditAdmin(Username.getText(), Password.getText());
+        //        if (result == true) {
+            //            this.setVisible(false);
+            //            this.dispose();
+            //            AdminViewAdmin page = new AdminViewAdmin();
+            //            page.setVisible(true);
+            //        }
+    }//GEN-LAST:event_EditBtnActionPerformed
+
+    private void DelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelBtnActionPerformed
+        //        int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected admin?", "Comfirmation", JOptionPane.YES_NO_OPTION);
+        //        if (reply == JOptionPane.YES_OPTION) {
+            //            Boolean result = Admin.DeleteAdmin(Username.getText());
+            //            if (result == true) {
+                //                this.setVisible(false);
+                //                this.dispose();
+                //                AdminViewAdmin page = new AdminViewAdmin();
+                //                page.setVisible(true);
+                //            }
+            //        }
+    }//GEN-LAST:event_DelBtnActionPerformed
+
+    private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
+//        ArrayList<Booking> result = Admin.SearchBooking(SearchTxt.getText(), SelectedVariable.getSelectedItem().toString());
+//        this.SearchTxt.setText("");
+//        if (result != null) {
+//            DefaultTableModel table = (DefaultTableModel) CustomerTable.getModel();
+//            //clear table first
+//            table.setRowCount(0);
+//            //Load the searched results
+//            Admin.LoadSearchedBookingTable(table, result);
+//        }
+    }//GEN-LAST:event_SearchBtnActionPerformed
+
+    private void ApproveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ApproveBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -446,41 +483,50 @@ public class AdminViewBooking extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminViewBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminViewCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminViewBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminViewCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminViewBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminViewCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminViewBooking.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminViewCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminViewBooking().setVisible(true);
+                new AdminViewCustomer().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Address;
+    private javax.swing.JTextField Age;
     private javax.swing.JButton ApproveBtn;
     private javax.swing.JButton BackBtn;
-    private javax.swing.JTable BookingTable;
-    private javax.swing.JTextField CarPlate;
-    private javax.swing.JTextField Customer;
+    private javax.swing.JTextField Card;
+    private javax.swing.JTable CustomerTable;
     private javax.swing.JButton DelBtn;
-    private javax.swing.JTextField Duration;
     private javax.swing.JButton EditBtn;
+    private javax.swing.JTextField Email;
+    private javax.swing.JTextField Gender;
+    private javax.swing.JTextField Phone;
     private javax.swing.JButton RefreshBtn;
     private javax.swing.JButton SearchBtn;
     private javax.swing.JTextField SearchTxt;
     private javax.swing.JComboBox<String> SelectedVariable;
-    private javax.swing.JTextField StartDate;
+    private javax.swing.JTextField Username;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

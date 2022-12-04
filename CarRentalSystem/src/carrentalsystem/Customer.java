@@ -211,7 +211,7 @@ public class Customer extends User {
                     String rating = null;
                     String feedback = null;
                     //create obj
-                    Booking newBooking = new Booking(Global.CurrentCustomer, carObj, startDate, Integer.parseInt(duration), status, rating, feedback);
+                    Booking newBooking = new Booking(Global.CurrentCustomer, carObj, startDate, Integer.parseInt(duration),"no", status, rating, feedback);
                     //add obj
                     DataIO.allBookings.add(newBooking);
                     //write file

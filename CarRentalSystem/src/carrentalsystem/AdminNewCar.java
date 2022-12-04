@@ -156,9 +156,9 @@ public class AdminNewCar extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel10.setText("New Car");
 
-        jSeparator1.setForeground(new java.awt.Color(51, 255, 0));
+        jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
 
-        jSeparator2.setForeground(new java.awt.Color(51, 255, 0));
+        jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

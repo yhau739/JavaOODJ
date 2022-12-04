@@ -233,7 +233,7 @@ public class DataIO {
                         carObj = car;
                     }
                 }
-                allBookings.add(new Booking(custObj, carObj, splited[2], Integer.parseInt(splited[3]), splited[4], splited[5], splited[6]));
+                allBookings.add(new Booking(custObj, carObj, splited[2], Integer.parseInt(splited[3]), splited[4], splited[5], splited[6], splited[7]));
             }
             myReader.close();
         } catch (FileNotFoundException e) {

@@ -65,8 +65,9 @@ public class Global {
 
             //get current date
             LocalDate date = LocalDate.now();
+            DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-            DataIO.allLogins.add(new Login(date.toString(), time.toString(), adminObj.getUsername(), adminObj.getPrivilege()));
+            DataIO.allLogins.add(new Login(date.format(formatters), time.toString(), adminObj.getUsername(), adminObj.getPrivilege()));
             DataIO.WriteFileLogin();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in saveloginrecord");
@@ -81,8 +82,9 @@ public class Global {
 
             //get current date
             LocalDate date = LocalDate.now();
+            DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-            DataIO.allLogins.add(new Login(date.toString(), time.toString(), customerObj.getUsername(), customerObj.getPrivilege()));
+            DataIO.allLogins.add(new Login(date.format(formatters), time.toString(), customerObj.getUsername(), customerObj.getPrivilege()));
             DataIO.WriteFileLogin();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in saveloginrecord");
