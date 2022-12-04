@@ -55,7 +55,7 @@
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -99,15 +99,16 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="BookCarBtn" min="-2" pref="220" max="-2" attributes="0"/>
-                      <Component id="PaymentBtn" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
+                      <Component id="ManageBookingBtn" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
                       <Component id="ReceiptBtn" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
                       <Component id="FeedbackBtn" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jSeparator1" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
+                      <Component id="ReturnCarBtn" alignment="0" min="-2" pref="220" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="42" max="32767" attributes="0"/>
               </Group>
@@ -123,12 +124,14 @@
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Component id="BookCarBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="PaymentBtn" min="-2" max="-2" attributes="0"/>
+                  <Component id="ManageBookingBtn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <Component id="ReturnCarBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="ReceiptBtn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="FeedbackBtn" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -145,15 +148,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BookCarBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="PaymentBtn">
+        <Component class="javax.swing.JButton" name="ManageBookingBtn">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="18" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Make Payment"/>
+            <Property name="text" type="java.lang.String" value="Manage Booking"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PaymentBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ManageBookingBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="ReceiptBtn">
@@ -192,6 +195,17 @@
               <Color blue="33" green="ff" red="33" type="rgb"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="ReturnCarBtn">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Return Car"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReturnCarBtnActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
