@@ -189,7 +189,7 @@ public class Customer extends User {
     public static Boolean AddBooking(String carPlate, String startDate, String duration) {
         try {
             //validate data
-            if (Customer.validateDate(startDate)) {
+            if (Global.validateDate(startDate)) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(carPlate);
                 list.add(startDate);
@@ -239,29 +239,6 @@ public class Customer extends User {
     }
 
     //Validation methods
-    public static Boolean validateDate(String stringDate) {
-        // Check if date is 'null'
-        if (stringDate.trim().equals("")) {
-            return false;
-        } // Date is not 'null' 
-        else {
-            //Check date format
-            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-            sdf.setLenient(false);
-            // Create Date object, parse the string into date 
-            try {
-                //Parse string date into date type
-                Date parsedDate = sdf.parse(stringDate);
-                //System.out.println(parsedDate+" is valid date format");
-            } /* Date format is invalid */ catch (ParseException e) {
-                JOptionPane.showMessageDialog(null, "Wrong date format entered!\nPlease follow the format DD-MM-YYYY");
-                return false;
-            }
-            /* Return true if date format is valid */
-            return true;
-        }
-    }
-
     public static Boolean CustomerAlreadyExists(String username, String bannerMsg) {
         for (Customer obj : DataIO.allCustomers) {
             if (obj.getUsername().equals(username)) {

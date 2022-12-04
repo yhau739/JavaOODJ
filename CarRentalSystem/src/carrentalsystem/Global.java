@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -109,6 +110,7 @@ public class Global {
         return list;
     }
 
+    //add date with number of days
     public static String addDate(String bookingDate, String days) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         int parsedDays = Integer.parseInt(days);
@@ -126,5 +128,43 @@ public class Global {
         String checkoutDate = sdf.format(c.getTime());
         //return checkout date        
         return checkoutDate;
+    }
+    
+    //global validations
+    //validate empty date or wrong date format
+    public static Boolean validateDate(String stringDate) {
+        // Check if date is 'null'
+        if (stringDate.trim().equals("")) {
+            return false;
+        } // Date is not 'null' 
+        else {
+            //Check date format
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            sdf.setLenient(false);
+            // Create Date object, parse the string into date 
+            try {
+                //Parse string date into date type
+                Date parsedDate = sdf.parse(stringDate);
+                //System.out.println(parsedDate+" is valid date format");
+            } /* Date format is invalid */ catch (ParseException e) {
+                JOptionPane.showMessageDialog(null, "Wrong date format entered!\nPlease follow the format DD-MM-YYYY");
+                return false;
+            }
+            /* Return true if date format is valid */
+            return true;
+        }
+    }
+    
+    //validate if date entered is before today's date.
+    public static Boolean beforeTodayDate(String stringDate){
+        LocalDate today = LocalDate.now();
+        LocalDate bookingDate = LocalDate.parse(stringDate);
+        if(bookingDate.isBefore(today) || bookingDate.isEqual(today)){
+            JOptionPane.showMessageDialog(null, "Please enter a date that is after today's date");   
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
