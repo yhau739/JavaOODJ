@@ -250,11 +250,27 @@ public class Customer extends User {
             //get object
             Booking bookingObj = DataIO.allBookings.get(i);
             //get values and make it into an array
-            String[] eachRow = new String[]{bookingObj.getCustomer().getUsername(), bookingObj.getCar().GetCarPlate(),bookingObj.getCar().GetCarType(), Integer.toString(bookingObj.getCar().GetPrice()), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), bookingObj.getEndDate(), Integer.toString(bookingObj.getDuration()), Integer.toString(bookingObj.getPayment())};
+            String[] eachRow = new String[]{bookingObj.getCar().GetCarPlate(),bookingObj.getCar().GetCarType(), Integer.toString(bookingObj.getCar().GetPrice()), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), bookingObj.getEndDate(), Integer.toString(bookingObj.getDuration()), Integer.toString(bookingObj.getPayment())};
             String bookingStatus = bookingObj.getBookStatus();
             String paymentStatus = bookingObj.getPaymentStatus();
             String customer = bookingObj.getCustomer().getUsername();
             if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("booked") && paymentStatus.equals("yes")){
+                table.addRow(eachRow);
+            }
+        }
+    }
+    
+     public static void LoadFeedbackTable(DefaultTableModel table) {
+        for (int i = 0; i < DataIO.allBookings.size(); i++) {
+            //get object
+            Booking bookingObj = DataIO.allBookings.get(i);
+            //get values and make it into an array
+            String[] eachRow = new String[]{bookingObj.getCar().GetCarPlate(),bookingObj.getCar().GetCarType(), Integer.toString(bookingObj.getCar().GetPrice()), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), bookingObj.getEndDate(), Integer.toString(bookingObj.getDuration()), Integer.toString(bookingObj.getPayment())};
+            String bookingStatus = bookingObj.getBookStatus();
+            String rating = bookingObj.getRating();
+            String feedback = bookingObj.getFeedback();
+            String customer = bookingObj.getCustomer().getUsername();
+            if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("returned") && rating.equals("none") && feedback.equals("none")){
                 table.addRow(eachRow);
             }
         }
@@ -386,6 +402,35 @@ public class Customer extends User {
         }
         return false;
     }
+    
+    public static Boolean addFeedback(String Rating, String Feedback, String CarPlate){
+        if(Customer.CheckBookingSelected(CarPlate) == false){
+            if(Customer.validateRating(Rating) && Customer.validateFeedback(Feedback)){
+                int result = JOptionPane.showConfirmDialog(null,"Confirm to submit the rating and feedback for car " + CarPlate + "?", "Feedback Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(result == JOptionPane.YES_OPTION){
+                    for(Booking booking : DataIO.allBookings){
+                        //booking found
+                        if (booking.getCar().GetCarPlate().equals(CarPlate)){
+                            //Edit values
+                            booking.setRating(Rating);
+                            booking.setFeedback(Feedback);
+
+                            //Write to File
+                            DataIO.WriteFileBooking();
+
+                            JOptionPane.showMessageDialog(null, "Successfully submit feedback for car " + CarPlate + "!\nThank you for using our service.\nWe hope to see you again!","Feedback Successful", JOptionPane.INFORMATION_MESSAGE);
+                            return true;
+                        }
+                    }
+                }    
+                else{
+                    JOptionPane.showMessageDialog(null, "Feedback has been cancelled", "Feedback cancellation", JOptionPane.INFORMATION_MESSAGE);
+                    return false;   
+                }
+            } 
+        }
+        return false;
+    }
 
     public static Boolean CheckBookingSelected(String CarPlate) {
         // Car plate is 'null' 
@@ -477,6 +522,22 @@ public class Customer extends User {
             }
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "You did not enter number for card", "Enter a number for card", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public static Boolean validateRating(String rating){
+        if(rating.equals("none")){
+            JOptionPane.showMessageDialog(null, "Please choose between 1 to 5 for rating", "No rating selected", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public static Boolean validateFeedback(String feedback){
+         if(feedback.equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter some feedbacks", "No feedback entered", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

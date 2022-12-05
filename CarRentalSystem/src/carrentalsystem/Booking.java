@@ -128,17 +128,4 @@ public class Booking {
     public void setFeedback(String Feedback) {
         this.Feedback = Feedback;
     }
-
-    
-    //Load Table Section in Feedback Section for customer
-    public static void LoadBookingTable(DefaultTableModel table) {
-        for (int i = 0; i < DataIO.allBookings.size(); i++) {
-            //get object
-            Booking bookingObj = DataIO.allBookings.get(i);
-            //get values and make it into an array
-//            String[] eachRow = new String[]{bookingObj.getUsername(), bookingObj.getPassword(), bookingObj.getCreatedOnDate(), bookingObj.getCreatedOnTime()};
-
-//            table.addRow(eachRow);
-        }
-    }
 }
