@@ -260,7 +260,7 @@ public class Customer extends User {
         }
     }
     
-     public static void LoadFeedbackTable(DefaultTableModel table) {
+    public static void LoadFeedbackTable(DefaultTableModel table) {
         for (int i = 0; i < DataIO.allBookings.size(); i++) {
             //get object
             Booking bookingObj = DataIO.allBookings.get(i);
@@ -271,6 +271,20 @@ public class Customer extends User {
             String feedback = bookingObj.getFeedback();
             String customer = bookingObj.getCustomer().getUsername();
             if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("returned") && rating.equals("none") && feedback.equals("none")){
+                table.addRow(eachRow);
+            }
+        }
+    }
+    
+    public static void LoadHistoryTable(DefaultTableModel table) {
+        for (int i = 0; i < DataIO.allBookings.size(); i++) {
+            //get object
+            Booking bookingObj = DataIO.allBookings.get(i);
+            //get values and make it into an array
+            String[] eachRow = new String[]{bookingObj.getCar().GetCarPlate(),bookingObj.getCar().GetCarType(), Integer.toString(bookingObj.getCar().GetPrice()), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), bookingObj.getEndDate(), Integer.toString(bookingObj.getDuration()), Integer.toString(bookingObj.getPayment()), bookingObj.getRating(), bookingObj.getFeedback()};
+            String bookingStatus = bookingObj.getBookStatus();
+            String customer = bookingObj.getCustomer().getUsername();
+            if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("returned")){
                 table.addRow(eachRow);
             }
         }
