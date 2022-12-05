@@ -366,7 +366,7 @@ public class CustomerRegister extends javax.swing.JFrame {
                 EmailInput.setText("");
             }
             
-            if (validateCard == false){ //email null or wrong format
+            if (validateCard == false){ //card number too short or long
                 CardInput.setText("");
             }
             

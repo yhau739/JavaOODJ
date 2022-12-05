@@ -41,11 +41,12 @@ public class CustomerMain extends javax.swing.JFrame {
         LogoutBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         BookCarBtn = new javax.swing.JButton();
-        PaymentBtn = new javax.swing.JButton();
+        ManageBookingBtn = new javax.swing.JButton();
         ReceiptBtn = new javax.swing.JButton();
         FeedbackBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        ReturnCarBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         EditProfileBtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -78,11 +79,11 @@ public class CustomerMain extends javax.swing.JFrame {
             }
         });
 
-        PaymentBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        PaymentBtn.setText("Make Payment");
-        PaymentBtn.addActionListener(new java.awt.event.ActionListener() {
+        ManageBookingBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        ManageBookingBtn.setText("Manage Booking");
+        ManageBookingBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PaymentBtnActionPerformed(evt);
+                ManageBookingBtnActionPerformed(evt);
             }
         });
 
@@ -107,6 +108,14 @@ public class CustomerMain extends javax.swing.JFrame {
 
         jSeparator1.setForeground(new java.awt.Color(51, 255, 51));
 
+        ReturnCarBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        ReturnCarBtn.setText("Return Car");
+        ReturnCarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnCarBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -115,11 +124,12 @@ public class CustomerMain extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BookCarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PaymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ManageBookingBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ReceiptBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(FeedbackBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ReturnCarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -132,12 +142,14 @@ public class CustomerMain extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addComponent(BookCarBtn)
                 .addGap(18, 18, 18)
-                .addComponent(PaymentBtn)
+                .addComponent(ManageBookingBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(ReturnCarBtn)
                 .addGap(18, 18, 18)
                 .addComponent(ReceiptBtn)
                 .addGap(18, 18, 18)
                 .addComponent(FeedbackBtn)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -222,7 +234,7 @@ public class CustomerMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(51, 51, 51))
+                .addContainerGap())
         );
 
         pack();
@@ -238,12 +250,12 @@ public class CustomerMain extends javax.swing.JFrame {
         page.setVisible(true);
     }//GEN-LAST:event_LogoutBtnActionPerformed
 
-    private void PaymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentBtnActionPerformed
+    private void ManageBookingBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageBookingBtnActionPerformed
         this.setVisible(false);
         this.dispose();
-        CustomerPayment page = new CustomerPayment();
+        CustomerManageBooking page = new CustomerManageBooking();
         page.setVisible(true);
-    }//GEN-LAST:event_PaymentBtnActionPerformed
+    }//GEN-LAST:event_ManageBookingBtnActionPerformed
 
     private void ReceiptBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReceiptBtnActionPerformed
         this.setVisible(false);
@@ -279,6 +291,13 @@ public class CustomerMain extends javax.swing.JFrame {
         CustomerHistory page = new CustomerHistory();
         page.setVisible(true);
     }//GEN-LAST:event_HistoryBtnActionPerformed
+
+    private void ReturnCarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnCarBtnActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        CustomerReturnCar page = new CustomerReturnCar();
+        page.setVisible(true);
+    }//GEN-LAST:event_ReturnCarBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,8 +340,9 @@ public class CustomerMain extends javax.swing.JFrame {
     private javax.swing.JButton FeedbackBtn;
     private javax.swing.JButton HistoryBtn;
     private javax.swing.JButton LogoutBtn;
-    private javax.swing.JButton PaymentBtn;
+    private javax.swing.JButton ManageBookingBtn;
     private javax.swing.JButton ReceiptBtn;
+    private javax.swing.JButton ReturnCarBtn;
     private javax.swing.JLabel WelcomeMsg;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
