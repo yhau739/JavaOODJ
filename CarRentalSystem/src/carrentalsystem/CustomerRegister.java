@@ -320,7 +320,7 @@ public class CustomerRegister extends javax.swing.JFrame {
         String email = EmailInput.getText();
         String address = AddressInput.getText();
         String card = CardInput.getText();
-        String status = "unapproved";
+        String status = "unapprove";
 
         //Convert to String data type
         String strPassword = String.valueOf(password);

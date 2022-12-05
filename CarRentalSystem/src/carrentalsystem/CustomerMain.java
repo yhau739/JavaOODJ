@@ -288,7 +288,7 @@ public class CustomerMain extends javax.swing.JFrame {
     private void HistoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistoryBtnActionPerformed
         this.setVisible(false);
         this.dispose();
-        CustomerHistory page = new CustomerHistory();
+        CustomerBookingHistory page = new CustomerBookingHistory();
         page.setVisible(true);
     }//GEN-LAST:event_HistoryBtnActionPerformed
 
