@@ -460,7 +460,7 @@ public class AdminViewCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_RefreshBtnActionPerformed
 
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
-        Boolean result = Admin.EditCustomer(Username.getText(), password.getText(), GenderInput.getSelectedItem().toString(), Age.getText(), Phone.getText(), Email.getText(), Address.getText(), Card.getText());
+        Boolean result = Admin.EditCustomer(Global.RemoveWhitespaces(Username.getText()), Global.RemoveWhitespaces(password.getText()), Global.RemoveWhitespaces(GenderInput.getSelectedItem().toString()), Global.RemoveWhitespaces(Age.getText()), Global.RemoveWhitespaces(Phone.getText()), Global.RemoveWhitespaces(Email.getText()), Global.RemoveWhitespaces(Address.getText()), Global.RemoveWhitespaces(Card.getText()));
         if (result == true) {
             this.setVisible(false);
             this.dispose();

@@ -1,1 +1,2 @@
-customer123|%|12345|%|male|%|23|%|01156273493|%|yankit@gmail.com|%|21,jalan|%|012465874|%|unapprove
+customer123|%|12345|%|male|%|23|%|01156273493|%|yankit@gmail.com|%|21,jalan|%|012465874|%|approve
+ali|%|12345|%|male|%|17|%|01156341687|%|ali@yahoo.com|%|28,Jalan loran|%|123123123|%|approve

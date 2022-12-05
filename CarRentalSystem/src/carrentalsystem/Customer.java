@@ -173,6 +173,7 @@ public class Customer extends User {
                         JOptionPane.showMessageDialog(null, "Login is Successfull!", "Login", JOptionPane.INFORMATION_MESSAGE);
                         //Set up profile
                         Global.CurrentCustomer = custObj;
+                        Global.SaveCustomerLoginRecord(custObj);
                         return custObj;
                     }
                     else

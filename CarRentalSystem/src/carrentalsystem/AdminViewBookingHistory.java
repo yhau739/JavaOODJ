@@ -92,7 +92,7 @@ public class AdminViewBookingHistory extends javax.swing.JFrame {
         jScrollPane1.setViewportView(BookingTable);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("View Bookings History");
+        jLabel1.setText("View History of Completed Bookings");
 
         RefreshBtn.setText("Refresh Table");
         RefreshBtn.addActionListener(new java.awt.event.ActionListener() {

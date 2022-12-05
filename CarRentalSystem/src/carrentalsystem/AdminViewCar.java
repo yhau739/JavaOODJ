@@ -355,7 +355,7 @@ public class AdminViewCar extends javax.swing.JFrame {
     }//GEN-LAST:event_CarTableMouseClicked
 
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
-        Boolean result = Admin.EditCar(CarPlate.getText(), CarType.getText(), Price.getText(), Color.getText());
+        Boolean result = Admin.EditCar(Global.RemoveWhitespaces(CarPlate.getText()), Global.RemoveWhitespaces(CarType.getText()), Global.RemoveWhitespaces(Price.getText()), Global.RemoveWhitespaces(Color.getText()));
         if (result == true) {
             this.setVisible(false);
             this.dispose();

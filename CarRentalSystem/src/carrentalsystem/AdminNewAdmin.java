@@ -222,8 +222,8 @@ public class AdminNewAdmin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
-        String newUsername = UsernameInput.getText();
-        String newPassword = PassInput.getText();
+        String newUsername = Global.RemoveWhitespaces(UsernameInput.getText());
+        String newPassword = Global.RemoveWhitespaces(PassInput.getText());
 
         Boolean result = Admin.AddNewAdmin(newUsername, newPassword);
         if (result == true) {

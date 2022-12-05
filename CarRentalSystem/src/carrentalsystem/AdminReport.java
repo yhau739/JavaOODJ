@@ -5,6 +5,8 @@
  */
 package carrentalsystem;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -19,6 +21,10 @@ public class AdminReport extends javax.swing.JFrame {
      */
     public AdminReport() {
         initComponents();
+        //To make sure JFrame is located in the center of the screen regardless of monitor resolution
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
         //all time revenue
         int alltimerevenue = 0;
         for (Booking b : DataIO.allBookings) {
@@ -47,54 +53,52 @@ public class AdminReport extends javax.swing.JFrame {
         //age
         int age18 = 0, age1830 = 0, age30 = 0;
         for (Customer b : DataIO.allCustomers) {
-            if(Integer.parseInt(b.getAge()) < 18){
+            if (Integer.parseInt(b.getAge()) < 18) {
                 age18 += 1;
-            }else if(Integer.parseInt(b.getAge()) >= 18 && Integer.parseInt(b.getAge()) <= 30){
+            } else if (Integer.parseInt(b.getAge()) >= 18 && Integer.parseInt(b.getAge()) <= 30) {
                 age1830 += 1;
-            }
-            else{
+            } else {
                 age30 += 1;
             }
         }
         Age18.setText(Integer.toString(age18));
         Age1830.setText(Integer.toString(age1830));
         Age30.setText(Integer.toString(age30));
-        
+
         //gender
         int male = 0;
         int female = 0;
-        for(Customer c:DataIO.allCustomers){
-            if(c.getGender().equals("male")){
+        for (Customer c : DataIO.allCustomers) {
+            if (c.getGender().equals("male")) {
                 male += 1;
-            }
-            else{
+            } else {
                 female += 1;
             }
         }
         Male.setText(Integer.toString(male));
         Female.setText(Integer.toString(female));
-        
+
         //rating
         int maxrating = 0, minrating = 0, totalrating = 0, sum = 0, temp = 0;
         double meanrating = 0;
-        for(Booking b:DataIO.allBookings){
-            if(b.getRating().equals("none")){
+        for (Booking b : DataIO.allBookings) {
+            if (b.getRating().equals("none")) {
                 continue;
             }
             temp = Integer.parseInt(b.getRating());
             sum += temp;
             totalrating += 1;
-            if(temp >= maxrating){
+            if (temp >= maxrating) {
                 maxrating = temp;
             }
-            if(temp <= minrating){
+            if (temp <= minrating) {
                 minrating = temp;
             }
         }
-        if(sum == 0 || totalrating == 0){
+        if (sum == 0 || totalrating == 0) {
             return;
         }
-        meanrating = sum/ totalrating;
+        meanrating = sum / totalrating;
         MeanRating.setText(String.valueOf(meanrating));
         MaxRating.setText(Integer.toString(maxrating));
         MinRating.setText(Integer.toString(minrating));

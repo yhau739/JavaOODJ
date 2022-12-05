@@ -197,7 +197,7 @@ public class AdminMain extends javax.swing.JFrame {
         });
 
         BookingsHistory.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        BookingsHistory.setText("Bookings History");
+        BookingsHistory.setText("Booked History");
         BookingsHistory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BookingsHistoryActionPerformed(evt);
@@ -286,7 +286,7 @@ public class AdminMain extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel2.setText("Logs");
+        jLabel2.setText("Reports, Logs & Receipts");
 
         EventLogsBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         EventLogsBtn.setText("Event Logs");
@@ -389,7 +389,7 @@ public class AdminMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -491,7 +491,10 @@ public class AdminMain extends javax.swing.JFrame {
     }//GEN-LAST:event_ReportsActionPerformed
 
     private void PaymentCollectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentCollectionActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        this.dispose();
+        AdminPaymentReceipt page = new AdminPaymentReceipt();
+        page.setVisible(true);
     }//GEN-LAST:event_PaymentCollectionActionPerformed
 
     /**

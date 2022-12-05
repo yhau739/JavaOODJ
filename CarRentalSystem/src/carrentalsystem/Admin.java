@@ -84,13 +84,28 @@ public class Admin extends User {
     }
 
     //Functionality Section
+    public static Boolean CollectPayment(String username, String carplate) {
+        for (Booking b : DataIO.allBookings) {
+            if (b.getCustomer().getUsername().equals(username) && b.getCar().GetCarPlate().equals(carplate)) {
+                b.setBookStatus("booked");
+                b.setPaymentStatus("yes");
+                DataIO.WriteFileBooking();
+                Global.CurrentAdmin.setEvent("CollectPayment");
+                Admin.SaveEventLogs(Global.CurrentAdmin);
+                JOptionPane.showMessageDialog(null, "Payment Collected successfully!");
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static Boolean ApproveCustomer(String username) {
         for (Customer c : DataIO.allCustomers) {
             if (c.getUsername().equals(username)) {
                 c.setStatus("approve");
                 DataIO.WriteFileCustomer();
                 Global.CurrentAdmin.setEvent("ApproveCustomer");
-                //Admin.SaveEventLogs(Global.currentadmin);
+                Admin.SaveEventLogs(Global.CurrentAdmin);
                 JOptionPane.showMessageDialog(null, "Customer approved successfully!");
                 return true;
             }
@@ -161,7 +176,7 @@ public class Admin extends User {
                     //Write to File
                     DataIO.WriteFileCustomer();
                     Global.CurrentAdmin.setEvent("EditCustomer");
-                    //Admin.SaveEventLogs(Global.currentadmin);
+                    Admin.SaveEventLogs(Global.CurrentAdmin);
                     JOptionPane.showMessageDialog(null, "Customer edited successfully!");
                     return true;
                 }
@@ -177,7 +192,7 @@ public class Admin extends User {
                 //write file
                 DataIO.WriteFileCustomer();
                 Global.CurrentAdmin.setEvent("DeleteCustomer");
-                //Admin.SaveEventLogs(Global.currentadmin);
+                Admin.SaveEventLogs(Global.CurrentAdmin);
                 JOptionPane.showMessageDialog(null, "Customer is deleted successfully!");
                 return true;
             }
@@ -243,7 +258,7 @@ public class Admin extends User {
         if (!Admin.CurrentCarPlate.equals(carPlate)) {
             //check if car is taken
             for (Booking b : DataIO.allBookings) {
-                if (b.getCar().GetCarPlate().equals(carPlate)) {
+                if (b.getCar().GetCarPlate().equals(carPlate) && b.getBookStatus().equals("")) {
                     //car is taken, can not change to this car
                     JOptionPane.showMessageDialog(null, "This car is unavailable, please choose another one!");
                     return false;
@@ -277,7 +292,7 @@ public class Admin extends User {
                     DataIO.WriteFileBooking();
                     //save events
                     Global.CurrentAdmin.setEvent("EditBooking");
-                    //Admin.SaveEventLogs(Global.currentadmin);
+                    Admin.SaveEventLogs(Global.CurrentAdmin);
                     JOptionPane.showMessageDialog(null, "Modification is successful!");
                     return true;
                 }
@@ -386,7 +401,7 @@ public class Admin extends User {
                     //write file
                     DataIO.WriteFileBooking();
                     Global.CurrentAdmin.setEvent("DeleteBooking");
-                    //Admin.SaveEventLogs(Global.currentadmin);
+                    Admin.SaveEventLogs(Global.CurrentAdmin);
                     JOptionPane.showMessageDialog(null, "Booking is deleted successfully!");
                     return true;
                 }
@@ -410,8 +425,7 @@ public class Admin extends User {
                         return false;
                     } //completed bookings
                     else if (bookObj.getBookStatus().equals("returned")) {
-                        JOptionPane.showMessageDialog(null, "This booking is already completed!");
-                        return false;
+
                     } //booking previously disapproved
                     else if (bookObj.getBookStatus().equals("notavailable")) {
                         int reply = JOptionPane.showConfirmDialog(null,
@@ -424,7 +438,7 @@ public class Admin extends User {
                             //write file
                             DataIO.WriteFileBooking();
                             Global.CurrentAdmin.setEvent("ApproveBooking");
-                            //Admin.SaveEventLogs(Global.currentadmin);
+                            Admin.SaveEventLogs(Global.CurrentAdmin);
                             JOptionPane.showMessageDialog(null, "Booking is approved!");
                             return true;
                         } //no
@@ -479,7 +493,7 @@ public class Admin extends User {
                     //write file
                     DataIO.WriteFileBooking();
                     Global.CurrentAdmin.setEvent("DisapproveBooking");
-                    //Admin.SaveEventLogs(Global.currentadmin);
+                    Admin.SaveEventLogs(Global.CurrentAdmin);
                     JOptionPane.showMessageDialog(null, "Booking is disapproved!");
                     return true;
                 }
@@ -497,7 +511,7 @@ public class Admin extends User {
             list.add(color);
             Boolean validation = Global.NullValuesExist(list);
             Boolean validation2 = Admin.CarAlreadyExists(CarPlate, "CarPlate");
-
+            
             if (validation == false && validation2 == false) {
                 //create obj
                 Car newCar = new Car(CarPlate, CarType, Integer.parseInt(Price), color);
@@ -507,7 +521,7 @@ public class Admin extends User {
                 DataIO.WriteFileCar();
                 JOptionPane.showMessageDialog(null, "New Car is successfully added!", "New Car", JOptionPane.INFORMATION_MESSAGE);
                 Global.CurrentAdmin.setEvent("AddNewCar");
-                //Admin.SaveEventLogs(Global.currentadmin);
+                Admin.SaveEventLogs(Global.CurrentAdmin);
                 return true;
             }
         } catch (Exception e) {
@@ -549,10 +563,16 @@ public class Admin extends User {
     public static Boolean DeleteCar(String carplate) {
         for (Car carObj : DataIO.allCars) {
             if (carObj.GetCarPlate().equals(carplate)) {
+                for (Booking b : DataIO.allBookings) {
+                    if(b.getCar().GetCarPlate().equals(carplate)){
+                        JOptionPane.showMessageDialog(null, "Car is in use, can't be deleted!");
+                        return false;
+                    }
+                }
                 DataIO.allCars.remove(carObj);
                 DataIO.WriteFileCar();
                 Global.CurrentAdmin.setEvent("DeleteCar");
-                //Admin.SaveEventLogs(Global.currentadmin);
+                Admin.SaveEventLogs(Global.CurrentAdmin);
                 JOptionPane.showMessageDialog(null, "Car is deleted successfully!");
                 return true;
             }
@@ -590,7 +610,7 @@ public class Admin extends User {
                     //Write to File
                     DataIO.WriteFileCar();
                     Global.CurrentAdmin.setEvent("EditCar");
-                    //Admin.SaveEventLogs(Global.currentadmin);
+                    Admin.SaveEventLogs(Global.CurrentAdmin);
                     JOptionPane.showMessageDialog(null, "Modification is successful!");
                     return true;
                 }
@@ -628,7 +648,7 @@ public class Admin extends User {
             DataIO.WriteFileAdmin();
             JOptionPane.showMessageDialog(null, "New Admin is successfully added!", "New Admin", JOptionPane.INFORMATION_MESSAGE);
             Global.CurrentAdmin.setEvent("AddNewAdmin");
-            //Admin.SaveEventLogs(Global.currentadmin);
+            Admin.SaveEventLogs(Global.CurrentAdmin);
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error in AddNewAdmin");
@@ -666,7 +686,7 @@ public class Admin extends User {
                 DataIO.allAdmins.remove(adminObj);
                 DataIO.WriteFileAdmin();
                 Global.CurrentAdmin.setEvent("DeleteAdmin");
-                //Admin.SaveEventLogs(Global.currentadmin);
+                Admin.SaveEventLogs(Global.CurrentAdmin);
                 JOptionPane.showMessageDialog(null, "Admin is deleted successfully!");
                 return true;
             }
@@ -696,7 +716,7 @@ public class Admin extends User {
                 //Write to File
                 DataIO.WriteFileAdmin();
                 Global.CurrentAdmin.setEvent("EditAdmin");
-                //Admin.SaveEventLogs(Global.currentadmin);
+                Admin.SaveEventLogs(Global.CurrentAdmin);
                 JOptionPane.showMessageDialog(null, "Modification is successful!");
                 return true;
             }
@@ -714,7 +734,7 @@ public class Admin extends User {
 
                     //Set up profile
                     Global.CurrentAdmin = adminObj;
-                    //Global.SaveAdminLoginRecord(result); 
+                    Global.SaveAdminLoginRecord(adminObj);
                     return adminObj;
                 }
             }
@@ -856,6 +876,20 @@ public class Admin extends User {
         for (Customer c : DataIO.allCustomers) {
             if (c.getStatus().equals("unapprove")) {
                 String[] eachRow = new String[]{c.getUsername(), c.getPassword(), c.getGender(), c.getAge(), c.getPhone(), c.getEmail(), c.getAddress(), c.getCard(), c.getStatus()};
+                table.addRow(eachRow);
+            }
+        }
+    }
+
+    public static void LoadReceiptTable(DefaultTableModel table) {
+        for (int i = 0; i < DataIO.allBookings.size(); i++) {
+            //get object
+            Booking bookingObj = DataIO.allBookings.get(i);
+            //get values and make it into an array
+            String[] eachRow = new String[]{bookingObj.getCustomer().getUsername(), bookingObj.getCar().GetCarPlate(), bookingObj.getCar().GetCarType(), Integer.toString(bookingObj.getCar().GetPrice()), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), bookingObj.getEndDate(), Integer.toString(bookingObj.getDuration()), Integer.toString(bookingObj.getPayment())};
+            String bookingStatus = bookingObj.getBookStatus();
+            String paymentStatus = bookingObj.getPaymentStatus();
+            if (bookingStatus.equals("available") && paymentStatus.equals("no")) {
                 table.addRow(eachRow);
             }
         }

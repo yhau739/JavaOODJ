@@ -295,7 +295,7 @@ public class AdminViewAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_BackBtnActionPerformed
 
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
-        Boolean result = Admin.EditAdmin(Username.getText(), Password.getText());
+        Boolean result = Admin.EditAdmin(Global.RemoveWhitespaces(Username.getText()), Global.RemoveWhitespaces(Password.getText()));
         if (result == true) {
             this.setVisible(false);
             this.dispose();

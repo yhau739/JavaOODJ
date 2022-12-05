@@ -39,6 +39,10 @@ public class Global {
         }
         return false;
     }
+    
+    public static String RemoveWhitespaces(String input){
+        return input.replaceAll("\\s+","");
+    }
 
     public static Boolean IsInteger(String Userinput, String bannerMsg) {
         try {

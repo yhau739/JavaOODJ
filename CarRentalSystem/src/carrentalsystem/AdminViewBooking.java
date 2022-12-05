@@ -138,6 +138,7 @@ public class AdminViewBooking extends javax.swing.JFrame {
         Customer.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         Customer.setEnabled(false);
 
+        CarPlate.setEditable(false);
         CarPlate.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         EditBtn.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -177,6 +178,7 @@ public class AdminViewBooking extends javax.swing.JFrame {
 
         StartDate.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
+        Duration.setEditable(false);
         Duration.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -312,7 +314,7 @@ public class AdminViewBooking extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("Manage Bookings");
+        jLabel1.setText("Manage All Bookings");
 
         RefreshBtn.setText("Refresh Table");
         RefreshBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -391,7 +393,7 @@ public class AdminViewBooking extends javax.swing.JFrame {
     }//GEN-LAST:event_BookingTableMouseClicked
 
     private void EditBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditBtnActionPerformed
-        Boolean result = Admin.EditBooking(Customer.getText(), CarPlate.getText(), StartDate.getText(), Duration.getText());
+        Boolean result = Admin.EditBooking(Global.RemoveWhitespaces(Customer.getText()), Global.RemoveWhitespaces(CarPlate.getText()), Global.RemoveWhitespaces(StartDate.getText()), Global.RemoveWhitespaces(Duration.getText()));
         this.setVisible(false);
         this.dispose();
         AdminViewBooking page = new AdminViewBooking();

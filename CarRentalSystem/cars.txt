@@ -1,3 +1,5 @@
 LRJ1283 Lambo 2123 yellow
 LRJ1234 Ferrari 2333 pink
-test1234 Lambo 1234 pink
+ACD1294 Proton 2563 green
+POD829 HondaCivic 6547 pink
+SJD9203 HondaCity 2321 pink
