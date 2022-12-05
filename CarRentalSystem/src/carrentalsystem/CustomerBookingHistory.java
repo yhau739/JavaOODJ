@@ -22,7 +22,7 @@ public class CustomerBookingHistory extends javax.swing.JFrame {
      */
     public CustomerBookingHistory() {
         initComponents();
-         JTableHeader tableHeader = HistoryTable.getTableHeader();
+        JTableHeader tableHeader = HistoryTable.getTableHeader();
         Font headerFont = new Font("Verdana", Font.PLAIN, 14);
         tableHeader.setFont(headerFont);
 

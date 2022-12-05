@@ -208,9 +208,6 @@ public class Customer extends User {
             String[] eachRow = new String[]{carObj.GetCarPlate(), carObj.GetCarType(), Integer.toString(carObj.GetPrice()), carObj.GetColor()};
             if (!list.contains(carObj.GetCarPlate())) {
                 table.addRow(eachRow);
-            } else {
-                System.out.println(list);
-                System.out.println(carObj.GetCarPlate());
             }
         }
     }
