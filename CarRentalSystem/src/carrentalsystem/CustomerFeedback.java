@@ -493,7 +493,7 @@ public class CustomerFeedback extends javax.swing.JFrame {
         String rating = Rating.getSelectedItem().toString();
         String feedback = Feedback.getText();
         String carPlate = CarPlate.getText();
-        Boolean result = Customer.addFeedback(rating, feedback, carPlate);
+        Boolean result = Customer.AddFeedback(rating, feedback, carPlate);
 
         if (result == true) {
             this.setVisible(false);

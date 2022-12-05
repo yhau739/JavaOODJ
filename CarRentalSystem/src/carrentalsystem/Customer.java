@@ -403,7 +403,7 @@ public class Customer extends User {
         return false;
     }
     
-    public static Boolean addFeedback(String Rating, String Feedback, String CarPlate){
+    public static Boolean AddFeedback(String Rating, String Feedback, String CarPlate){
         if(Customer.CheckBookingSelected(CarPlate) == false){
             if(Customer.validateRating(Rating) && Customer.validateFeedback(Feedback)){
                 int result = JOptionPane.showConfirmDialog(null,"Confirm to submit the rating and feedback for car " + CarPlate + "?", "Feedback Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
