@@ -22,9 +22,10 @@ public class Booking {
     private String PaymentStatus;
     private String Rating;
     private String Feedback;
+    private String Collected;
     
     //constructor
-    public Booking(Customer customer, Car car, String StartDate, int Duration, String BookStatus, String PaymentStatus, String Rating, String Feedback){
+    public Booking(Customer customer, Car car, String StartDate, int Duration, String BookStatus, String PaymentStatus, String Rating, String Feedback, String Collected){
         this.customer = customer;
         this.car = car;
         this.StartDate = StartDate;
@@ -37,6 +38,11 @@ public class Booking {
         this.PaymentStatus = PaymentStatus;
         this.Rating = Rating;
         this.Feedback = Feedback;
+        this.Collected = Collected;
+    }
+
+    public String getCollected() {
+        return Collected;
     }
 
     public Customer getCustomer() {
@@ -73,6 +79,10 @@ public class Booking {
 
     public String getRating() {
         return Rating;
+    }
+
+    public void setCollected(String Collected) {
+        this.Collected = Collected;
     }
 
     public String getFeedback() {

@@ -233,7 +233,7 @@ public class DataIO {
                         carObj = car;
                     }
                 }
-                allBookings.add(new Booking(custObj, carObj, splited[2], Integer.parseInt(splited[3]), splited[4], splited[7], splited[8], splited[9]));
+                allBookings.add(new Booking(custObj, carObj, splited[2], Integer.parseInt(splited[3]), splited[4], splited[7], splited[8], splited[9], splited[10]));
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -251,7 +251,7 @@ public class DataIO {
                 writer.write(obj.getCustomer().getUsername()+ "|%|" + obj.getCar().GetCarPlate() + "|%|" + 
                              obj.getStartDate() + "|%|" + obj.getDuration() + "|%|" + obj.getBookStatus() + "|%|" + 
                              obj.getEndDate()+ "|%|" + obj.getPayment() + "|%|" + obj.getPaymentStatus() + "|%|" +  
-                             obj.getRating() + "|%|" + obj.getFeedback());
+                             obj.getRating() + "|%|" + obj.getFeedback() + "|%|" + obj.getCollected());
                 writer.write(System.getProperty("line.separator"));
             }
             writer.close();

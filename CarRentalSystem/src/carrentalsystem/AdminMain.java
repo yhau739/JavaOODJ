@@ -166,6 +166,11 @@ public class AdminMain extends javax.swing.JFrame {
 
         ManageCustomerBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         ManageCustomerBtn.setText("Manage Customers");
+        ManageCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManageCustomerBtnActionPerformed(evt);
+            }
+        });
 
         AddCarBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         AddCarBtn.setText("New Cars");
@@ -249,9 +254,9 @@ public class AdminMain extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(ManageBookings)))
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(BookingsHistory)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -421,6 +426,13 @@ public class AdminMain extends javax.swing.JFrame {
         AdminViewBookingHistory page = new AdminViewBookingHistory();
         page.setVisible(true);
     }//GEN-LAST:event_BookingsHistoryActionPerformed
+
+    private void ManageCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageCustomerBtnActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        AdminViewCustomer page = new AdminViewCustomer();
+        page.setVisible(true);
+    }//GEN-LAST:event_ManageCustomerBtnActionPerformed
 
     /**
      * @param args the command line arguments
