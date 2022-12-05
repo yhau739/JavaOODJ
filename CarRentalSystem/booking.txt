@@ -1,2 +1,3 @@
 customer123|%|LRJ1283|%|15-12-2022|%|3|%|booked|%|18-12-2022|%|6369|%|yes|%|none|%|none|%|no
 ali|%|POD829|%|09-12-2022|%|6|%|available|%|15-12-2022|%|39282|%|no|%|none|%|none|%|no
+customer123|%|ACD1294|%|12-12-2022|%|14|%|returned|%|26-12-2022|%|35882|%|yes|%|5|%|Good service!|%|no
