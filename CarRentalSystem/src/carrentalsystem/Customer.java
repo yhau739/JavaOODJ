@@ -100,7 +100,7 @@ public class Customer extends User {
         this.setEmail(Email);
         this.setAddress(Address);
         this.setCard(Card);
-        this.setStatus("unapproved");
+        this.setStatus(Status);
         this.setPrivilege();
     }
 
@@ -131,6 +131,11 @@ public class Customer extends User {
         list.add(status);
 
         if (Global.NullValuesExist(list)) {
+            return false;
+        }
+
+        if (String.valueOf(password).length() < 5) {
+            JOptionPane.showMessageDialog(null, "Password length must be at least 5 characters long!", "Invalid Password", JOptionPane.INFORMATION_MESSAGE);
             return false;
         }
 
@@ -183,40 +188,40 @@ public class Customer extends User {
             String bookingCarPlate = bookings.getCar().GetCarPlate();
             String bookingStatus = bookings.getBookStatus();
             //if car is booked add car plate to list
-            if(!bookingStatus.equals("notavailable") && !bookingStatus.equals("returned")){
-               list.add(bookingCarPlate);
+            if (!bookingStatus.equals("notavailable") && !bookingStatus.equals("returned")) {
+                list.add(bookingCarPlate);
             }
         }
-        
+
         for (int i = 0; i < DataIO.allCars.size(); i++) {
             //get object
             Car carObj = DataIO.allCars.get(i);
             //get values and make it into an array
             String[] eachRow = new String[]{carObj.GetCarPlate(), carObj.GetCarType(), Integer.toString(carObj.GetPrice()), carObj.GetColor()};
-            if(!list.contains(carObj.GetCarPlate())){
+            if (!list.contains(carObj.GetCarPlate())) {
                 table.addRow(eachRow);
-            }else{
+            } else {
                 System.out.println(list);
                 System.out.println(carObj.GetCarPlate());
             }
         }
     }
-    
+
     public static void LoadApprovedBookingTable(DefaultTableModel table) {
         for (int i = 0; i < DataIO.allBookings.size(); i++) {
             //get object
             Booking bookingObj = DataIO.allBookings.get(i);
             //get values and make it into an array
-            String[] eachRow = new String[]{bookingObj.getCar().GetCarPlate(),bookingObj.getCar().GetCarType(),bookingObj.getCar().GetColor(), bookingObj.getStartDate(), Integer.toString(bookingObj.getDuration()), bookingObj.getEndDate(), Integer.toString(bookingObj.getPayment())};
+            String[] eachRow = new String[]{bookingObj.getCar().GetCarPlate(), bookingObj.getCar().GetCarType(), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), Integer.toString(bookingObj.getDuration()), bookingObj.getEndDate(), Integer.toString(bookingObj.getPayment())};
             String bookingStatus = bookingObj.getBookStatus();
             String paymentStatus = bookingObj.getPaymentStatus();
             String customer = bookingObj.getCustomer().getUsername();
-            if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("available") && paymentStatus.equals("no")){
+            if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("available") && paymentStatus.equals("no")) {
                 table.addRow(eachRow);
             }
         }
     }
-    
+
     public static void LoadReturnTable(DefaultTableModel table) {
         for (int i = 0; i < DataIO.allBookings.size(); i++) {
             //get object
@@ -226,7 +231,7 @@ public class Customer extends User {
             String bookingStatus = bookingObj.getBookStatus();
             String paymentStatus = bookingObj.getPaymentStatus();
             String customer = bookingObj.getCustomer().getUsername();
-            if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("booked") && paymentStatus.equals("yes")){
+            if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("booked") && paymentStatus.equals("yes")) {
                 table.addRow(eachRow);
             }
         }
@@ -240,26 +245,26 @@ public class Customer extends User {
             list.add(startDate);
             list.add(duration);
             list.add("pending");
-            
+
             Boolean checkNull = Global.NullValuesExist(list);
-            
+
             if (Global.validateDate(startDate)) {
-                if (Global.beforeTodayDate(startDate) == false && Global.IsInteger(duration, "duration")){
+                if (Global.beforeTodayDate(startDate) == false && Global.IsInteger(duration, "duration")) {
                     Car carObj = null;
                     int price = 0;
                     for (Car car : DataIO.allCars) {
-                        if(car.GetCarPlate().equals(carPlate)){
+                        if (car.GetCarPlate().equals(carPlate)) {
                             carObj = car;
                             price = car.GetPrice();
                         }
                     }
-                     
+
                     Boolean checkBookingExist = Customer.BookingAlreadyExists(carObj);
-                    int total = price*Integer.parseInt(duration);
+                    int total = price * Integer.parseInt(duration);
 
                     if (checkNull == false && checkBookingExist == false) {
-                        int result = JOptionPane.showConfirmDialog(null,"Your total will be RM" + total + "\nPayment will be done after staff approves the booking.\nConfirm Booking?", "Total Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-                        if(result == JOptionPane.YES_OPTION){
+                        int result = JOptionPane.showConfirmDialog(null, "Your total will be RM" + total + "\nPayment will be done after staff approves the booking.\nConfirm Booking?", "Total Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                        if (result == JOptionPane.YES_OPTION) {
                             String BookingStatus = "pending";
                             String PaymentStatus = "no";
                             String rating = "none";
@@ -272,8 +277,7 @@ public class Customer extends User {
                             DataIO.WriteFileBooking();
                             JOptionPane.showMessageDialog(null, "Successfully added new Booking for car " + carPlate, "New Booking", JOptionPane.INFORMATION_MESSAGE);
                             return true;
-                        }
-                        else{
+                        } else {
                             JOptionPane.showMessageDialog(null, "Booking has been cancelled!", "Booking cancellation", JOptionPane.INFORMATION_MESSAGE);
                             return false;
                         }
@@ -287,11 +291,11 @@ public class Customer extends User {
         }
         return false;
     }
-    
+
     public static Boolean DeleteBooking(String carplate) {
-        if (Customer.CheckBookingSelected(carplate) == false){
-            int result = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete booking for car " + carplate + "?\n You can not undo this action.", "Delete Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(result == JOptionPane.YES_OPTION){
+        if (Customer.CheckBookingSelected(carplate) == false) {
+            int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete booking for car " + carplate + "?\n You can not undo this action.", "Delete Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
                 for (Booking bookingObj : DataIO.allBookings) {
                     if (bookingObj.getCar().GetCarPlate().equals(carplate)) {
                         DataIO.allBookings.remove(bookingObj);
@@ -301,21 +305,20 @@ public class Customer extends User {
                         return true;
                     }
                 }
-            }
-            else{
+            } else {
                 return false;
             }
         }
         return false;
     }
-    
-    public static Boolean ProcessPayment(String CarPlate, String Total){
-        if (Customer.CheckBookingSelected(CarPlate) == false){
-            int result = JOptionPane.showConfirmDialog(null,"Your total will be RM" + Total + " for car " + CarPlate + ".\nConfirm payment?", "Payment Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(result == JOptionPane.YES_OPTION){
-                for(Booking booking : DataIO.allBookings){
+
+    public static Boolean ProcessPayment(String CarPlate, String Total) {
+        if (Customer.CheckBookingSelected(CarPlate) == false) {
+            int result = JOptionPane.showConfirmDialog(null, "Your total will be RM" + Total + " for car " + CarPlate + ".\nConfirm payment?", "Payment Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                for (Booking booking : DataIO.allBookings) {
                     //booking found
-                    if (booking.getCar().GetCarPlate().equals(CarPlate)){
+                    if (booking.getCar().GetCarPlate().equals(CarPlate)) {
                         //Edit values
                         booking.setBookStatus("booked");
                         booking.setPaymentStatus("yes");
@@ -327,22 +330,21 @@ public class Customer extends User {
                         return true;
                     }
                 }
-            }    
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Payment has been cancelled", "Payment cancellation", JOptionPane.INFORMATION_MESSAGE);
-                return false;   
+                return false;
             }
         }
         return false;
     }
-    
-    public static Boolean ReturnCar(String CarPlate){
-        if (Customer.CheckBookingSelected(CarPlate) == false){
-            int result = JOptionPane.showConfirmDialog(null,"Confirm to return car" + CarPlate + "?\nYou will not be able to use the car anymore.", "Return Car Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if(result == JOptionPane.YES_OPTION){
-                for(Booking booking : DataIO.allBookings){
+
+    public static Boolean ReturnCar(String CarPlate) {
+        if (Customer.CheckBookingSelected(CarPlate) == false) {
+            int result = JOptionPane.showConfirmDialog(null, "Confirm to return car" + CarPlate + "?\nYou will not be able to use the car anymore.", "Return Car Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (result == JOptionPane.YES_OPTION) {
+                for (Booking booking : DataIO.allBookings) {
                     //booking found
-                    if (booking.getCar().GetCarPlate().equals(CarPlate)){
+                    if (booking.getCar().GetCarPlate().equals(CarPlate)) {
                         //Edit values
                         booking.setBookStatus("returned");
                         booking.setPaymentStatus("yes");
@@ -350,28 +352,27 @@ public class Customer extends User {
                         //Write to File
                         DataIO.WriteFileBooking();
 
-                        JOptionPane.showMessageDialog(null, "Successfully returned car " + CarPlate + "!\nThank you for using our service.\nWe hope to see you again!","Return Successful", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Successfully returned car " + CarPlate + "!\nThank you for using our service.\nWe hope to see you again!", "Return Successful", JOptionPane.INFORMATION_MESSAGE);
                         return true;
                     }
                 }
-            }    
-            else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Car return has been cancelled", "Car return cancellation", JOptionPane.INFORMATION_MESSAGE);
-                return false;   
+                return false;
             }
         }
         return false;
     }
 
-    public static Boolean CheckBookingSelected(String CarPlate){
+    public static Boolean CheckBookingSelected(String CarPlate) {
         // Car plate is 'null' 
         if (CarPlate.equals("")) {
-            JOptionPane.showMessageDialog(null, "Please select a booking information","No booking information selected", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please select a booking information", "No booking information selected", JOptionPane.ERROR_MESSAGE);
             return true;
         } // Car plate is not 'null' 
         return false;
     }
-    
+
     public static Boolean BookingAlreadyExists(Car car) {
         for (Booking obj : DataIO.allBookings) {
             if (obj.getCustomer().getUsername().equals(Global.CurrentCustomer.getUsername()) && obj.getCar().GetCarPlate().equals(car.GetCarPlate()) && (!obj.getBookStatus().equals("notavailable") || !obj.getBookStatus().equals("returned"))) {

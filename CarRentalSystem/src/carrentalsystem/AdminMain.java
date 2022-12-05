@@ -55,11 +55,14 @@ public class AdminMain extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         ManageAdmin = new javax.swing.JButton();
         BookingsHistory = new javax.swing.JButton();
+        ApproveCustomer = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         SystemLoginRecordBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         EventLogsBtn = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+        Reports = new javax.swing.JButton();
+        PaymentCollection = new javax.swing.JButton();
 
         jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -201,6 +204,14 @@ public class AdminMain extends javax.swing.JFrame {
             }
         });
 
+        ApproveCustomer.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        ApproveCustomer.setText("Account Comfirmation");
+        ApproveCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApproveCustomerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -230,7 +241,9 @@ public class AdminMain extends javax.swing.JFrame {
                         .addGap(22, 22, 22))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(BookingsHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ApproveCustomer)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +268,9 @@ public class AdminMain extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addComponent(ManageBookings)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(BookingsHistory)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BookingsHistory)
+                    .addComponent(ApproveCustomer))
                 .addGap(22, 22, 22))
         );
 
@@ -283,6 +298,22 @@ public class AdminMain extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
 
+        Reports.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Reports.setText("Reports");
+        Reports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReportsActionPerformed(evt);
+            }
+        });
+
+        PaymentCollection.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        PaymentCollection.setText("Collect Payment");
+        PaymentCollection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PaymentCollectionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -290,15 +321,22 @@ public class AdminMain extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(SystemLoginRecordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(EventLogsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jSeparator2)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(SystemLoginRecordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(EventLogsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(Reports, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(PaymentCollection, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,6 +349,10 @@ public class AdminMain extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SystemLoginRecordBtn)
                     .addComponent(EventLogsBtn))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Reports)
+                    .addComponent(PaymentCollection))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -434,6 +476,24 @@ public class AdminMain extends javax.swing.JFrame {
         page.setVisible(true);
     }//GEN-LAST:event_ManageCustomerBtnActionPerformed
 
+    private void ApproveCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveCustomerActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        AdminComfirmCustomer page = new AdminComfirmCustomer();
+        page.setVisible(true);
+    }//GEN-LAST:event_ApproveCustomerActionPerformed
+
+    private void ReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportsActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        AdminReport page = new AdminReport();
+        page.setVisible(true);
+    }//GEN-LAST:event_ReportsActionPerformed
+
+    private void PaymentCollectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentCollectionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PaymentCollectionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -473,12 +533,15 @@ public class AdminMain extends javax.swing.JFrame {
     private javax.swing.JButton AddAdminBtn;
     private javax.swing.JButton AddAdminBtn1;
     private javax.swing.JButton AddCarBtn;
+    private javax.swing.JButton ApproveCustomer;
     private javax.swing.JButton BookingsHistory;
     private javax.swing.JButton EventLogsBtn;
     private javax.swing.JButton LogoutBtn;
     private javax.swing.JButton ManageAdmin;
     private javax.swing.JButton ManageBookings;
     private javax.swing.JButton ManageCustomerBtn;
+    private javax.swing.JButton PaymentCollection;
+    private javax.swing.JButton Reports;
     private javax.swing.JButton SystemLoginRecordBtn;
     private javax.swing.JButton ViewEditCarBtn;
     private javax.swing.JButton ViewEditCarBtn1;

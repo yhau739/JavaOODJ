@@ -84,6 +84,136 @@ public class Admin extends User {
     }
 
     //Functionality Section
+    public static Boolean ApproveCustomer(String username) {
+        for (Customer c : DataIO.allCustomers) {
+            if (c.getUsername().equals(username)) {
+                c.setStatus("approve");
+                DataIO.WriteFileCustomer();
+                Global.CurrentAdmin.setEvent("ApproveCustomer");
+                //Admin.SaveEventLogs(Global.currentadmin);
+                JOptionPane.showMessageDialog(null, "Customer approved successfully!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Boolean EditCustomer(String username, String password, String gender, String age, String phone, String email, String address, String card) {
+        ArrayList<String> list = new ArrayList<String>();
+        list.add(username);
+        list.add(password);
+        list.add(gender);
+        list.add(age);
+        list.add(phone);
+        list.add(email);
+        list.add(address);
+        list.add(card);
+
+        //password validation problem
+        if (String.valueOf(password).length() < 5) {
+            JOptionPane.showMessageDialog(null, "Password length must be at least 5 characters long!", "Invalid Password", JOptionPane.INFORMATION_MESSAGE);
+            return false;
+        }
+
+        //validation
+        if (Global.NullValuesExist(list)) {
+            return false;
+        }
+
+        Boolean validateAge = Customer.validateAge(age);
+        Boolean validatePhone = Customer.validatePhone(phone);
+        Boolean validateEmail = Customer.validateEmail(email);
+        Boolean validateCard = Customer.validateCard(card);
+        if (validateAge == false) { //Age wrong format, too small or too big
+            JOptionPane.showMessageDialog(null, "Age is in wrong format!");
+            return false;
+        }
+
+        if (validatePhone == false) { //phone null or wrong format
+            JOptionPane.showMessageDialog(null, "Phone number is in wrong format!");
+            return false;
+        }
+
+        if (validateEmail == false) { //email null or wrong format
+            JOptionPane.showMessageDialog(null, "Email is in wrong format!");
+            return false;
+        }
+
+        if (validateCard == false) { //card null or wrong format
+            JOptionPane.showMessageDialog(null, "card is in wrong format!");
+            return false;
+        }
+
+        if (validateAge && validatePhone && validateEmail) { //pass validation
+            //edit profile
+            for (Customer cust : DataIO.allCustomers) {
+                //admin found
+                if (cust.getUsername().equals(username)) {
+                    //Edit values
+                    cust.setPassword(password);
+                    cust.setGender(gender);
+                    cust.setAge(age);
+                    cust.setPhone(phone);
+                    cust.setEmail(email);
+                    cust.setAddress(address);
+                    cust.setCard(card);
+
+                    //Write to File
+                    DataIO.WriteFileCustomer();
+                    Global.CurrentAdmin.setEvent("EditCustomer");
+                    //Admin.SaveEventLogs(Global.currentadmin);
+                    JOptionPane.showMessageDialog(null, "Customer edited successfully!");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static Boolean DeleteCustomer(String username) {
+        for (Customer cusObj : DataIO.allCustomers) {
+            if (cusObj.getUsername().equals(username)) {
+                DataIO.allCustomers.remove(cusObj);
+                //write file
+                DataIO.WriteFileCustomer();
+                Global.CurrentAdmin.setEvent("DeleteCustomer");
+                //Admin.SaveEventLogs(Global.currentadmin);
+                JOptionPane.showMessageDialog(null, "Customer is deleted successfully!");
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static ArrayList<Customer> SearchCustomer(String customerUsername, String attribute) {
+        ArrayList<Customer> MatchList = new ArrayList<Customer>();
+        for (Customer i : DataIO.allCustomers) {
+            switch (attribute) {
+                case "Username":
+                    if (i.getUsername().matches("(.*)" + customerUsername + "(.*)")) {
+                        MatchList.add(i);
+                    }
+                    break;
+                case "Gender":
+                    if (i.getGender().matches("(.*)" + customerUsername + "(.*)")) {
+                        MatchList.add(i);
+                    }
+                    break;
+                case "Age":
+                    if (i.getAge().matches("(.*)" + customerUsername + "(.*)")) {
+                        MatchList.add(i);
+                    }
+                    break;
+                case "Status":
+                    if (i.getStatus().matches("(.*)" + customerUsername + "(.*)")) {
+                        MatchList.add(i);
+                    }
+                    break;
+            }
+        }
+        return MatchList;
+    }
+
     public static Boolean EditBooking(String username, String carPlate, String startDate, String Duration) {
         ArrayList<String> list = new ArrayList<String>();
         list.add(carPlate);
@@ -700,6 +830,32 @@ public class Admin extends User {
         for (Booking bookObj : DataIO.allBookings) {
             if (bookObj.getBookStatus().equals("booked") || bookObj.getBookStatus().equals("returned")) {
                 String[] eachRow = new String[]{bookObj.getCustomer().getUsername(), bookObj.getCar().GetCarPlate(), bookObj.getStartDate(), bookObj.getEndDate(), Integer.toString(bookObj.getDuration()), Integer.toString(bookObj.getPayment()), bookObj.getBookStatus(), bookObj.getPaymentStatus()};
+                table.addRow(eachRow);
+            }
+        }
+    }
+
+    public static void LoadCustomerTable(DefaultTableModel table) {
+        for (Customer c : DataIO.allCustomers) {
+            String[] eachRow = new String[]{c.getUsername(), c.getPassword(), c.getGender(), c.getAge(), c.getPhone(), c.getEmail(), c.getAddress(), c.getCard(), c.getStatus()};
+            table.addRow(eachRow);
+        }
+    }
+
+    public static void LoadSearchedCustomerTable(DefaultTableModel table, ArrayList<Customer> CustomerList) {
+        for (int i = 0; i < CustomerList.size(); i++) {
+            //get object
+            Customer c = CustomerList.get(i);
+            //get values and make it into an array
+            String[] eachRow = new String[]{c.getUsername(), c.getPassword(), c.getGender(), c.getAge(), c.getPhone(), c.getEmail(), c.getAddress(), c.getCard(), c.getStatus()};
+            table.addRow(eachRow);
+        }
+    }
+
+    public static void LoadComfirmCustomerTable(DefaultTableModel table) {
+        for (Customer c : DataIO.allCustomers) {
+            if (c.getStatus().equals("unapprove")) {
+                String[] eachRow = new String[]{c.getUsername(), c.getPassword(), c.getGender(), c.getAge(), c.getPhone(), c.getEmail(), c.getAddress(), c.getCard(), c.getStatus()};
                 table.addRow(eachRow);
             }
         }
