@@ -100,7 +100,7 @@ public class Customer extends User {
         this.setEmail(Email);
         this.setAddress(Address);
         this.setCard(Card);
-        this.setStatus("unapproved");
+        this.setStatus(Status);
         this.setPrivilege();
     }
 
@@ -163,11 +163,18 @@ public class Customer extends User {
         for (Customer custObj : DataIO.allCustomers) {
             if (custObj.getUsername().equals(UsernameInput)) {
                 if (custObj.getPassword().equals(PasswordInput)) {
-                    //prompt message
-                    JOptionPane.showMessageDialog(null, "Login is Successfull!", "Login", JOptionPane.INFORMATION_MESSAGE);
-                    //Set up profile
-                    Global.CurrentCustomer = custObj;
-                    return custObj;
+                    if(custObj.getStatus().equals("approve")){
+                        //prompt message
+                        JOptionPane.showMessageDialog(null, "Login is Successfull!", "Login", JOptionPane.INFORMATION_MESSAGE);
+                        //Set up profile
+                        Global.CurrentCustomer = custObj;
+                        return custObj;
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Your account is not approved, please try again later", "Account not approved", JOptionPane.INFORMATION_MESSAGE);
+                        return null;
+                    }
                 }
             }
         }
@@ -223,6 +230,21 @@ public class Customer extends User {
             Booking bookingObj = DataIO.allBookings.get(i);
             //get values and make it into an array
             String[] eachRow = new String[]{bookingObj.getCar().GetCarPlate(), bookingObj.getStartDate(), Integer.toString(bookingObj.getDuration()), bookingObj.getEndDate()};
+            String bookingStatus = bookingObj.getBookStatus();
+            String paymentStatus = bookingObj.getPaymentStatus();
+            String customer = bookingObj.getCustomer().getUsername();
+            if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("booked") && paymentStatus.equals("yes")){
+                table.addRow(eachRow);
+            }
+        }
+    }
+    
+    public static void LoadReceiptTable(DefaultTableModel table) {
+        for (int i = 0; i < DataIO.allBookings.size(); i++) {
+            //get object
+            Booking bookingObj = DataIO.allBookings.get(i);
+            //get values and make it into an array
+            String[] eachRow = new String[]{bookingObj.getCustomer().getUsername(), bookingObj.getCar().GetCarPlate(),bookingObj.getCar().GetCarType(), Integer.toString(bookingObj.getCar().GetPrice()), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), bookingObj.getEndDate(), Integer.toString(bookingObj.getDuration()), Integer.toString(bookingObj.getPayment())};
             String bookingStatus = bookingObj.getBookStatus();
             String paymentStatus = bookingObj.getPaymentStatus();
             String customer = bookingObj.getCustomer().getUsername();
