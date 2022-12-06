@@ -102,14 +102,14 @@ public class CustomerReceipt extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Username", "Car Plate", "Car Type ", "Car Price/Day", "Color", "Start Date", "End Date", "Duration", "Total"
+                "Car Plate", "Car Type ", "Car Price/Day", "Color", "Start Date", "End Date", "Duration", "Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -380,27 +380,19 @@ public class CustomerReceipt extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 805, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BackBtn)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BackBtn)
-                        .addGap(45, 45, 45))))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 633, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -439,15 +431,15 @@ public class CustomerReceipt extends javax.swing.JFrame {
         int selectedRowIndex = ReceiptTable.getSelectedRow();
 
         //display in textfields
-        Username.setText(model.getValueAt(selectedRowIndex, 0).toString());
-        CarPlate.setText(model.getValueAt(selectedRowIndex, 1).toString());
-        CarType.setText(model.getValueAt(selectedRowIndex, 2).toString());
-        Price.setText(model.getValueAt(selectedRowIndex, 3).toString());
-        Color.setText(model.getValueAt(selectedRowIndex, 4).toString());
-        RentDate.setText(model.getValueAt(selectedRowIndex, 5).toString());
-        EndDate.setText(model.getValueAt(selectedRowIndex, 6).toString());
-        Duration.setText(model.getValueAt(selectedRowIndex, 7).toString());
-        Total.setText(model.getValueAt(selectedRowIndex, 8).toString());
+        Username.setText(Global.CurrentCustomer.getUsername());
+        CarPlate.setText(model.getValueAt(selectedRowIndex, 0).toString());
+        CarType.setText(model.getValueAt(selectedRowIndex, 1).toString());
+        Price.setText(model.getValueAt(selectedRowIndex, 2).toString());
+        Color.setText(model.getValueAt(selectedRowIndex, 3).toString());
+        RentDate.setText(model.getValueAt(selectedRowIndex, 4).toString());
+        EndDate.setText(model.getValueAt(selectedRowIndex, 5).toString());
+        Duration.setText(model.getValueAt(selectedRowIndex, 6).toString());
+        Total.setText(model.getValueAt(selectedRowIndex, 7).toString());
     }//GEN-LAST:event_ReceiptTableMouseClicked
 
     private void RentDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentDateActionPerformed

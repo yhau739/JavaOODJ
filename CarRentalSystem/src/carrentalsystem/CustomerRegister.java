@@ -339,12 +339,12 @@ public class CustomerRegister extends javax.swing.JFrame {
         Boolean validationNull = Global.NullValuesExist(list);
                 
         if (!validationNull){
-            Boolean validationPsw = Customer.checkMatchPsw(strPassword, strCfmPassword);
+            Boolean validationPsw = Customer.CheckMatchPsw(strPassword, strCfmPassword);
             Boolean validationUsernameExists = Customer.CustomerAlreadyExists(newUsername , "Customer Username");
-            Boolean validateAge = Customer.validateAge(age);
-            Boolean validatePhone = Customer.validatePhone(phone);
-            Boolean validateEmail = Customer.validateEmail(email);
-            Boolean validateCard = Customer.validateCard(card);
+            Boolean validateAge = Customer.ValidateAge(age);
+            Boolean validatePhone = Customer.ValidatePhone(phone);
+            Boolean validateEmail = Customer.ValidateEmail(email);
+            Boolean validateCard = Customer.ValidateCard(card);
             if (validationPsw == false) { //password does not match
                 PswInput.setText("");
                 CfmPswInput.setText("");

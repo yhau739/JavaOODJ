@@ -208,9 +208,6 @@ public class Customer extends User {
             String[] eachRow = new String[]{carObj.GetCarPlate(), carObj.GetCarType(), Integer.toString(carObj.GetPrice()), carObj.GetColor()};
             if (!list.contains(carObj.GetCarPlate())) {
                 table.addRow(eachRow);
-            } else {
-                System.out.println(list);
-                System.out.println(carObj.GetCarPlate());
             }
         }
     }
@@ -250,11 +247,41 @@ public class Customer extends User {
             //get object
             Booking bookingObj = DataIO.allBookings.get(i);
             //get values and make it into an array
-            String[] eachRow = new String[]{bookingObj.getCustomer().getUsername(), bookingObj.getCar().GetCarPlate(),bookingObj.getCar().GetCarType(), Integer.toString(bookingObj.getCar().GetPrice()), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), bookingObj.getEndDate(), Integer.toString(bookingObj.getDuration()), Integer.toString(bookingObj.getPayment())};
+            String[] eachRow = new String[]{bookingObj.getCar().GetCarPlate(),bookingObj.getCar().GetCarType(), Integer.toString(bookingObj.getCar().GetPrice()), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), bookingObj.getEndDate(), Integer.toString(bookingObj.getDuration()), Integer.toString(bookingObj.getPayment())};
             String bookingStatus = bookingObj.getBookStatus();
             String paymentStatus = bookingObj.getPaymentStatus();
             String customer = bookingObj.getCustomer().getUsername();
             if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("booked") && paymentStatus.equals("yes")){
+                table.addRow(eachRow);
+            }
+        }
+    }
+    
+    public static void LoadFeedbackTable(DefaultTableModel table) {
+        for (int i = 0; i < DataIO.allBookings.size(); i++) {
+            //get object
+            Booking bookingObj = DataIO.allBookings.get(i);
+            //get values and make it into an array
+            String[] eachRow = new String[]{bookingObj.getCar().GetCarPlate(),bookingObj.getCar().GetCarType(), Integer.toString(bookingObj.getCar().GetPrice()), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), bookingObj.getEndDate(), Integer.toString(bookingObj.getDuration()), Integer.toString(bookingObj.getPayment())};
+            String bookingStatus = bookingObj.getBookStatus();
+            String rating = bookingObj.getRating();
+            String feedback = bookingObj.getFeedback();
+            String customer = bookingObj.getCustomer().getUsername();
+            if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("returned") && rating.equals("none") && feedback.equals("none")){
+                table.addRow(eachRow);
+            }
+        }
+    }
+    
+    public static void LoadHistoryTable(DefaultTableModel table) {
+        for (int i = 0; i < DataIO.allBookings.size(); i++) {
+            //get object
+            Booking bookingObj = DataIO.allBookings.get(i);
+            //get values and make it into an array
+            String[] eachRow = new String[]{bookingObj.getCar().GetCarPlate(),bookingObj.getCar().GetCarType(), Integer.toString(bookingObj.getCar().GetPrice()), bookingObj.getCar().GetColor(), bookingObj.getStartDate(), bookingObj.getEndDate(), Integer.toString(bookingObj.getDuration()), Integer.toString(bookingObj.getPayment()), bookingObj.getRating(), bookingObj.getFeedback()};
+            String bookingStatus = bookingObj.getBookStatus();
+            String customer = bookingObj.getCustomer().getUsername();
+            if (customer.equals(Global.CurrentCustomer.getUsername()) && bookingStatus.equals("returned")){
                 table.addRow(eachRow);
             }
         }
@@ -386,6 +413,35 @@ public class Customer extends User {
         }
         return false;
     }
+    
+    public static Boolean AddFeedback(String Rating, String Feedback, String CarPlate){
+        if(Customer.CheckBookingSelected(CarPlate) == false){
+            if(Customer.ValidateRating(Rating) && Customer.ValidateFeedback(Feedback)){
+                int result = JOptionPane.showConfirmDialog(null,"Confirm to submit the rating and feedback for car " + CarPlate + "?", "Feedback Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if(result == JOptionPane.YES_OPTION){
+                    for(Booking booking : DataIO.allBookings){
+                        //booking found
+                        if (booking.getCar().GetCarPlate().equals(CarPlate)){
+                            //Edit values
+                            booking.setRating(Rating);
+                            booking.setFeedback(Feedback);
+
+                            //Write to File
+                            DataIO.WriteFileBooking();
+
+                            JOptionPane.showMessageDialog(null, "Successfully submit feedback for car " + CarPlate + "!\nThank you for using our service.\nWe hope to see you again!","Feedback Successful", JOptionPane.INFORMATION_MESSAGE);
+                            return true;
+                        }
+                    }
+                }    
+                else{
+                    JOptionPane.showMessageDialog(null, "Feedback has been cancelled", "Feedback cancellation", JOptionPane.INFORMATION_MESSAGE);
+                    return false;   
+                }
+            } 
+        }
+        return false;
+    }
 
     public static Boolean CheckBookingSelected(String CarPlate) {
         // Car plate is 'null' 
@@ -417,7 +473,7 @@ public class Customer extends User {
         return false;
     }
 
-    public static Boolean checkMatchPsw(String psw, String cfmPsw) {
+    public static Boolean CheckMatchPsw(String psw, String cfmPsw) {
         if (!psw.equals(cfmPsw)) {
             JOptionPane.showMessageDialog(null, "The password entered does not match!", "Password does not match", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -425,7 +481,7 @@ public class Customer extends User {
         return true;
     }
 
-    public static Boolean validateAge(String age) {
+    public static Boolean ValidateAge(String age) {
         try {
             int numbAge = Integer.parseInt(age);
             if (numbAge <= 0 || numbAge > 100) {
@@ -439,7 +495,7 @@ public class Customer extends User {
         return true;
     }
 
-    public static Boolean validatePhone(String phone) {
+    public static Boolean ValidatePhone(String phone) {
         // Contact Validation
         String regexContact = "^(\\+?6?01)[0-46-9]-*[0-9]{7,8}$";
         Pattern phonePattern = Pattern.compile(regexContact);
@@ -453,7 +509,7 @@ public class Customer extends User {
         return true;
     }
 
-    public static Boolean validateEmail(String email) {
+    public static Boolean ValidateEmail(String email) {
         // Regular Expression   
         String regexPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         //Compile regular expression to get the pattern  
@@ -468,7 +524,7 @@ public class Customer extends User {
         return true;
     }
 
-    public static Boolean validateCard(String card) {
+    public static Boolean ValidateCard(String card) {
         try {
             long numbCard = Long.parseLong(card);
             if (numbCard < 13 && numbCard > 16) {
@@ -477,6 +533,22 @@ public class Customer extends User {
             }
         } catch (NumberFormatException nfe) {
             JOptionPane.showMessageDialog(null, "You did not enter number for card", "Enter a number for card", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public static Boolean ValidateRating(String rating){
+        if(rating.equals("none")){
+            JOptionPane.showMessageDialog(null, "Please choose between 1 to 5 for rating", "No rating selected", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    
+    public static Boolean ValidateFeedback(String feedback){
+         if(feedback.equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter some feedbacks", "No feedback entered", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

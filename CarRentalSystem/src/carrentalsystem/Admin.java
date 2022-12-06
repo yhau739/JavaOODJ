@@ -135,10 +135,10 @@ public class Admin extends User {
             return false;
         }
 
-        Boolean validateAge = Customer.validateAge(age);
-        Boolean validatePhone = Customer.validatePhone(phone);
-        Boolean validateEmail = Customer.validateEmail(email);
-        Boolean validateCard = Customer.validateCard(card);
+        Boolean validateAge = Customer.ValidateAge(age);
+        Boolean validatePhone = Customer.ValidatePhone(phone);
+        Boolean validateEmail = Customer.ValidateEmail(email);
+        Boolean validateCard = Customer.ValidateCard(card);
         if (validateAge == false) { //Age wrong format, too small or too big
             JOptionPane.showMessageDialog(null, "Age is in wrong format!");
             return false;
