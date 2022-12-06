@@ -416,7 +416,7 @@ public class Customer extends User {
     
     public static Boolean AddFeedback(String Rating, String Feedback, String CarPlate){
         if(Customer.CheckBookingSelected(CarPlate) == false){
-            if(Customer.validateRating(Rating) && Customer.validateFeedback(Feedback)){
+            if(Customer.ValidateRating(Rating) && Customer.ValidateFeedback(Feedback)){
                 int result = JOptionPane.showConfirmDialog(null,"Confirm to submit the rating and feedback for car " + CarPlate + "?", "Feedback Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if(result == JOptionPane.YES_OPTION){
                     for(Booking booking : DataIO.allBookings){
@@ -473,7 +473,7 @@ public class Customer extends User {
         return false;
     }
 
-    public static Boolean checkMatchPsw(String psw, String cfmPsw) {
+    public static Boolean CheckMatchPsw(String psw, String cfmPsw) {
         if (!psw.equals(cfmPsw)) {
             JOptionPane.showMessageDialog(null, "The password entered does not match!", "Password does not match", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -481,7 +481,7 @@ public class Customer extends User {
         return true;
     }
 
-    public static Boolean validateAge(String age) {
+    public static Boolean ValidateAge(String age) {
         try {
             int numbAge = Integer.parseInt(age);
             if (numbAge <= 0 || numbAge > 100) {
@@ -495,7 +495,7 @@ public class Customer extends User {
         return true;
     }
 
-    public static Boolean validatePhone(String phone) {
+    public static Boolean ValidatePhone(String phone) {
         // Contact Validation
         String regexContact = "^(\\+?6?01)[0-46-9]-*[0-9]{7,8}$";
         Pattern phonePattern = Pattern.compile(regexContact);
@@ -509,7 +509,7 @@ public class Customer extends User {
         return true;
     }
 
-    public static Boolean validateEmail(String email) {
+    public static Boolean ValidateEmail(String email) {
         // Regular Expression   
         String regexPattern = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         //Compile regular expression to get the pattern  
@@ -524,7 +524,7 @@ public class Customer extends User {
         return true;
     }
 
-    public static Boolean validateCard(String card) {
+    public static Boolean ValidateCard(String card) {
         try {
             long numbCard = Long.parseLong(card);
             if (numbCard < 13 && numbCard > 16) {
@@ -538,7 +538,7 @@ public class Customer extends User {
         return true;
     }
     
-    public static Boolean validateRating(String rating){
+    public static Boolean ValidateRating(String rating){
         if(rating.equals("none")){
             JOptionPane.showMessageDialog(null, "Please choose between 1 to 5 for rating", "No rating selected", JOptionPane.ERROR_MESSAGE);
             return false;
@@ -546,7 +546,7 @@ public class Customer extends User {
         return true;
     }
     
-    public static Boolean validateFeedback(String feedback){
+    public static Boolean ValidateFeedback(String feedback){
          if(feedback.equals("")){
             JOptionPane.showMessageDialog(null, "Please enter some feedbacks", "No feedback entered", JOptionPane.ERROR_MESSAGE);
             return false;
