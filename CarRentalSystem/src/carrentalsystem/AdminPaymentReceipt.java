@@ -82,7 +82,6 @@ public class AdminPaymentReceipt extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ReceiptTable = new javax.swing.JTable();
-        CollectBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -369,9 +368,6 @@ public class AdminPaymentReceipt extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(ReceiptTable);
 
-        CollectBtn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        CollectBtn.setText("Collect");
-
         jLabel1.setText("*Click on any row");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -379,9 +375,7 @@ public class AdminPaymentReceipt extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(632, 632, 632)
-                .addComponent(CollectBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(632, 1464, Short.MAX_VALUE)
                 .addComponent(BackBtn)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -404,10 +398,8 @@ public class AdminPaymentReceipt extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BackBtn)
-                            .addComponent(CollectBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addComponent(BackBtn)
+                        .addGap(34, 34, 34)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -516,7 +508,6 @@ public class AdminPaymentReceipt extends javax.swing.JFrame {
     private javax.swing.JButton BackBtn;
     private javax.swing.JTextField CarPlate;
     private javax.swing.JTextField CarType;
-    private javax.swing.JButton CollectBtn;
     private javax.swing.JTextField Color;
     private javax.swing.JTextField Duration;
     private javax.swing.JTextField EndDate;
