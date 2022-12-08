@@ -3,3 +3,11 @@ LRJ1234 Ferrari 2333 pink
 ACD1294 Proton 2563 green
 POD829 HondaCivic 6547 pink
 SJD9203 HondaCity 2321 pink
+SLK123 Mercedes 5555 grey
+MLK1231 ProtonX90 3578 red
+MKS122 ProtonX70 3000 red
+LSK422 AcuraIntegra 3012 silver
+MSL2293 AcuraMDX 2312 silver
+LOP221 NissanLeaf 2001 white
+POO291 MazdaCX 2460 brown
+SSW123 Hyundai 2122 pink

@@ -12,9 +12,9 @@ package carrentalsystem;
 public class Car {
 
     private String CarPlate;
-    public String CarType;
-    public int PricePerDay;
-    public String CarColor;
+    private String CarType;
+    private int PricePerDay;
+    private String CarColor;
 
     public Car(String plate, String type, int price, String color) {
         this.CarPlate = plate;

@@ -10,3 +10,11 @@ admin123 ApproveBooking 05-12-2022 17:12:54.652
 admin123 DisapproveBooking 05-12-2022 17:12:58.271
 admin123 ApproveBooking 05-12-2022 17:13:28.611
 admin123 EditBooking 05-12-2022 17:14:23.270
+admin123 AddNewCar 08-12-2022 14:35:22.720
+admin123 AddNewCar 08-12-2022 14:35:42.298
+admin123 AddNewCar 08-12-2022 14:36:10.158
+admin123 AddNewCar 08-12-2022 14:37:04.002
+admin123 AddNewCar 08-12-2022 14:37:23.805
+admin123 AddNewCar 08-12-2022 14:37:49.883
+admin123 AddNewCar 08-12-2022 14:38:40.675
+admin123 AddNewCar 08-12-2022 14:41:57.652

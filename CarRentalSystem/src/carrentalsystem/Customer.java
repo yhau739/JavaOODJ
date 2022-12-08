@@ -369,6 +369,9 @@ public class Customer extends User {
                 for (Booking booking : DataIO.allBookings) {
                     //booking found
                     if (booking.getCar().GetCarPlate().equals(CarPlate)) {
+                        if(booking.getBookStatus().equals("returned")){
+                           continue; 
+                        }
                         //Edit values
                         booking.setBookStatus("booked");
                         booking.setPaymentStatus("yes");

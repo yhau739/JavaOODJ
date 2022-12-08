@@ -1,3 +1,10 @@
 customer123|%|LRJ1283|%|15-12-2022|%|3|%|booked|%|18-12-2022|%|6369|%|yes|%|none|%|none|%|no
-ali|%|POD829|%|09-12-2022|%|6|%|available|%|15-12-2022|%|39282|%|no|%|none|%|none|%|no
+ali|%|POD829|%|09-12-2022|%|6|%|booked|%|15-12-2022|%|39282|%|yes|%|none|%|none|%|no
 customer123|%|ACD1294|%|12-12-2022|%|14|%|returned|%|26-12-2022|%|35882|%|yes|%|5|%|Good service!|%|no
+lester|%|MSL2293|%|10-12-2022|%|5|%|pending|%|15-12-2022|%|11560|%|no|%|none|%|none|%|no
+tim|%|MLK1231|%|20-12-2022|%|10|%|pending|%|30-12-2022|%|35780|%|no|%|none|%|none|%|no
+curry|%|SLK123|%|20-12-2022|%|4|%|pending|%|24-12-2022|%|22220|%|no|%|none|%|none|%|no
+lebron|%|MKS122|%|18-12-2022|%|4|%|pending|%|22-12-2022|%|12000|%|no|%|none|%|none|%|no
+Lonny|%|ACD1294|%|01-01-2023|%|3|%|booked|%|04-01-2023|%|7689|%|yes|%|none|%|none|%|no
+Broky|%|SJD9203|%|25-12-2022|%|4|%|available|%|29-12-2022|%|9284|%|no|%|none|%|none|%|no
+mandy|%|LSK422|%|20-12-2022|%|12|%|booked|%|01-01-2023|%|36144|%|yes|%|none|%|none|%|no

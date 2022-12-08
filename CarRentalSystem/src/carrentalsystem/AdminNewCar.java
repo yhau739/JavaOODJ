@@ -322,7 +322,7 @@ public class AdminNewCar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
-        Boolean result = Admin.AddCar(Global.RemoveWhitespaces(CarPlate.getText()), Global.RemoveWhitespaces(CarType.getText()), Global.RemoveWhitespaces(Price.getText()), Global.RemoveWhitespaces(Color.getText()));
+        Boolean result = Admin.AddCar(Global.RemoveWhitespaces(CarPlate.getText().toUpperCase()), Global.RemoveWhitespaces(CarType.getText()), Global.RemoveWhitespaces(Price.getText()), Global.RemoveWhitespaces(Color.getText()));
         if (result == true) {
             this.setVisible(false);
             this.dispose();

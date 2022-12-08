@@ -1,2 +1,10 @@
 customer123|%|12345|%|male|%|23|%|01156273493|%|customer@gmail.com|%|21,jalan|%|01246587483124|%|approve
 ali|%|12345|%|male|%|17|%|01156341687|%|ali@yahoo.com|%|28,Jalan loran|%|1231231239174567|%|approve
+mandy|%|12345|%|female|%|19|%|01153568687|%|mandy@yahoo.com|%|38,Jalan Bangi|%|1239273239174567|%|approve
+Broky|%|12345|%|male|%|29|%|01184931687|%|broky@yahoo.com|%|28,Jalan Bander|%|1231231238593067|%|approve
+Lonny|%|12345|%|male|%|35|%|01156347352|%|lonny@yahoo.com|%|30,Jalan loran|%|12312312329281567|%|approve
+juohan|%|12345|%|male|%|30|%|01156291687|%|jh@yahoo.com|%|28,Jalan alor|%|1231231302174567|%|approve
+lebron|%|12345|%|male|%|39|%|01156341687|%|lrb@yahoo.com|%|28,Jalan lebron|%|123123123174567|%|approve
+curry|%|12345|%|male|%|27|%|01156341687|%|curry@yahoo.com|%|58,Jalan west|%|1231231123174567|%|approve
+tim|%|12345|%|male|%|37|%|01156341687|%|tim@yahoo.com|%|28,Jalan lester|%|1231231239174567|%|approve
+lester|%|12345|%|male|%|16|%|01156341687|%|lester@yahoo.com|%|28,Jalan manga|%|1231231239174567|%|approve
