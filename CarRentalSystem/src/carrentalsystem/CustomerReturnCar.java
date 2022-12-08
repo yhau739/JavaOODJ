@@ -294,8 +294,8 @@ public class CustomerReturnCar extends javax.swing.JFrame {
         //display in textfields
         CarPlate.setText(model.getValueAt(selectedRowIndex, 0).toString());
         StartDate.setText(model.getValueAt(selectedRowIndex, 1).toString());
-        EndDate.setText(model.getValueAt(selectedRowIndex, 2).toString());
-        Duration.setText(model.getValueAt(selectedRowIndex, 3).toString());
+        EndDate.setText(model.getValueAt(selectedRowIndex, 3).toString());
+        Duration.setText(model.getValueAt(selectedRowIndex, 2).toString());
     }//GEN-LAST:event_BookedTableMouseClicked
 
     private void ReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnActionPerformed
