@@ -2,7 +2,7 @@
 Car Rental System Built using Java
 ----------------------------------
 This project is a Car Rental System implemented in Java, showcasing the practical application of Object-Oriented Programming (OOP) concepts. The system features a user interface built with forms to facilitate the rental of cars. The primary goal of this project is to illustrate the effective utilization of OOP principles in a real-world context.
-----------------------------------
+
 **Features**
 - User Interface: The system offers a user-friendly interface with forms that allow users to interact with the application seamlessly.
 - Car Inventory: Users can browse through a collection of available cars for rent. Each car is represented as an object with attributes like make, model, year, and rental price.
