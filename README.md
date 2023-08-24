@@ -16,8 +16,7 @@ This project is a Car Rental System implemented in Java, showcasing the practica
 - Inheritance: Inheritance allows the creation of a hierarchy of classes, inheriting properties and behaviors from parent classes. For example, a general "Car" class may be inherited by more specific classes like "Sedan" or "SUV."
 - Polymorphism: Polymorphism enables different classes to be treated as instances of the same class through method overriding and interfaces. This can be employed when dealing with various car types or rental scenarios.
 ----------------------------------
-**Getting Started**
-To run the Car Rental System:
+**To run the Car Rental System:**
 1. Clone or download the repository to your local machine.
 2. Open the project in your preferred Java Integrated Development Environment (IDE).
 3. Build and run the project.
